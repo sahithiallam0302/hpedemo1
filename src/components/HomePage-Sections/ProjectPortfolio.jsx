@@ -35,8 +35,8 @@ const ProjectPortfolio = () => {
                         <span className="inline-block font-rajdhani text-brand-orange tracking-[0.2em] md:tracking-[0.4em] font-black text-[10px] md:text-xs uppercase mb-4">
                             PORTFOLIO
                         </span>
-                        <h2 id="portfolio-heading" className="text-3xl sm:text-4xl md:text-6xl text-white leading-none tracking-tight uppercase">
-                            Impact at <span className="text-brand-cyan">Scale</span>
+                        <h2 id="portfolio-heading" className="text-2xl sm:text-3xl md:text-5xl text-white leading-none tracking-tight uppercase">
+                            Project <span className="text-brand-cyan">Portfolio</span>
                         </h2>
                     </div>
 
@@ -74,13 +74,13 @@ const ProjectPortfolio = () => {
                             transition={{ delay: index * 0.05 }}
                             className="flex-shrink-0 w-80 snap-center"
                         >
-                            <div className="h-48 bg-[#0a1219] p-8 rounded-2xl border border-white/5 hover:border-brand-cyan/30 transition-all group flex flex-col justify-between relative overflow-hidden">
+                            <div className="relative h-48 bg-[#0a1219] p-8 rounded-2xl border border-white/5 hover:border-brand-cyan/30 transition-all group flex flex-col justify-between overflow-hidden">
                                 {/* Background Accent Icon */}
                                 <div className="absolute -bottom-4 -right-4 opacity-5 group-hover:opacity-10 transition-opacity">
                                     <Briefcase size={120} className="text-white" />
                                 </div>
 
-                                <div className="space-y-4 relative z-10">
+                                <div className="space-y-4">
                                     <div className="w-10 h-10 rounded-lg bg-brand-cyan/10 flex items-center justify-center text-brand-cyan">
                                         <Briefcase size={20} />
                                     </div>

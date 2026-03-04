@@ -79,7 +79,7 @@ const AboutUsSection = () => {
                                 WHO WE ARE
                             </span>
 
-                            <h2 id="about-heading" className="text-3xl sm:text-4xl md:text-6xl text-[#011b26] dark:text-white leading-tight tracking-tighter">
+                            <h2 id="about-heading" className="text-2xl sm:text-3xl md:text-5xl text-[#011b26] dark:text-white leading-tight tracking-tighter">
                                 Pioneering Enterprise <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00b0d4] to-[#ff8d00]">
                                     Infrastructure

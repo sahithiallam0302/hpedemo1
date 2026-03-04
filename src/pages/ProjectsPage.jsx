@@ -141,7 +141,7 @@ const ProjectCard = ({ project, index, delay }) => {
     return (
         <FadeUp delay={delay} className="h-full">
             <Link to={targetPath}
-                className="group relative block h-[450px] rounded-3xl overflow-hidden bg-slate-50 dark:bg-[#020817] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3">
+                className="group block h-full min-h-[450px] rounded-3xl overflow-hidden bg-slate-50 dark:bg-[#020817] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3">
 
                 {/* PROJECT IMAGE */}
                 <div className="h-60 overflow-hidden relative bg-slate-950/20">
@@ -201,7 +201,7 @@ export default function ProjectsPage() {
                 {/* ══════════════════════════════════════
                     HEADER — Typographic Hero (No Image)
                 ══════════════════════════════════════ */}
-                <section className="relative px-8 md:px-16 py-20 md:py-28 border-b border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-[#020c13] overflow-hidden">
+                <section className="relative px-8 md:px-16 py-10 md:py-12 border-b border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-[#020c13] overflow-hidden">
 
                     {/* Subtle background grid */}
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -211,88 +211,108 @@ export default function ProjectsPage() {
                     <div className="absolute -top-20 -left-32 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                     <div className="absolute -bottom-32 -right-32 w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-3xl pointer-events-none" />
 
-                    <div className="max-w-5xl mx-auto relative z-10">
-
-                        {/* Eyebrow tag */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            className="flex items-center gap-4 mb-8"
-                        >
-                            <motion.div
-                                className="h-px bg-blue-500"
-                                initial={{ width: 0 }}
-                                animate={{ width: 48 }}
-                                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                            />
-                            <span className="text-blue-500 dark:text-blue-400 text-[11px] font-black uppercase tracking-[0.4em]">
-                                Enterprise Portfolio
-                            </span>
-                        </motion.div>
-
-                        {/* Main heading — word-by-word slide-up */}
-                        <div className="overflow-hidden mb-3">
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight">
-                                {[
-                                    { word: 'Project', color: 'text-slate-900 dark:text-white' },
-                                    { word: 'Portfolio', color: 'text-blue-600 dark:text-blue-400' },
-                                ].map(({ word, color }, wi) => (
-                                    <motion.span
-                                        key={wi}
-                                        className={`inline-block mr-4 ${color}`}
-                                        initial={{ y: 80, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{
-                                            duration: 0.8,
-                                            delay: 0.15 + wi * 0.18,
-                                            ease: [0.22, 1, 0.36, 1],
-                                        }}
-                                    >
-                                        {word}
-                                    </motion.span>
-                                ))}
-                            </h1>
-                        </div>
-
-                        {/* Animated underline bar */}
-                        <motion.div
-                            className="h-[3px] bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full mb-8 origin-left"
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                            style={{ width: '6rem' }}
-                        />
-
-                        {/* Description paragraph */}
-                        <motion.p
-                            className="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-2xl font-medium leading-relaxed"
-                            initial={{ opacity: 0, y: 24 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                        >
-                            A comprehensive record of 10 national-scale infrastructure and digital transformation projects delivered with measurable excellence across the Indian landscape.
-                        </motion.p>
-
-                        {/* Stats strip — staggered per-stat animation */}
-                        <div className="flex flex-wrap gap-10 mt-12 pt-10 border-t border-slate-200 dark:border-white/5">
-                            {[
-                                { value: '10', label: 'Enterprise Projects' },
-                                { value: '8+', label: 'States Covered' },
-                                { value: '3', label: 'Industry Verticals' },
-                                { value: '800+', label: 'Workforce Deployed' },
-                            ].map((stat, i) => (
+                    <div className="max-w-7xl mx-auto relative z-10">
+                        <div className="grid lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                {/* Eyebrow tag */}
                                 <motion.div
-                                    key={i}
-                                    className="flex flex-col gap-1"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.7 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                    className="flex items-center gap-4 mb-6"
                                 >
-                                    <span className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white tabular-nums">{stat.value}</span>
-                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{stat.label}</span>
+                                    <motion.div
+                                        className="h-px bg-blue-500"
+                                        initial={{ width: 0 }}
+                                        animate={{ width: 48 }}
+                                        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                    />
+                                    <span className="text-blue-500 dark:text-blue-400 text-[11px] font-black uppercase tracking-[0.4em]">
+                                        Enterprise Portfolio
+                                    </span>
                                 </motion.div>
-                            ))}
+
+                                {/* Main heading — word-by-word slide-up */}
+                                <div className="overflow-hidden mb-3">
+                                    <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold uppercase tracking-tight leading-tight">
+                                        {[
+                                            { word: 'Project', color: 'text-slate-900 dark:text-white' },
+                                            { word: 'Portfolio', color: 'text-blue-600 dark:text-blue-400' },
+                                        ].map(({ word, color }, wi) => (
+                                            <motion.span
+                                                key={wi}
+                                                className={`inline-block mr-4 ${color}`}
+                                                initial={{ y: 80, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{
+                                                    duration: 0.8,
+                                                    delay: 0.15 + wi * 0.18,
+                                                    ease: [0.22, 1, 0.36, 1],
+                                                }}
+                                            >
+                                                {word}
+                                            </motion.span>
+                                        ))}
+                                    </h1>
+                                </div>
+
+                                {/* Animated underline bar */}
+                                <motion.div
+                                    className="h-[3px] bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full mb-6 origin-left"
+                                    initial={{ scaleX: 0 }}
+                                    animate={{ scaleX: 1 }}
+                                    transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                    style={{ width: '4rem' }}
+                                />
+
+                                {/* Description paragraph */}
+                                <motion.p
+                                    className="text-slate-500 dark:text-slate-400 text-sm max-w-xl font-medium leading-relaxed"
+                                    initial={{ opacity: 0, y: 24 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                                >
+                                    A comprehensive record of 10 national-scale infrastructure and digital transformation projects delivered with measurable excellence across the Indian landscape.
+                                </motion.p>
+
+                                {/* Stats strip — staggered per-stat animation */}
+                                <div className="flex flex-wrap gap-6 mt-6 pt-5 border-t border-slate-200 dark:border-white/5">
+                                    {[
+                                        { value: '10', label: 'Enterprise Projects' },
+                                        { value: '8+', label: 'States Covered' },
+                                        { value: '3', label: 'Industry Verticals' },
+                                        { value: '800+', label: 'Workforce Deployed' },
+                                    ].map((stat, i) => (
+                                        <motion.div
+                                            key={i}
+                                            className="flex flex-col gap-1"
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.6, delay: 0.7 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                        >
+                                            <span className="text-lg font-bold text-slate-900 dark:text-white tabular-nums">{stat.value}</span>
+                                            <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-slate-400">{stat.label}</span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Right: Portfolio Image */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                className="relative lg:block hidden max-w-sm ml-auto w-full"
+                            >
+                                <div className="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl transition-all duration-700 hover:shadow-blue-500/10 hover:border-blue-500/20">
+                                    <img
+                                        src="/projectportfolio.jpeg"
+                                        alt="Project Portfolio Dashboard"
+                                        className="w-full h-auto object-cover hover:scale-110 transition-transform duration-1000"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
+                                </div>
+                            </motion.div>
                         </div>
                     </div>
                 </section>
@@ -385,7 +405,7 @@ export default function ProjectsPage() {
                             <span className="text-blue-400 text-[10px] md:text-xs font-black uppercase tracking-[0.5em] mb-6 block">
                                 Beyond Infrastructure
                             </span>
-                            <h2 className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter max-w-5xl leading-none">
+                            <h2 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-tighter max-w-4xl leading-snug">
                                 Transforming the <br /> National <span className="text-blue-400">Digital</span> Landscape
                             </h2>
                             <p className="text-slate-400 text-base md:text-xl font-medium mt-8 max-w-2xl mx-auto">
@@ -419,7 +439,7 @@ const GroupBanner = ({ cat, delay }) => (
                     </span>
 
                     {/* Main Immersive Title */}
-                    <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tighter uppercase mb-8">
+                    <h3 className="text-xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.1] tracking-tight uppercase mb-6">
                         {cat.title.replace('Project ', '')} <br />
                         <span className="text-white/40 group-hover:text-white transition-colors duration-500">Mastery & Governance</span>
                     </h3>

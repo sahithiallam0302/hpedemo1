@@ -29,7 +29,7 @@ const FadeUp = ({ children, className = '', delay = 0 }) => {
 
 /* ─── Section Label ─── */
 const Label = ({ text, color = 'text-hpe-orange' }) => (
-    <span className={`inline-block text-[10px] font-black uppercase tracking-[0.55em] ${color}`}>
+    <span className={`inline-block text-[10px] font-rajdhani font-black uppercase tracking-[0.55em] ${color}`}>
         {text}
     </span>
 );
@@ -64,6 +64,7 @@ const ServiceModule = ({ icon, title, label, bullets, result, isDark, index, acc
             initial={{ opacity: 0, y: 36 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="h-full"
         >
             <Glass isDark={isDark} className="p-8 md:p-10 h-full group hover:scale-[1.01] hover:shadow-2xl transition-all duration-500">
                 {/* Icon + Label Row */}
@@ -197,7 +198,7 @@ const WorkforceManagedServices = () => {
             {/* ──────────────────────────────────────────
                 HERO
             ────────────────────────────────────────── */}
-            <section className="relative min-h-[80vh] flex items-center pt-20 pb-28 overflow-hidden bg-[#011b26]">
+            <section className="relative min-h-[60vh] flex items-center pt-36 pb-20 overflow-hidden bg-[#011b26]">
                 {/* Background glows */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                     <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-hpe-cyan/10 rounded-full blur-[160px] -translate-y-1/3 translate-x-1/3" />
@@ -226,37 +227,16 @@ const WorkforceManagedServices = () => {
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
                     <div className="max-w-3xl">
-                        {/* Breadcrumb */}
-                        <motion.nav
-                            initial={{ opacity: 0, x: -16 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="flex items-center gap-2 text-[10px] font-black tracking-[0.35em] uppercase text-slate-500 mb-10"
-                        >
-                            <span className="hover:text-hpe-cyan transition-colors cursor-pointer">Home</span>
-                            <ChevronRight className="w-3 h-3" />
-                            <span className="hover:text-hpe-cyan transition-colors cursor-pointer">Services</span>
-                            <ChevronRight className="w-3 h-3" />
-                            <span className="text-hpe-cyan">Workforce & Managed</span>
-                        </motion.nav>
 
-                        {/* Division Tag */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, delay: 0.1 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-hpe-cyan/10 border border-hpe-cyan/20 mb-8"
-                        >
-                            <span className="w-1.5 h-1.5 rounded-full bg-hpe-cyan animate-pulse" />
-                            <span className="text-[10px] font-black tracking-[0.3em] text-hpe-cyan uppercase">Division 03 · Workforce & Managed Services</span>
-                        </motion.div>
+
+
 
                         {/* Headline */}
                         <motion.h1
                             initial={{ opacity: 0, y: 24 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[1.05] text-white mb-6"
+                            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-rajdhani font-black uppercase tracking-tighter leading-[1.05] text-white mb-6"
                         >
                             Structured <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-hpe-cyan via-white/80 to-hpe-orange">
@@ -275,21 +255,7 @@ const WorkforceManagedServices = () => {
                             With 2000+ employees deployed across India, HPE IT Solutions operates a centralized workforce governance framework aligned with enterprise execution standards.
                         </motion.p>
 
-                        {/* CTAs */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="flex flex-wrap gap-4"
-                        >
-                            <button className="px-8 py-4 bg-hpe-orange text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full shadow-xl shadow-hpe-orange/20 hover:bg-white hover:text-[#011b26] transition-all duration-300 active:scale-95 flex items-center gap-2 group">
-                                Explore Capabilities
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </button>
-                            <button className="px-8 py-4 border border-white/20 text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full hover:border-hpe-cyan/60 hover:text-hpe-cyan transition-all duration-300">
-                                Contact Team
-                            </button>
-                        </motion.div>
+
                     </div>
                 </div>
             </section>
@@ -297,7 +263,7 @@ const WorkforceManagedServices = () => {
             {/* ──────────────────────────────────────────
                 STATS STRIP
             ────────────────────────────────────────── */}
-            <section className={`py-12 border-y ${isDark ? 'border-white/5 bg-white/[0.02]' : 'border-slate-100 bg-white'}`}>
+            <section className={`py-12 ${isDark ? 'bg-[#011b26]' : 'bg-white'}`}>
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {stats.map((stat, i) => (
@@ -320,7 +286,7 @@ const WorkforceManagedServices = () => {
             {/* ──────────────────────────────────────────
                 CAPABILITY BADGES
             ────────────────────────────────────────── */}
-            <section className={`py-10 ${isDark ? 'bg-[#011b26]/50' : 'bg-slate-50'}`}>
+            <section className={`py-10 ${isDark ? 'bg-[#011b26]' : 'bg-slate-50'}`}>
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {capabilities.map((cap, i) => (
@@ -350,16 +316,16 @@ const WorkforceManagedServices = () => {
             {/* ──────────────────────────────────────────
                 SERVICE MODULES (2+2 grid)
             ────────────────────────────────────────── */}
-            <section className="py-28 px-6">
+            <section className={`py-28 px-6 ${isDark ? 'bg-[#011b26]' : ''}`}>
                 <div className="max-w-7xl mx-auto">
                     {/* Section Header */}
                     <FadeUp delay={0}>
                         <div className="mb-16 max-w-2xl">
                             <Label text="Four Core Programs" color="text-hpe-orange" />
-                            <h2 className={`text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mt-3 mb-4 ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
+                            <h2 className={`text-xl md:text-3xl font-black uppercase tracking-tight leading-tight mt-3 mb-4 ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
                                 Governing People, Processes & Continuity at National Scale
                             </h2>
-                            <div className="w-16 h-1.5 bg-hpe-cyan rounded-full" />
+                            <div className="w-16 h-1 bg-hpe-cyan rounded-full" />
                         </div>
                     </FadeUp>
 
@@ -382,7 +348,7 @@ const WorkforceManagedServices = () => {
             {/* ──────────────────────────────────────────
                 WHY CHOOSE — Split Section
             ────────────────────────────────────────── */}
-            <section className={`py-28 px-6 relative ${isDark ? 'bg-white/[0.02] border-y border-white/5' : 'bg-slate-100/60'}`}>
+            <section className={`py-28 px-6 relative ${isDark ? 'bg-[#011b26]' : 'bg-slate-100/60'}`}>
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div className="absolute right-0 top-0 w-1/2 h-full bg-hpe-cyan/5 blur-[120px]" />
                 </div>
@@ -390,65 +356,12 @@ const WorkforceManagedServices = () => {
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-                        {/* Left: Visual */}
-                        <FadeUp delay={0}>
-                            <div className="relative">
-                                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070"
-                                        alt="Workforce Operations"
-                                        className="w-full h-full object-cover scale-[1.02] hover:scale-105 transition-transform duration-1000"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#011b26] via-transparent to-transparent opacity-60" />
-                                </div>
-
-                                {/* Floating Stat Card */}
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20, y: 20 }}
-                                    whileInView={{ opacity: 1, x: 0, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.4, duration: 0.7 }}
-                                    className={`absolute -bottom-6 -left-6 p-5 rounded-2xl border shadow-2xl ${isDark
-                                        ? 'bg-[#011b26]/90 border-white/10 backdrop-blur-xl'
-                                        : 'bg-white border-slate-200'
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-xl bg-hpe-cyan/20 flex items-center justify-center">
-                                            <Users className="w-5 h-5 text-hpe-cyan" />
-                                        </div>
-                                        <div>
-                                            <p className="text-2xl font-black text-hpe-cyan leading-none">2000+</p>
-                                            <p className={`text-[10px] font-black uppercase tracking-widest ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Professionals</p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-
-                                {/* Floating AMC Card */}
-                                <motion.div
-                                    initial={{ opacity: 0, x: 20, y: -20 }}
-                                    whileInView={{ opacity: 1, x: 0, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.55, duration: 0.7 }}
-                                    className={`absolute -top-6 -right-6 px-5 py-3 rounded-2xl border shadow-2xl ${isDark
-                                        ? 'bg-[#011b26]/90 border-white/10 backdrop-blur-xl'
-                                        : 'bg-white border-slate-200'
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-hpe-orange animate-pulse" />
-                                        <span className="text-[11px] font-black uppercase tracking-widest text-hpe-orange">24/7 AMC Active</span>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </FadeUp>
-
-                        {/* Right: Content */}
+                        {/* Left: Content */}
                         <FadeUp delay={0.15}>
                             <div className="space-y-8">
                                 <div>
                                     <Label text="Workforce Excellence" color="text-hpe-cyan" />
-                                    <h2 className={`text-3xl md:text-4xl font-black uppercase tracking-tight leading-tight mt-3 ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
+                                    <h2 className={`text-xl md:text-3xl font-black uppercase tracking-tight leading-tight mt-3 ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
                                         Why HPE Workforce & Managed Services?
                                     </h2>
                                 </div>
@@ -482,6 +395,18 @@ const WorkforceManagedServices = () => {
                                         </motion.div>
                                     ))}
                                 </div>
+                            </div>
+                        </FadeUp>
+
+                        {/* Right: Image */}
+                        <FadeUp delay={0}>
+                            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3]">
+                                <img
+                                    src="/service3.png"
+                                    alt="Workforce & Managed Services"
+                                    className="w-full h-full object-cover scale-[1.02] hover:scale-105 transition-transform duration-1000"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/60 via-transparent to-transparent" />
                             </div>
                         </FadeUp>
 
@@ -526,53 +451,6 @@ const WorkforceManagedServices = () => {
                             </div>
                         </FadeUp>
                     </div>
-                </div>
-            </section>
-
-            {/* ──────────────────────────────────────────
-                CTA
-            ────────────────────────────────────────── */}
-            <section className="py-28 px-6">
-                <div className="max-w-5xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        className={`relative overflow-hidden rounded-[3rem] border p-12 md:p-20 text-center ${isDark
-                            ? 'bg-white/[0.03] border-white/10'
-                            : 'bg-white border-slate-200 shadow-2xl'
-                            }`}
-                    >
-                        {/* Glow accents */}
-                        <div className="absolute -top-20 -left-20 w-64 h-64 bg-hpe-cyan/15 blur-[100px] rounded-full pointer-events-none" />
-                        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-hpe-orange/15 blur-[100px] rounded-full pointer-events-none" />
-
-                        <div className="relative z-10 space-y-6">
-                            <Label text="Operationalize Your Enterprise" color="text-hpe-orange" />
-                            <h2 className={`text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
-                                Ready to Deploy a <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-hpe-cyan to-hpe-orange">
-                                    Governed Workforce?
-                                </span>
-                            </h2>
-                            <p className={`text-base md:text-lg font-medium max-w-2xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                                Partner with HPE IT Solutions to build a nationally distributed, compliance-ready workforce backed by 24/7 managed support.
-                            </p>
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4">
-                                <button className="w-full sm:w-auto px-10 py-4 bg-hpe-orange text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full shadow-xl shadow-hpe-orange/20 hover:bg-white hover:text-[#011b26] transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 group">
-                                    Schedule a Consultation
-                                    <PhoneCall className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                                <button className={`w-full sm:w-auto px-10 py-4 border-2 font-black text-[11px] uppercase tracking-[0.2em] rounded-full transition-all duration-300 ${isDark
-                                    ? 'border-white/20 text-white hover:border-hpe-cyan hover:text-hpe-cyan'
-                                    : 'border-slate-200 text-slate-600 hover:border-hpe-cyan hover:text-hpe-cyan hover:bg-hpe-cyan/5'
-                                    }`}>
-                                    Download Brochure
-                                </button>
-                            </div>
-                        </div>
-                    </motion.div>
                 </div>
             </section>
 

@@ -126,22 +126,22 @@ function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative z-10 bg-white dark:bg-[#0a0f1e] text-slate-900 dark:text-white border-t border-slate-200 dark:border-white/5 pt-20 pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
+        <footer className="relative z-10 bg-[#011b26] text-white border-t border-white/5 pt-20 pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
             <div className="max-w-[1400px] mx-auto px-6">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
 
                     {/* ✅ Brand Info */}
-                    <div className="space-y-8">
+                    <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-6">
                         <Link to="/" className="flex items-center group">
                             <img
                                 src="/HPE LOGO.png"
                                 alt="HPE IT Solutions"
-                                className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                                className="h-[70px] sm:h-[94px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                             />
                         </Link>
 
-                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
+                        <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
                             At HPE IT Solutions, we empower businesses with cutting-edge technology and innovative digital strategies. Leading the future of enterprise excellence with dedication.
                         </p>
 
@@ -159,18 +159,17 @@ function Footer() {
                     </div>
 
                     {/* Explore */}
-                    <div>
-                        <h4 className="font-black text-sm uppercase tracking-[0.2em] mb-10 relative">
+                    <div className="text-center sm:text-left">
+                        <h4 className="font-black text-sm uppercase tracking-[0.2em] mb-10 text-white">
                             Explore
-                            <span className="absolute -bottom-2 left-0 w-8 h-0.5 bg-[#ff8d00]"></span>
                         </h4>
 
-                        <ul className="space-y-4">
-                            {['HOME', 'ABOUT', 'SERVICES', 'PROJECTS', 'CERTIFICATIONS', 'CONTACT'].map((link) => (
+                        <ul className="grid grid-cols-2 sm:grid-cols-1 gap-4">
+                            {['HOME', 'ABOUT', 'SERVICES', 'PROJECTS', 'CERTIFICATIONS', 'GROWTH STRATEGY', 'CONTACT'].map((link) => (
                                 <li key={link}>
                                     <Link
-                                        to={link === 'HOME' ? '/' : `/${link.toLowerCase()}`}
-                                        className="text-gray-500 dark:text-gray-400 hover:text-[#00b0d4] text-xs font-bold tracking-widest transition-colors flex items-center group"
+                                        to={link === 'HOME' ? '/' : link === 'GROWTH STRATEGY' ? '/growth-strategy' : `/${link.toLowerCase()}`}
+                                        className="text-gray-400 hover:text-[#00b0d4] text-[10px] sm:text-xs font-bold tracking-widest transition-colors flex items-center justify-center sm:justify-start group"
                                     >
                                         <span className="w-0 overflow-hidden group-hover:w-4 transition-all text-[#ff8d00]">→</span>
                                         {link}
@@ -181,18 +180,17 @@ function Footer() {
                     </div>
 
                     {/* Expertise */}
-                    <div>
-                        <h4 className="font-black text-sm uppercase tracking-[0.2em] mb-10 relative">
+                    <div className="text-center sm:text-left">
+                        <h4 className="font-black text-sm uppercase tracking-[0.2em] mb-10 text-white">
                             Expertise
-                            <span className="absolute -bottom-2 left-0 w-8 h-0.5 bg-[#00b0d4]"></span>
                         </h4>
 
-                        <ul className="space-y-4">
+                        <ul className="grid grid-cols-2 sm:grid-cols-1 gap-4">
                             {['Cloud Integration', 'Cybersecurity', 'AI & Automation', 'Enterprise ERP', 'Data Analytics'].map((item) => (
-                                <li key={item}>
+                                <li key={item} className="text-center sm:text-left">
                                     <a
                                         href="#"
-                                        className="text-gray-500 dark:text-gray-400 hover:text-white text-sm transition-colors block"
+                                        className="text-gray-400 hover:text-white text-xs sm:text-sm transition-colors block"
                                     >
                                         {item}
                                     </a>
@@ -202,25 +200,24 @@ function Footer() {
                     </div>
 
                     {/* Contact */}
-                    <div>
-                        <h4 className="font-black text-sm uppercase tracking-[0.2em] mb-10 relative">
+                    <div className="text-center sm:text-left">
+                        <h4 className="font-black text-sm uppercase tracking-[0.2em] mb-10 text-white">
                             Connect
-                            <span className="absolute -bottom-2 left-0 w-8 h-0.5 bg-[#ff8d00]"></span>
                         </h4>
 
-                        <div className="space-y-6">
+                        <div className="space-y-6 flex flex-col items-center sm:items-start">
 
-                            <div className="flex items-start space-x-4 group">
-                                <div className="p-3 bg-slate-100 dark:bg-white/5 rounded-lg text-[#ff8d00]">
+                            <div className="flex items-start space-x-4 group text-left">
+                                <div className="p-3 bg-white/5 rounded-lg text-[#ff8d00]">
                                     <MapPin size={18} />
                                 </div>
-                                <span className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                                    123 Technology Hub, Digital City, <br /> Bangalore - 560001
+                                <span className="text-gray-400 text-xs leading-relaxed max-w-[200px]">
+                                    123 Technology Hub, Digital City, Bangalore - 560001
                                 </span>
                             </div>
 
-                            <div className="flex items-center space-x-4 group text-gray-500 dark:text-gray-400 hover:text-white transition-colors cursor-pointer">
-                                <div className="p-3 bg-slate-100 dark:bg-white/5 rounded-lg text-[#00b0d4]">
+                            <div className="flex items-center space-x-4 group text-gray-400 hover:text-white transition-colors cursor-pointer text-left">
+                                <div className="p-3 bg-white/5 rounded-lg text-[#00b0d4]">
                                     <Mail size={18} />
                                 </div>
                                 <span className="text-xs font-bold tracking-widest">
@@ -228,8 +225,8 @@ function Footer() {
                                 </span>
                             </div>
 
-                            <div className="flex items-center space-x-4 group text-gray-500 dark:text-gray-400 hover:text-white transition-colors cursor-pointer">
-                                <div className="p-3 bg-slate-100 dark:bg-white/5 rounded-lg text-slate-900 dark:text-white">
+                            <div className="flex items-center space-x-4 group text-gray-400 hover:text-white transition-colors cursor-pointer text-left">
+                                <div className="p-3 bg-white/5 rounded-lg text-white">
                                     <Phone size={18} />
                                 </div>
                                 <span className="text-xs font-bold tracking-widest">
@@ -243,8 +240,8 @@ function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-10 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <p className="text-slate-400 dark:text-gray-600 text-[10px] font-bold tracking-[0.2em] uppercase">
+                <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <p className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">
                         © {currentYear} HPE IT SOLUTIONS PVT LTD. ALL RIGHTS RESERVED.
                     </p>
 
@@ -253,7 +250,7 @@ function Footer() {
                             <a
                                 key={policy}
                                 href="#"
-                                className="text-gray-600 dark:text-gray-500 hover:text-white text-[10px] font-bold tracking-widest uppercase transition-colors"
+                                className="text-gray-500 hover:text-white text-[10px] font-bold tracking-widest uppercase transition-colors"
                             >
                                 {policy}
                             </a>

@@ -19,7 +19,7 @@ const ContactCTA = () => {
                         <span className="text-brand-orange text-xs font-black tracking-[0.3em] uppercase mb-4 block">
                             GET IN TOUCH
                         </span>
-                        <h2 id="contact-heading" className="text-3xl md:text-5xl font-black mb-6 leading-tight text-[#011b26] dark:text-white">
+                        <h2 id="contact-heading" className="text-xl md:text-3xl font-semibold mb-4 leading-tight text-[#011b26] dark:text-white">
                             Ready to Transform Your Enterprise?
                         </h2>
                         <p className="text-slate-600 dark:text-slate-300 text-base md:text-lg mb-8 max-w-lg leading-relaxed">

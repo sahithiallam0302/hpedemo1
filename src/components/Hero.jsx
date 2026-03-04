@@ -98,7 +98,7 @@ function Hero() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-2xl md:text-5xl font-rajdhani font-black text-white mb-6 uppercase tracking-wider drop-shadow-lg"
+                            className="text-xl md:text-3xl font-rajdhani font-semibold text-white mb-4 uppercase tracking-wide drop-shadow-lg"
                         >
                             HPE IT <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-orange via-orange-500 to-amber-600">Solutions</span>
                         </motion.h1>

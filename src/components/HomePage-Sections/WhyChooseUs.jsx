@@ -52,7 +52,7 @@ const WhyChooseUs = () => {
                             WHY PARTNER WITH US
                         </span>
 
-                        <h2 className="text-4xl md:text-6xl font-rajdhani font-black text-white leading-tight uppercase mb-8 tracking-tighter">
+                        <h2 className="text-xl md:text-3xl font-rajdhani font-semibold text-white leading-tight uppercase mb-5 tracking-tight">
                             WHY HPE IT <span className="text-brand-cyan">SOLUTIONS</span>
                         </h2>
 
@@ -64,7 +64,6 @@ const WhyChooseUs = () => {
                         <div className="w-24 h-1 bg-gradient-to-r from-brand-cyan to-brand-orange rounded-full" />
                     </motion.div>
 
-                    {/* Right Side: Reasons Grid */}
                     <div className="grid grid-cols-1 gap-6">
                         {reasons.map((reason, index) => (
                             <motion.div
@@ -73,18 +72,19 @@ const WhyChooseUs = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group flex items-start gap-6 p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-cyan/30 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
                             >
-                                <div className="p-3 rounded-xl bg-white/5 group-hover:bg-brand-cyan/10 transition-colors">
-                                    {React.cloneElement(reason.icon, { size: 28 })}
-                                </div>
-                                <div>
-                                    <h3 className="text-lg md:text-xl font-rajdhani font-black text-white group-hover:text-brand-cyan transition-colors mb-2">
-                                        {reason.title}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm md:text-base font-medium">
-                                        {reason.description}
-                                    </p>
+                                <div className="flex items-start gap-6 p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-cyan/30 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm group">
+                                    <div className="p-3 rounded-xl bg-white/5 group-hover:bg-brand-cyan/10 transition-colors">
+                                        {React.cloneElement(reason.icon, { size: 28 })}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg md:text-xl font-rajdhani font-black text-white group-hover:text-brand-cyan transition-colors mb-2">
+                                            {reason.title}
+                                        </h3>
+                                        <p className="text-slate-500 text-sm md:text-base font-medium">
+                                            {reason.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}

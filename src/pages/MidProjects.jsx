@@ -78,7 +78,7 @@ export default function MidProjects() {
                         <span className="block text-[10px] font-black tracking-[0.5em] uppercase text-indigo-600 mb-3">
                             Page 13 — Mid-Scale Execution
                         </span>
-                        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-slate-900 leading-[0.93]">
+                        <h1 className="text-xl md:text-3xl font-semibold uppercase tracking-tight text-slate-900 leading-[1.1]">
                             4 Mid-Size<br />
                             <span className="text-indigo-600">Projects</span>
                         </h1>

@@ -46,7 +46,7 @@ const Preloader = ({ onFinish }) => {
                         muted
                         playsInline
                         onEnded={dismiss}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-contain md:object-cover"
                     />
                 </motion.div>
             )}

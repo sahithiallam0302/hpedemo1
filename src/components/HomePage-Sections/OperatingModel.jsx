@@ -44,7 +44,7 @@ const OperatingModel = () => {
                         <span className="inline-block font-rajdhani text-brand-cyan tracking-[0.4em] font-black text-xs uppercase mb-4 px-4 py-1.5 bg-brand-cyan/10 rounded-full">
                             OUR WORKFLOW
                         </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-rajdhani font-black text-white leading-none tracking-tight uppercase mb-6">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-rajdhani font-semibold text-white leading-none tracking-tight uppercase mb-4">
                             OPERATING <span className="text-brand-orange">MODEL</span>
                         </h2>
                         <div className="w-16 md:w-20 h-1 bg-gradient-to-r from-brand-cyan to-brand-orange mx-auto rounded-full" />
