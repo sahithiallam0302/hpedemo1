@@ -54,7 +54,7 @@ const CorporateStructure = () => {
                     <FadeUp className="lg:col-span-6 space-y-6">
                         <Label text="Corporate Architecture" color={isDark ? 'text-orange-400' : 'text-orange-600'} />
                         <h1 className={`text-2xl md:text-3xl font-bold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                            Corporate <br /><span className={isDark ? 'text-white/40' : 'text-slate-400'}>Structure</span>
+                            Corporate <br /><span className={isDark ? 'text-white' : 'text-slate-900'}>Structure</span>
                         </h1>
                         <div className="w-16 h-0.5 bg-gradient-to-r from-orange-400 to-blue-500 rounded-full" />
                     </FadeUp>
@@ -75,8 +75,8 @@ const CorporateStructure = () => {
             <Divider isDark={isDark} />
 
             {/* 2) ORG CHART SECTION */}
-            <section id="org-chart" className="px-8 md:px-16 py-24">
-                <div className="max-w-7xl mx-auto space-y-16">
+            <section id="org-chart" className="px-8 md:px-16 py-14">
+                <div className="max-w-4xl mx-auto space-y-10">
                     <FadeUp className="space-y-3 text-center">
                         <Label text="Governance Architecture" color={isDark ? 'text-blue-400' : 'text-blue-600'} />
                         <h2 className={`text-lg md:text-xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -87,42 +87,88 @@ const CorporateStructure = () => {
                         </p>
                     </FadeUp>
 
-                    <FadeUp delay={0.14}>
-                        <div className={`rounded-3xl border transition-all duration-500 p-10 md:p-16 overflow-x-auto ${isDark ? 'border-white/10 bg-white/[0.03]' : 'border-slate-200 bg-white shadow-xl'}`}>
-                            <div className="min-w-[1000px] flex flex-col items-center">
-                                {/* Tier 1 - Board of Directors */}
-                                <div className={`px-12 py-6 rounded-2xl border text-center w-[400px] transition-colors shadow-lg ${isDark ? 'border-orange-400/50 bg-orange-400/[0.09]' : 'border-orange-200 bg-orange-50'}`}>
-                                    <p className={`text-[11px] font-black uppercase tracking-[0.5em] mb-2 ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>Tier 1</p>
-                                    <p className={`font-extrabold text-xl ${isDark ? 'text-white' : 'text-slate-900'}`}>Board of Directors</p>
-                                    <p className={`text-[10px] font-bold uppercase tracking-widest mt-1 ${isDark ? 'text-orange-300/60' : 'text-orange-700/60'}`}>Supreme Governance</p>
-                                </div>
-                                <div className={`w-px h-12 ${isDark ? 'bg-white/30' : 'bg-slate-300'}`} />
+                    {/* Desktop Tree — animated */}
+                    <div className="hidden md:flex flex-col items-center">
+                        {/* Tier 1 */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.03 }}
+                            className={`px-8 py-4 rounded-xl border text-center w-[300px] cursor-default shadow-md ${isDark ? 'border-orange-400/50 bg-orange-400/[0.09] hover:bg-orange-400/[0.15]' : 'border-orange-400 bg-orange-50 hover:bg-orange-100 shadow-orange-100'}`}
+                        >
+                            <p className={`text-[9px] font-black uppercase tracking-[0.5em] mb-1 ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>Tier 1</p>
+                            <p className={`font-extrabold text-base ${isDark ? 'text-white' : 'text-slate-900'}`}>Board of Directors</p>
+                            <p className={`text-[9px] font-bold uppercase tracking-widest mt-0.5 ${isDark ? 'text-orange-300/60' : 'text-orange-700'}`}>Supreme Governance</p>
+                        </motion.div>
 
-                                {/* Tier 2 - CEO */}
-                                <div className={`px-12 py-6 rounded-2xl border text-center w-[400px] transition-colors shadow-lg ${isDark ? 'border-blue-400/50 bg-blue-400/[0.09]' : 'border-blue-200 bg-blue-50'}`}>
-                                    <p className={`text-[11px] font-black uppercase tracking-[0.5em] mb-2 ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>Tier 2 · Executive</p>
-                                    <p className={`font-extrabold text-xl ${isDark ? 'text-white' : 'text-slate-900'}`}>Chief Executive Officer (CEO)</p>
-                                    <p className={`text-[10px] font-bold uppercase tracking-widest mt-1 ${isDark ? 'text-blue-300/60' : 'text-blue-700/60'}`}>Group Strategy & Policy</p>
-                                </div>
+                        <motion.div initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.5 }} className={`w-px h-7 origin-top ${isDark ? 'bg-white/25' : 'bg-slate-400'}`} />
 
-                                <div className={`w-px h-12 ${isDark ? 'bg-white/30' : 'bg-slate-300'}`} />
-                                <div className={`w-full max-w-[900px] h-px ${isDark ? 'bg-white/30' : 'bg-slate-300'}`} />
+                        {/* Tier 2 */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            whileHover={{ scale: 1.03 }}
+                            className={`px-8 py-4 rounded-xl border text-center w-[300px] cursor-default shadow-md ${isDark ? 'border-blue-400/50 bg-blue-400/[0.09] hover:bg-blue-400/[0.15]' : 'border-blue-400 bg-blue-50 hover:bg-blue-100 shadow-blue-100'}`}
+                        >
+                            <p className={`text-[9px] font-black uppercase tracking-[0.5em] mb-1 ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>Tier 2 · Executive</p>
+                            <p className={`font-extrabold text-base ${isDark ? 'text-white' : 'text-slate-900'}`}>Chief Executive Officer (CEO)</p>
+                            <p className={`text-[9px] font-bold uppercase tracking-widest mt-0.5 ${isDark ? 'text-blue-300/60' : 'text-blue-700'}`}>Group Strategy &amp; Policy</p>
+                        </motion.div>
 
-                                {/* Tier 3 - C-Suite Officers */}
-                                <div className="w-full max-w-[1000px] grid grid-cols-4 gap-3">
-                                    {['COO', 'CTO', 'CFO', 'CHRO'].map((abbr, i) => (
-                                        <div key={abbr} className="flex flex-col items-center">
-                                            <div className={`w-px h-10 ${isDark ? 'bg-white/30' : 'bg-slate-300'}`} />
-                                            <div className={`w-full px-4 py-5 rounded-xl border text-center transition-all shadow-md group ${isDark ? 'border-white/20 bg-white/5 hover:bg-white/10' : 'border-slate-200 bg-white hover:bg-slate-50'}`}>
-                                                <p className={`font-black tracking-widest text-[13px] mb-1 ${isDark ? 'text-[#a5b4fc]' : 'text-indigo-600'}`}>{abbr}</p>
-                                                <p className={`font-bold text-[10px] uppercase tracking-tighter ${isDark ? 'text-white/60' : 'text-slate-500'}`}>Executive Office</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                        {/* Branch lines */}
+                        <div className="flex flex-col items-center w-[580px]">
+                            <motion.div initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.25, delay: 0.55 }} className={`w-px h-7 origin-top ${isDark ? 'bg-white/25' : 'bg-slate-400'}`} />
+                            <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: 0.65 }} className={`w-full h-px origin-center ${isDark ? 'bg-white/25' : 'bg-slate-400'}`} />
                         </div>
-                    </FadeUp>
+
+                        {/* Tier 3 */}
+                        <div className="w-[580px] grid grid-cols-4 gap-3">
+                            {['COO', 'CTO', 'CFO', 'CHRO'].map((abbr, i) => (
+                                <div key={abbr} className="flex flex-col items-center">
+                                    <motion.div initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.2, delay: 0.7 + i * 0.07 }} className={`w-px h-5 origin-top ${isDark ? 'bg-white/25' : 'bg-slate-400'}`} />
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 8 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.35, delay: 0.75 + i * 0.09 }}
+                                        whileHover={{ scale: 1.06, y: -2 }}
+                                        className={`w-full px-2 py-3 rounded-lg border text-center cursor-default ${isDark ? 'border-white/15 bg-white/[0.05] hover:bg-white/[0.1]' : 'border-slate-300 bg-white hover:bg-slate-50 shadow-sm hover:shadow-md'}`}
+                                    >
+                                        <p className={`font-black tracking-widest text-xs mb-0.5 ${isDark ? 'text-[#a5b4fc]' : 'text-indigo-600'}`}>{abbr}</p>
+                                        <p className={`font-bold text-[8px] uppercase tracking-tight ${isDark ? 'text-white/50' : 'text-slate-500'}`}>Executive Office</p>
+                                    </motion.div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Mobile View */}
+                    <div className="flex md:hidden flex-col gap-4 items-center">
+                        <motion.div initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className={`w-full p-4 rounded-xl border text-center ${isDark ? 'border-orange-400/50 bg-orange-400/[0.09]' : 'border-orange-400 bg-orange-50 shadow-md'}`}>
+                            <p className={`text-[9px] font-black uppercase tracking-[0.4em] mb-1 ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>Tier 1</p>
+                            <p className={`font-black text-base ${isDark ? 'text-white' : 'text-slate-900'}`}>Board of Directors</p>
+                            <p className={`text-[8px] font-bold uppercase tracking-widest mt-0.5 ${isDark ? 'text-orange-300/60' : 'text-orange-700'}`}>Supreme Governance</p>
+                        </motion.div>
+                        <div className={`w-px h-5 ${isDark ? 'bg-white/20' : 'bg-slate-400'}`} />
+                        <motion.div initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }} className={`w-full p-4 rounded-xl border text-center ${isDark ? 'border-blue-400/50 bg-blue-400/[0.09]' : 'border-blue-400 bg-blue-50 shadow-md'}`}>
+                            <p className={`text-[9px] font-black uppercase tracking-[0.4em] mb-1 ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>Tier 2 · Executive</p>
+                            <p className={`font-black text-base ${isDark ? 'text-white' : 'text-slate-900'}`}>CEO</p>
+                            <p className={`text-[8px] font-bold uppercase tracking-widest mt-0.5 ${isDark ? 'text-blue-300/60' : 'text-blue-700'}`}>Strategy &amp; Policy</p>
+                        </motion.div>
+                        <div className={`w-px h-5 ${isDark ? 'bg-white/20' : 'bg-slate-400'}`} />
+                        <div className="grid grid-cols-2 gap-3 w-full">
+                            {['COO', 'CTO', 'CFO', 'CHRO'].map((abbr, i) => (
+                                <motion.div key={abbr} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }} className={`w-full p-3 rounded-lg border text-center ${isDark ? 'border-white/20 bg-white/5' : 'border-slate-300 bg-white shadow-sm'}`}>
+                                    <p className={`font-black tracking-widest text-[11px] mb-0.5 ${isDark ? 'text-[#a5b4fc]' : 'text-indigo-600'}`}>{abbr}</p>
+                                    <p className={`font-bold text-[8px] uppercase tracking-tighter ${isDark ? 'text-white/60' : 'text-slate-500'}`}>Executive</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -143,7 +189,7 @@ const CorporateStructure = () => {
                         <div className="space-y-5">
                             <Label text="Leadership Structure" color={isDark ? 'text-orange-400' : 'text-orange-600'} />
                             <h2 className={`text-xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                                Board-Driven<br /><span className={isDark ? 'text-white/40' : 'text-slate-400'}>Institutional Leadership</span>
+                                Board-Driven<br /><span className={isDark ? 'text-white' : 'text-slate-900'}>Institutional Leadership</span>
                             </h2>
                         </div>
                         <div className={`space-y-5 text-[15px] leading-[1.9] font-medium ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>
@@ -163,7 +209,7 @@ const CorporateStructure = () => {
                         <div className="space-y-5">
                             <Label text="Operational Model" color={isDark ? 'text-teal-400' : 'text-teal-600'} />
                             <h2 className={`text-xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                                Decentralised Execution<br /><span className={isDark ? 'text-white/40' : 'text-slate-400'}>Centralised Oversight</span>
+                                Decentralised Execution<br /><span className={isDark ? 'text-white' : 'text-slate-900'}>Centralised Oversight</span>
                             </h2>
                         </div>
                         <div className={`space-y-5 text-[15px] leading-[1.9] font-medium ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>
@@ -197,18 +243,21 @@ const CorporateStructure = () => {
                     <FadeUp className="space-y-5">
                         <Label text="Governance Architecture" color={isDark ? 'text-indigo-400' : 'text-indigo-600'} />
                         <h2 className={`text-xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                            Structured Accountability<br /><span className={isDark ? 'text-white/40' : 'text-slate-400'}>Across Every Division</span>
+                            Structured Accountability<br /><span className={isDark ? 'text-white' : 'text-slate-900'}>Across Every Division</span>
                         </h2>
                     </FadeUp>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {govItems.map((item, i) => (
-                            <FadeUp key={i} delay={i * 0.08}>
-                                <div className={`group h-full p-8 rounded-2xl border transition-all duration-300 ${isDark ? 'border-white/10 bg-white/[0.02] hover:bg-white/[0.05]' : 'border-slate-200 bg-white shadow-sm hover:shadow-md'}`}>
+                            <FadeUp key={i} delay={i * 0.08} className="relative group">
+                                {/* Animated Border Background */}
+                                <div className={`absolute -inset-[1px] bg-gradient-to-r from-blue-500 via-indigo-500 to-teal-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[0.5px] ${isDark ? 'block' : 'hidden'}`} />
+
+                                <div className={`relative h-full p-8 rounded-2xl border transition-all duration-300 ${isDark ? 'border-white/10 bg-[#0a0f1e] group-hover:bg-[#0d1428]' : 'border-slate-200 bg-white shadow-sm hover:shadow-md'}`}>
                                     <div className={`w-10 h-10 rounded-lg mb-5 flex items-center justify-center border transition-colors ${isDark ? 'bg-white/[0.05] border-white/10' : 'bg-slate-50 border-slate-100'} ${item.borderColor.replace('20', '50')} ${item.color}`}>
                                         <item.icon size={18} strokeWidth={1.5} />
                                     </div>
-                                    <h3 className={`text-[11px] font-black uppercase tracking-[0.4em] mb-3 ${isDark ? item.color : item.color.replace('400', '600')}`}>{item.label}</h3>
-                                    <p className={`text-sm leading-relaxed font-medium ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>{item.body}</p>
+                                    <h3 className={`text-[11px] font-black uppercase tracking-[0.4em] mb-3 relative z-10 ${isDark ? item.color : item.color.replace('400', '600')}`}>{item.label}</h3>
+                                    <p className={`text-sm leading-relaxed font-medium relative z-10 ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>{item.body}</p>
                                 </div>
                             </FadeUp>
                         ))}

@@ -76,7 +76,7 @@ const ImpactAtScale = () => {
                     <span className="text-brand-orange text-[10px] font-black tracking-[0.3em] uppercase mb-3 block">
                         OUR IMPACT
                     </span>
-                    <h2 id="impact-heading" className="text-4xl md:text-6xl text-[#011b26] dark:text-white mb-4 tracking-tight">
+                    <h2 id="impact-heading" className="text-2xl md:text-5xl text-[#011b26] dark:text-white mb-4 tracking-tight">
                         Impact at Scale
                     </h2>
                     <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
@@ -84,12 +84,11 @@ const ImpactAtScale = () => {
                     </p>
                 </div>
 
-                {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {impacts.map((item, index) => (
                         <div
                             key={index}
-                            className="bg-white dark:bg-[#022534] border border-slate-100 dark:border-white/5 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center group"
+                            className="bg-white dark:bg-[#0a1f29] border border-slate-100 dark:border-white/5 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center h-full group"
                         >
                             <div className={`${item.bgColor} dark:bg-white/5 p-4 rounded-xl mb-6 transition-transform group-hover:scale-110`}>
                                 {item.icon}

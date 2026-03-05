@@ -24,6 +24,7 @@ import Contact from './pages/Contact';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
 import AdminLogin from './AdminDashboard/AdminLogin';
 import AdminRoute from './AdminDashboard/AdminRoute';
+import GrowthStrategy from './pages/GrowthStrategy';
 import Preloader from './components/common/Preloader';
 import ScrollIndicator from './components/common/ScrollIndicator';
 
@@ -48,6 +49,7 @@ function AppContent() {
       '/projects/mid': 'Mid Projects | HPE IT Solutions',
       '/projects/large': 'Large Projects | HPE IT Solutions',
       '/certifications': 'Certifications | HPE IT Solutions',
+      '/growth-strategy': 'Growth Strategy | HPE IT Solutions',
       '/contact': 'Contact Us | HPE IT Solutions',
       '/admin/login': 'Admin Login | HPE IT Solutions',
       '/admin': 'Admin Dashboard | HPE IT Solutions',
@@ -100,6 +102,7 @@ function AppContent() {
               <Route path="/projects/mid" element={<MidProjects />} />
               <Route path="/projects/large" element={<LargeProjects />} />
               <Route path="/certifications" element={<CertificationsPage />} />
+              <Route path="/growth-strategy" element={<GrowthStrategy />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>

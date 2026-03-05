@@ -117,7 +117,7 @@ const OurDivisions = () => {
                             CORE DIVISIONS
                         </span>
 
-                        <h2 id="divisions-heading" className="text-3xl sm:text-4xl md:text-6xl text-white leading-none tracking-tight mb-6 uppercase">
+                        <h2 id="divisions-heading" className="text-2xl sm:text-3xl md:text-5xl text-white leading-none tracking-tight mb-6 uppercase">
                             WHAT WE DO
                         </h2>
 

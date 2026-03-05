@@ -1,7 +1,31 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Cpu, Globe2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Users, Cpu, Globe2, ShieldCheck, MapPin, Briefcase, Building } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import { citiesData } from '../data/contactLocations';
+
+// Custom white icon for pinpoints
+const whiteIcon = L.divIcon({
+    className: 'custom-div-icon',
+    html: `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <div style="background-color: white; width: 10px; height: 10px; border: 1.5px solid #00b0d4; border-radius: 50%; box-shadow: 0 0 10px rgba(255,255,255,0.8);"></div>
+            <span style="color: white; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 0 1px 4px rgba(0,0,0,0.8); white-space: nowrap;">{{CITY_NAME}}</span>
+        </div>
+    `,
+    iconSize: [80, 25],
+    iconAnchor: [40, 5]
+});
+
+// Fix Leaflet issue
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 import { useTheme } from '../context/ThemeContext';
 
 /* ─── Scroll Fade-Up ─── */
@@ -46,30 +70,52 @@ const Strength = () => {
     return (
         <article className={`transition-colors duration-500 overflow-x-hidden font-sans ${isDark ? 'bg-[#0a0f1e] text-white' : 'bg-[#f8fafc] text-slate-900'}`}>
 
-            {/* TOP INTRO */}
-            <section className="px-8 md:px-16 pt-20 pb-20">
+            {/* TOP INTRO — Enhanced with Image */}
+            <section className="px-8 md:px-16 pt-32 pb-16">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-12 items-end">
-                        <FadeUp className="lg:col-span-6 space-y-6">
-                            <Label text="Organisational Strength" color="text-orange-400" isDark={isDark} />
-                            <h1 className={`text-2xl md:text-3xl font-bold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                                Capability. Scale. <br />
-                                <span className={isDark ? 'text-white/40' : 'text-slate-400'}>Institutional Depth.</span>
-                            </h1>
-                            <div className="w-16 h-0.5 bg-gradient-to-r from-orange-400 to-blue-500 rounded-full" />
-                        </FadeUp>
+                    <div className="grid lg:grid-cols-12 gap-16 items-center">
+                        <div className="lg:col-span-7 space-y-10">
+                            <FadeUp className="space-y-6">
+                                <Label text="Organisational Strength" color="text-orange-400" isDark={isDark} />
+                                <h1 className={`text-2xl md:text-4xl font-black uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                                    Capability. Scale. <br />
+                                    <span className={isDark ? 'text-white' : 'text-slate-900'}>Institutional Depth.</span>
+                                </h1>
+                                <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-blue-500 rounded-full" />
+                            </FadeUp>
 
-                        <FadeUp delay={0.15} className="lg:col-span-6 space-y-5">
-                            <p className={`text-lg font-medium leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
-                                HPE IT Solutions has built an institutional-grade organisational structure capable of managing large-scale, multi-vertical enterprise mandates with precision.
-                            </p>
-                            <p className={`text-[15px] font-medium leading-relaxed ${isDark ? 'text-gray-500' : 'text-slate-500'}`}>
-                                Formed through 70+ strategic integrations, our workforce capability, technical depth, and governance architecture represent a singular competitive advantage.
-                            </p>
-                            <Link to="/contact" className={`inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-widest transition-all group/link ${isDark ? 'text-white/50 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}>
-                                Engage With Leadership
-                                <ArrowRight size={12} className="group-hover/link:translate-x-1 transition-transform" />
-                            </Link>
+                            <FadeUp delay={0.15} className="space-y-6">
+                                <p className={`text-base md:text-lg font-medium leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
+                                    HPE IT Solutions has built an institutional-grade organisational structure capable of managing large-scale, multi-vertical enterprise mandates with precision.
+                                </p>
+                                <p className={`text-sm font-medium leading-relaxed ${isDark ? 'text-gray-500' : 'text-slate-500'}`}>
+                                    Formed through 70+ strategic integrations, our workforce capability, technical depth, and governance architecture represent a singular competitive advantage.
+                                </p>
+                                <div className="pt-4">
+                                    <Link to="/contact" className={`inline-flex items-center gap-4 px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-widest text-[10px] rounded-xl hover:bg-blue-700 transition-all shadow-xl hover:scale-105 active:scale-95`}>
+                                        Engage With Leadership
+                                        <ArrowRight size={14} />
+                                    </Link>
+                                </div>
+                            </FadeUp>
+                        </div>
+
+                        {/* New Side Image */}
+                        <FadeUp delay={0.3} className="lg:col-span-5 mt-12 lg:mt-0">
+                            <div className={`relative rounded-3xl overflow-hidden border transition-all duration-500 group ${isDark ? 'border-white/10' : 'border-slate-200 shadow-2xl'}`}>
+                                <div className="aspect-square max-h-[400px]">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070"
+                                        alt="Modern Corporate Architecture"
+                                        className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                    />
+                                </div>
+                                <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none`} />
+                                <div className="absolute bottom-6 left-6 right-6">
+                                    <p className="text-white text-xs font-black uppercase tracking-widest opacity-80 mb-1">Corporate Infrastructure</p>
+                                    <p className="text-white text-lg font-black uppercase tracking-tight">Enterprise Scale</p>
+                                </div>
+                            </div>
                         </FadeUp>
                     </div>
                 </div>
@@ -77,54 +123,133 @@ const Strength = () => {
 
             <Divider isDark={isDark} />
 
-            {/* MAIN VIDEO — FULL WIDTH EXPERIENTIAL SECTION */}
-            <section className="relative w-full overflow-hidden">
-                <FadeUp delay={0.12}>
-                    <div className={`relative w-full h-[80vh] min-h-[680px] transition-all duration-500 ${isDark ? 'border-y border-white/10' : 'border-y border-slate-200 shadow-sm'}`}>
-                        <video autoPlay loop muted playsInline className={`absolute inset-0 w-full h-full object-cover ${isDark ? 'opacity-90' : 'opacity-100'}`}>
-                            <source src="https://player.vimeo.com/external/494251034.hd.mp4?s=34a873f1d3e144a1e944b3604929c2bcc5d36e05&profile_id=174" type="video/mp4" />
-                        </video>
-
-                        {/* Dynamic Overlays */}
-                        <div className={`absolute inset-0 transition-opacity duration-700 ${isDark ? 'bg-[#0a0f1e]/40' : 'bg-slate-900/10'}`} />
-                        <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent ${isDark ? 'to-[#0a0f1e]' : 'to-[#f8fafc]'} pointer-events-none`} />
-
-                        {/* Centered High-Impact Content Overlay */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-20">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1, ease: "easeOut" }}
-                                className="space-y-8 max-w-4xl"
-                            >
-                                <div className="space-y-4">
-                                    <Label text="Enterprise in Motion" color="text-orange-400" isDark={isDark} />
-                                    <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white drop-shadow-2xl leading-[0.9]">
-                                        How We <span className="bg-gradient-to-r from-orange-400 to-blue-500 bg-clip-text text-transparent">Execute</span> at Scale
-                                    </h2>
+            {/* STATS GRID SECTION */}
+            <section className="px-8 md:px-16 py-10 relative z-20">
+                <div className="max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                        {[
+                            { icon: Users, value: '2000+', label: 'Total Employees', sub: 'Nationwide Workforce' },
+                            { icon: Cpu, value: '350+', label: 'IT Professionals', sub: 'Core Engineering Depth' },
+                            { icon: Briefcase, value: '1200+', label: 'Field & Infra Experts', sub: 'On-site Technical Force' },
+                            { icon: ShieldCheck, value: '200+', label: 'Project Managers', sub: 'Regional Governance' },
+                            { icon: Building, value: '150+', label: 'Enterprise Clients', sub: 'Active Institutional Partners' },
+                            { icon: Globe2, value: '500+', label: 'Managed Sites', sub: 'Live Operational Assets' },
+                        ].map((stat, i) => (
+                            <FadeUp key={i} delay={i * 0.05}>
+                                <div className={`p-4 rounded-xl border transition-all duration-300 group ${isDark ? 'bg-[#0a0f1e] border-white/[0.07] hover:border-white/15' : 'bg-white border-slate-100 shadow-sm hover:shadow-md'}`}>
+                                    <p className={`text-[9px] font-black uppercase tracking-[0.25em] mb-1.5 ${isDark ? 'text-blue-400/70' : 'text-blue-500'}`}>{stat.label}</p>
+                                    <p className={`text-2xl font-black tracking-tight leading-none mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{stat.value}</p>
+                                    <p className={`text-[8px] font-bold uppercase tracking-widest ${isDark ? 'text-gray-600' : 'text-slate-400'}`}>{stat.sub}</p>
                                 </div>
+                            </FadeUp>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-                                <p className="text-base md:text-lg text-white font-medium max-w-2xl mx-auto drop-shadow-md leading-relaxed opacity-90">
-                                    HPE IT Solutions leverages a unified institutional-grade workforce to drive precision delivery and strategic excellence across 500+ active enterprise environments.
+            {/* OPERATIONAL FOOTPRINT SECTION */}
+            <section className={`py-24 overflow-hidden border-y border-white/10 ${isDark ? 'bg-black' : 'bg-white'}`}>
+                <div className="max-w-7xl mx-auto px-8 md:px-16">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+                        {/* Left: Content */}
+                        <div className="space-y-10 relative z-10">
+                            <div>
+                                <Label text="National Footprint" color="text-blue-400" isDark={isDark} />
+                                <h2 className={`text-2xl md:text-3xl font-bold uppercase tracking-tight mt-4 leading-[1.1] ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                                    Operational <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Presence</span>
+                                </h2>
+                                <div className="w-20 h-1.5 bg-blue-500 rounded-full mt-8" />
+                            </div>
+
+                            <p className={`text-lg font-medium leading-relaxed ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>
+                                Our institutional depth is mirrored by our physical reach. With a centralized command structure and decentralized execution hubs, we manage infrastructure assets at scale across the subcontinent.
+                            </p>
+
+                            <div className="grid grid-cols-2 gap-8 pt-4">
+                                <div className="space-y-2">
+                                    <p className={`text-4xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>20+</p>
+                                    <p className="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em]">States Active</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className={`text-4xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>500+</p>
+                                    <p className="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em]">Managed Sites</p>
+                                </div>
+                            </div>
+
+                            <div className={`p-6 rounded-2xl border ${isDark ? 'bg-white/[0.03] border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                                <p className={`text-xs font-bold leading-relaxed ${isDark ? 'text-gray-500' : 'text-slate-500'}`}>
+                                    HPE IT Solutions leverages a unified operational matrix ensuring localized support and resilient service delivery for enterprise clients nationwide.
                                 </p>
+                            </div>
+                        </div>
 
-                                <div className="pt-6">
-                                    <div className="inline-block backdrop-blur-xl bg-white/10 border border-white/20 rounded-[2rem] px-10 py-5 transition-transform hover:scale-105 duration-500">
-                                        <p className="text-[11px] font-black uppercase tracking-[0.45em] text-white">
-                                            Integrated Workforce · Scalable Execution · National Reach
-                                        </p>
+                        {/* Right: Focused India Map */}
+                        <FadeUp delay={0.2} className="relative">
+                            <div className={`relative h-[380px] md:h-[420px] rounded-2xl overflow-hidden border shadow-xl ${isDark ? 'border-white/10 bg-slate-900' : 'border-slate-200'}`}>
+                                <MapContainer
+                                    center={[22.5, 78]}
+                                    zoom={4.5}
+                                    scrollWheelZoom={false}
+                                    attributionControl={false}
+                                    className="h-full w-full grayscale brightness-[0.85]"
+                                >
+                                    <TileLayer
+                                        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                                    />
+                                    {Object.entries(citiesData).map(([city, data]) => {
+                                        // Dynamic colors based on theme for the "white map/black dots" request
+                                        const dotColor = isDark ? 'black' : 'white';
+                                        const textColor = isDark ? 'black' : 'white';
+                                        const borderColor = isDark ? '#00b0d4' : '#00b0d4';
+
+                                        const localizedIcon = L.divIcon({
+                                            className: 'custom-div-icon',
+                                            html: `
+                                                <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                                    <div style="background-color: #00b0d4; width: 8px; height: 8px; border: 1.5px solid #fff; border-radius: 50%; box-shadow: 0 0 8px rgba(0,176,212,0.6);"></div>
+                                                    <span style="color: white; font-family: 'Inter', sans-serif; font-size: 7px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 0 1px 3px rgba(0,0,0,0.8); white-space: nowrap;">${city}</span>
+                                                </div>
+                                            `,
+                                            iconSize: [80, 25],
+                                            iconAnchor: [40, 5]
+                                        });
+
+                                        return (
+                                            <Marker key={city} position={data.center} icon={localizedIcon}>
+                                                <Popup className="hpe-dark-popup">
+                                                    <div className="p-4 bg-slate-900 text-white rounded-xl border border-white/10 min-w-[200px]">
+                                                        <h4 className="font-black text-xs uppercase tracking-[0.2em] text-blue-400 mb-2 border-b border-white/10 pb-2">{city} HUB</h4>
+                                                        <p className="text-[10px] text-gray-400 font-medium leading-relaxed mb-4">Regional execution hub for infrastructure operations.</p>
+                                                        <div className="flex items-center gap-2 text-[9px] font-black tracking-widest text-white/50 bg-white/5 p-2 rounded-lg">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                                                            HUB ACTIVE
+                                                        </div>
+                                                    </div>
+                                                </Popup>
+                                            </Marker>
+                                        );
+                                    })}
+                                </MapContainer>
+
+                                {/* Decorative Map Overlay */}
+                                <div className="absolute top-6 left-6 p-4 backdrop-blur-md bg-black/20 border border-white/10 rounded-2xl z-[1000] hidden sm:block">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]" />
+                                        <span className="text-[9px] font-black tracking-widest text-white uppercase">Operational Matrix</span>
                                     </div>
                                 </div>
-                            </motion.div>
-                        </div>
+                            </div>
+                        </FadeUp>
                     </div>
-                </FadeUp>
+                </div>
             </section>
 
             <Divider isDark={isDark} />
 
             {/* WORKFORCE DEPTH BLOCK */}
-            <section id="workforce" className="px-8 md:px-16 py-24">
+            <section id="workforce" className="px-8 md:px-16 py-12">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-12 gap-12 items-start">
                         <FadeUp className="lg:col-span-5 space-y-5">
@@ -153,7 +278,7 @@ const Strength = () => {
 
             {/* TECHNICAL CAPABILITY + INFRA REACH */}
             <section id="technical-capability" className="px-8 md:px-16 py-24">
-                <div className="max-w-7xl mx-auto space-y-24">
+                <div className="max-w-7xl mx-auto space-y-12">
                     <div className="grid lg:grid-cols-12 gap-12 items-start">
                         <FadeUp className={`lg:col-span-7 space-y-5 text-[15px] leading-[1.9] font-medium order-last lg:order-first ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>
                             {contentBlocks[1].body.map((p, i) => <p key={i}>{p}</p>)}
@@ -205,7 +330,7 @@ const Strength = () => {
             <Divider isDark={isDark} />
 
             {/* GOVERNANCE BLOCK */}
-            <section id="governance" className="px-8 md:px-16 py-24">
+            <section id="governance" className="px-8 md:px-16 py-12">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-stretch">
                     <FadeUp className="lg:col-span-7 space-y-8">
                         <div className={`pl-5 border-l-2 space-y-3 transition-colors duration-500 ${isDark ? contentBlocks[3].borderColor : contentBlocks[3].borderColor.replace('25', '100')}`}>
@@ -231,8 +356,8 @@ const Strength = () => {
                         </div>
                     </FadeUp>
 
-                    <FadeUp delay={0.18} className="lg:col-span-5">
-                        <div className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 h-full min-h-[360px] ${isDark ? 'border-white/10' : 'border-slate-200 shadow-xl'}`}>
+                    <FadeUp delay={0.18} className="lg:col-span-5 h-full">
+                        <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 h-full min-h-[360px] group ${isDark ? 'border-white/10' : 'border-slate-200 shadow-xl'}`}>
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069" alt="Governance teams" className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale-[0.15] ${isDark ? 'opacity-55 hover:opacity-75' : 'opacity-90'}`} />
                             <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-black/40 via-transparent to-transparent'}`} />
                             <div className="absolute bottom-6 left-6">
@@ -247,7 +372,7 @@ const Strength = () => {
             {/* CTA */}
             <section className="px-8 md:px-16 pb-40">
                 <FadeUp className="max-w-5xl mx-auto">
-                    <div className={`relative py-16 px-10 md:px-16 rounded-[2rem] border overflow-hidden transition-all duration-500 ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-slate-200 bg-white shadow-2xl'}`}>
+                    <div className={`relative py-16 px-10 md:px-16 rounded-[2rem] border overflow-hidden transition-all duration-500 group ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-slate-200 bg-white shadow-2xl'}`}>
                         {isDark ? (
                             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-500/[0.06] blur-[120px] rounded-full pointer-events-none" />
                         ) : (

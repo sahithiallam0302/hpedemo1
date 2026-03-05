@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
     Sun, Moon, Menu, X, ChevronDown, ArrowRight,
     Building2, Users, LayoutGrid, Shield,
-    Headphones, Activity
+    Headphones, Activity, Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
@@ -15,6 +15,7 @@ function Navbar() {
     const [activeMega, setActiveMega] = useState(null);
     const [hoveredName, setHoveredName] = useState(null);
     const [expandedAccordion, setExpandedAccordion] = useState(null);
+    const [mobileView, setMobileView] = useState('main'); // 'main' or megaKey
 
     // Close menus on route change & handle scroll to hash
     useEffect(() => {
@@ -22,6 +23,7 @@ function Navbar() {
         setActiveMega(null);
         setExpandedAccordion(null);
         setHoveredName(null);
+        setMobileView('main');
 
         if (location.hash) {
             const id = location.hash.replace('#', '');
@@ -43,6 +45,7 @@ function Navbar() {
         { name: 'PROJECTS', path: '/projects', mega: 'projects' },
         { name: 'CERTIFICATIONS', path: '/certifications' },
         { name: 'CONTACT', path: '/contact' },
+        { name: 'GROWTH STRATEGY', path: '/growth-strategy' },
     ];
 
     const megaContent = {
@@ -149,6 +152,7 @@ function Navbar() {
 
     const isAboutActive = location.pathname.startsWith('/about') ||
         ['/vision-mission', '/strength', '/corporate-structure'].includes(location.pathname);
+    const isStrategyActive = location.pathname === '/growth-strategy';
     const isProjectsActive = location.pathname.startsWith('/projects');
     const isServicesActive = location.pathname.startsWith('/services');
 
@@ -386,129 +390,146 @@ function Navbar() {
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div
-                        initial={{ y: '-100%' }}
-                        animate={{ y: 0 }}
-                        exit={{ y: '-100%' }}
-                        transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
-                        className="fixed inset-0 z-[90] bg-[#011b26] flex flex-col items-center h-screen pt-20 overflow-y-auto"
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '100%' }}
+                        transition={{ duration: 0.4, ease: [0.65, 0, 0.35, 1] }}
+                        className="fixed inset-0 z-[10000] bg-[#011b26] flex flex-col h-screen transition-colors duration-500"
                     >
-                        {/* Decorative Background Elements */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#00b0d4]/10 blur-[100px] rounded-full pointer-events-none" />
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#ff8d00]/10 blur-[100px] rounded-full pointer-events-none" />
+                        {/* Mobile Header: Search & Close */}
+                        <div className="flex items-center h-20 border-b border-white/10 px-6">
+                            <div className="flex-grow relative">
+                                <input
+                                    type="text"
+                                    placeholder="Search hpe.com"
+                                    className="w-full bg-transparent text-white/90 text-lg font-medium outline-none placeholder:text-white/30"
+                                />
+                            </div>
+                            <button
+                                onClick={() => setMenuOpen(false)}
+                                className="ml-4 p-2 text-[#00b0d4] hover:text-[#ff8d00] transition-colors"
+                            >
+                                <X className="w-8 h-8" />
+                            </button>
+                        </div>
 
-                        <ul className="list-none flex flex-col gap-4 items-center w-full px-8 py-10 z-10">
-                            {navLinks.map((nav, index) => {
-                                const isActive = location.pathname === nav.path || (nav.mega && isMegaActive(nav.mega));
-                                const isExpanded = expandedAccordion === nav.name;
+                        {/* Slide Container */}
+                        <div className="flex-grow overflow-hidden relative">
+                            <AnimatePresence initial={false} mode="wait">
+                                {mobileView === 'main' ? (
+                                    <motion.div
+                                        key="main-view"
+                                        initial={{ x: -20, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        exit={{ x: -20, opacity: 0 }}
+                                        className="absolute inset-0 overflow-y-auto px-6 py-4"
+                                    >
+                                        <ul className="space-y-1">
+                                            {navLinks.map((nav) => (
+                                                <li key={nav.name} className="border-b border-white/5 last:border-0">
+                                                    {nav.mega ? (
+                                                        <button
+                                                            onClick={() => setMobileView(nav.mega)}
+                                                            className="w-full py-6 flex items-center justify-between text-white group"
+                                                        >
+                                                            <span className="text-xl font-bold tracking-tight">{nav.name}</span>
+                                                            <ArrowRight className="w-5 h-5 text-[#00b0d4] group-hover:translate-x-1 transition-transform" />
+                                                        </button>
+                                                    ) : (
+                                                        <Link
+                                                            to={nav.path}
+                                                            onClick={() => setMenuOpen(false)}
+                                                            className="block py-6 text-xl font-bold tracking-tight text-white/90 hover:text-white transition-colors"
+                                                        >
+                                                            {nav.name}
+                                                        </Link>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
 
-                                if (nav.mega) {
-                                    return (
-                                        <li key={nav.name} className="w-full">
-                                            <div className="flex items-center justify-center gap-4 py-4 border-b border-white/5 mx-auto w-fit">
-                                                <Link
-                                                    to={nav.path}
-                                                    onClick={() => setMenuOpen(false)}
-                                                    className={`font-black text-3xl uppercase tracking-wider transition-colors duration-300 ${isActive
-                                                        ? 'text-[#00b0d4]'
-                                                        : 'text-white/60 hover:text-white'
-                                                        }`}
-                                                >
-                                                    {nav.name}
-                                                </Link>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setExpandedAccordion(isExpanded ? null : nav.name);
-                                                    }}
-                                                    className="p-2 bg-white/5 rounded-full border border-white/10"
-                                                    aria-label={`Toggle ${nav.name} details`}
-                                                >
-                                                    <ChevronDown className={`w-6 h-6 text-white/50 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                                                </button>
-                                            </div>
-                                            <AnimatePresence>
-                                                {isExpanded && (
-                                                    <motion.div
-                                                        initial={{ height: 0, opacity: 0 }}
-                                                        animate={{ height: 'auto', opacity: 1 }}
-                                                        exit={{ height: 0, opacity: 0 }}
-                                                        className="overflow-hidden flex flex-col gap-6 py-8 px-8 bg-white/5 rounded-3xl mt-2 mx-4"
-                                                    >
-                                                        {/* Section Intro / Overview Link */}
-                                                        <div className="text-center pb-4 border-b border-white/5">
+                                        {/* Bottom Global Selectors */}
+                                        <div className="mt-12 pt-8 border-t border-white/10">
+                                            <button className="flex items-center gap-3 text-white/60 font-bold text-sm hover:text-white transition-colors">
+                                                <Globe className="w-5 h-5" />
+                                                <span>India (EN)</span>
+                                            </button>
+                                        </div>
+                                    </motion.div>
+                                ) : (
+                                    <motion.div
+                                        key="sub-view"
+                                        initial={{ x: 20, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        exit={{ x: 20, opacity: 0 }}
+                                        className="absolute inset-0 flex flex-col pt-4 overflow-y-auto"
+                                    >
+                                        {/* Back Anchor */}
+                                        <button
+                                            onClick={() => setMobileView('main')}
+                                            className="px-6 py-4 flex items-center gap-3 text-[#00b0d4] hover:text-[#ff8d00] transition-colors font-black text-xs uppercase tracking-widest border-b border-white/5"
+                                        >
+                                            <ArrowRight className="w-4 h-4 rotate-180" />
+                                            Back to Menu
+                                        </button>
+
+                                        {/* Sub-menu Content */}
+                                        <div className="px-6 py-8">
+                                            <h2 className="text-3xl font-black text-white mb-8 tracking-tighter uppercase">
+                                                {navLinks.find(l => l.mega === mobileView)?.name}
+                                            </h2>
+
+                                            <div className="space-y-10">
+                                                {megaContent[mobileView].columns.map((col, idx) => (
+                                                    <div key={idx} className="space-y-5">
+                                                        <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00b0d4]/60">
+                                                            {col.title}
+                                                        </h3>
+                                                        <div className="flex flex-col gap-5">
+                                                            {col.links.map((link) => (
+                                                                <Link
+                                                                    key={link.name}
+                                                                    to={link.path}
+                                                                    onClick={() => setMenuOpen(false)}
+                                                                    className="text-lg font-bold text-white/80 hover:text-white transition-colors flex items-center justify-between group"
+                                                                >
+                                                                    <span>{link.name}</span>
+                                                                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                ))}
+
+                                                {/* Featured Area */}
+                                                {megaContent[mobileView].featured && (
+                                                    <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-white/10 border-t-brand-cyan/40">
+                                                        <div className="flex flex-col gap-4">
+                                                            <span className="text-[9px] font-black uppercase tracking-widest text-[#00b0d4]">
+                                                                {megaContent[mobileView].featured.label}
+                                                            </span>
+                                                            <h4 className="text-xl font-black text-white leading-tight">
+                                                                {megaContent[mobileView].featured.title}
+                                                            </h4>
                                                             <Link
-                                                                to={nav.path}
+                                                                to={megaContent[mobileView].featured.path}
                                                                 onClick={() => setMenuOpen(false)}
-                                                                className="text-sm font-black text-[#ff8d00] uppercase tracking-[0.3em] inline-flex items-center gap-2 group"
+                                                                className="inline-flex items-center gap-2 text-xs font-black text-[#ff8d00] uppercase tracking-widest mt-2 hover:gap-3 transition-all"
                                                             >
-                                                                Go to {nav.name} Overview
-                                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                                Learn More <ArrowRight className="w-4 h-4" />
                                                             </Link>
                                                         </div>
-
-                                                        {megaContent[nav.mega].columns.map((col) => (
-                                                            <div key={col.title} className="flex flex-col gap-3">
-                                                                <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.35em] text-center">{col.title}</span>
-                                                                <div className="flex flex-col gap-2">
-                                                                    {col.links.map((subLink) => (
-                                                                        <Link
-                                                                            key={subLink.name}
-                                                                            to={subLink.path}
-                                                                            onClick={() => setMenuOpen(false)}
-                                                                            className="text-lg font-bold text-white/70 hover:text-[#00b0d4] transition-colors py-1 text-center"
-                                                                        >
-                                                                            {subLink.name}
-                                                                        </Link>
-                                                                    ))}
-                                                                </div>
-                                                            </div>
-                                                        ))}
-                                                    </motion.div>
+                                                    </div>
                                                 )}
-                                            </AnimatePresence>
-                                        </li>
-                                    );
-                                }
-
-                                return (
-                                    <motion.li
-                                        key={nav.name}
-                                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                                        transition={{ delay: 0.1 * index + 0.2 }}
-                                        className={`font-black text-4xl uppercase tracking-wider text-center w-full ${isActive
-                                            ? 'text-[#00b0d4]'
-                                            : 'text-white/60 hover:text-white transition-colors duration-300'
-                                            }`}
-                                    >
-                                        <Link
-                                            to={nav.path}
-                                            className="block py-4 w-full text-center tracking-widest leading-none outline-none"
-                                            onClick={() => setMenuOpen(false)}
-                                        >
-                                            {nav.name}
-                                        </Link>
-                                    </motion.li>
-                                );
-                            })}
-                        </ul>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                            className="w-full pb-16 pt-8 flex flex-col items-center gap-6 z-10 border-t border-white/10 mt-auto"
-                        >
-                            <Link
-                                to="/contact"
-                                onClick={() => setMenuOpen(false)}
-                                className="bg-[#ff8d00] hover:bg-white hover:text-[#011b26] text-white px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest transition-all duration-300 shadow-xl shadow-orange-900/20 active:scale-95"
-                            >
-                                Get Started
-                            </Link>
-                        </motion.div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </motion.div>
                 )}
+
             </AnimatePresence>
         </>
     );

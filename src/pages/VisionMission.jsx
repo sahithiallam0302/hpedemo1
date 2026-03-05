@@ -67,7 +67,7 @@ const VisionMission = () => {
         <article className={`transition-colors duration-500 overflow-x-hidden font-sans ${isDark ? 'bg-[#0a0f1e] text-white' : 'bg-[#f8fafc] text-slate-900'}`}>
 
             {/* HERO */}
-            <section className="relative w-full h-[75vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+            <section className="relative w-full h-[55vh] min-h-[450px] flex items-center justify-center overflow-hidden">
                 <video
                     autoPlay loop muted playsInline
                     className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-700 ${isDark ? 'opacity-50' : 'opacity-70'}`}
@@ -97,7 +97,7 @@ const VisionMission = () => {
 
             {/* INTRO STRIP */}
             <FadeUp>
-                <div className={`border-t border-b py-10 px-8 md:px-16 transition-colors duration-500 ${isDark ? 'border-white/[0.07]' : 'border-slate-200 bg-white/50'}`}>
+                <div className={`border-t border-b py-6 px-8 md:px-16 transition-colors duration-500 ${isDark ? 'border-white/[0.07]' : 'border-slate-200 bg-white/50'}`}>
                     <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <p className={`text-lg font-medium max-w-2xl leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                             HPE IT Solutions anchors every engagement in a disciplined strategic framework — combining unifying governance architecture with actionable execution excellence across India&apos;s enterprise infrastructure landscape.
@@ -111,9 +111,9 @@ const VisionMission = () => {
                 </div>
             </FadeUp>
 
-            <div className="h-24" />
+            <div className="h-12" />
 
-            <main className="space-y-36 pb-44">
+            <main className="space-y-20 pb-24">
 
                 {/* VISION SECTION */}
                 <section className="px-8 md:px-16">
@@ -170,9 +170,10 @@ const VisionMission = () => {
 
                 {/* MISSION SECTION */}
                 <section className="px-8 md:px-16">
-                    <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-start">
-                        <FadeUp className="lg:col-span-5 space-y-4 order-last lg:order-first">
-                            <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 shadow-xl aspect-[3/4] lg:aspect-auto lg:h-[680px] ${isDark ? 'border-white/10 shadow-[0_12px_48px_rgba(0,0,0,0.5)]' : 'border-slate-200 shadow-slate-200/50'}`}>
+                    <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
+                        {/* Image — right side on desktop */}
+                        <FadeUp delay={0.2} className="lg:col-span-5 lg:order-last order-first space-y-3">
+                            <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 shadow-lg aspect-[4/3] lg:h-[380px] ${isDark ? 'border-white/10 shadow-[0_12px_48px_rgba(0,0,0,0.4)]' : 'border-slate-200 shadow-slate-200/50'}`}>
                                 <img
                                     src="/mission.png"
                                     alt="Mission"
@@ -184,7 +185,8 @@ const VisionMission = () => {
                             </p>
                         </FadeUp>
 
-                        <FadeUp delay={0.15} className="lg:col-span-7 space-y-12">
+                        {/* Content — left side */}
+                        <FadeUp className="lg:col-span-7 space-y-8 lg:order-first">
                             <div className="space-y-5">
                                 <Label text="Our Mission" color="text-blue-400" isDark={isDark} />
                                 <h2 className={`text-2xl md:text-3xl font-bold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -219,7 +221,7 @@ const VisionMission = () => {
 
                 {/* STRATEGIC APPROACH SECTION */}
                 <section className="px-8 md:px-16">
-                    <div className="max-w-7xl mx-auto space-y-20">
+                    <div className="max-w-7xl mx-auto space-y-12">
                         <FadeUp className="space-y-5 max-w-3xl">
                             <Label text="Execution Methodology" color="text-teal-400" isDark={isDark} />
                             <h2 className={`text-xl md:text-2xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -234,7 +236,7 @@ const VisionMission = () => {
                             {approachItems.map((item, i) => (
                                 <FadeUp key={i} delay={i * 0.1}>
                                     <div className={`
-                                        p-8 md:p-10 space-y-5 h-full transition-all duration-300
+                                        p-8 md:p-10 space-y-5 h-full transition-all duration-300 group
                                         ${isDark ? 'border-white/10 hover:bg-white/[0.03]' : 'border-slate-100 hover:bg-slate-50'}
                                         border-b lg:border-b-0
                                         ${i < 3 ? 'lg:border-r' : ''}
@@ -263,7 +265,7 @@ const VisionMission = () => {
                                     <Label text="Institutional Foundation" color="text-indigo-400" isDark={isDark} />
                                     <h3 className={`text-lg md:text-xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                                         Governance Architecture<br />
-                                        <span className={isDark ? 'text-white/40' : 'text-slate-400'}>That Scales With the Nation</span>
+                                        <span className={isDark ? 'text-white' : 'text-slate-900'}>That Scales With the Nation</span>
                                     </h3>
                                 </div>
                                 <div className={`space-y-5 text-[15px] leading-relaxed font-medium ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>
