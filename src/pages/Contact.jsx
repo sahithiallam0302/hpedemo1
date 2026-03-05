@@ -85,6 +85,51 @@ const InfoRow = ({ icon: Icon, title, value, isDark }) => (
   </div>
 );
 
+// ── Success Banner shown after form submission ─────────────────────────────────
+const SuccessBanner = ({ submissionId, onReset }) => (
+  <div className="flex flex-col items-center justify-center py-20 px-8 text-center">
+    <div className="w-20 h-20 rounded-full bg-hpe-cyan/10 border-2 border-hpe-cyan/30 flex items-center justify-center mb-8 animate-bounce-once">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-10 h-10 text-hpe-cyan">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </div>
+    <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-3">Transmission Received!</h3>
+    <p className="text-slate-400 text-sm mb-2 max-w-md leading-relaxed">
+      Your inquiry has been logged and will be reviewed by our team shortly.
+    </p>
+    <p className="text-hpe-cyan text-xs font-black uppercase tracking-widest mb-10">
+      Reference ID: {submissionId}
+    </p>
+    <button
+      onClick={onReset}
+      className="px-8 py-3 border border-hpe-cyan/30 text-hpe-cyan rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-hpe-cyan/10 transition-all"
+    >
+      Submit Another Inquiry
+    </button>
+  </div>
+);
+
+// ── Generate unique submission ID ─────────────────────────────────────────────
+function generateId() {
+  const existing = (() => {
+    try {
+      const raw = localStorage.getItem("hpe_contact_submissions");
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  })();
+  return `SUB-${String(existing.length + 6).padStart(3, "0")}`;
+}
+
+// ── Save submission to localStorage ──────────────────────────────────────────
+function saveSubmission(data) {
+  try {
+    const raw = localStorage.getItem("hpe_contact_submissions");
+    const existing = raw ? JSON.parse(raw) : [];
+    existing.unshift(data);
+    localStorage.setItem("hpe_contact_submissions", JSON.stringify(existing));
+  } catch { /* ignore storage errors */ }
+}
+
 /**
  * Main Contact Component
  */
@@ -92,6 +137,45 @@ export default function Contact() {
   const [selectedCity, setSelectedCity] = useState(null);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+
+  // Form state
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submissionId, setSubmissionId] = useState("");
+
+  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.subject || !form.message) return;
+
+    setSubmitting(true);
+
+    // Simulate brief processing delay
+    setTimeout(() => {
+      const id = generateId();
+      const submission = {
+        id,
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+        status: "new",
+        timestamp: new Date().toISOString(),
+      };
+      saveSubmission(submission);
+      setSubmissionId(id);
+      setSubmitted(true);
+      setSubmitting(false);
+    }, 800);
+  };
+
+  const handleReset = () => {
+    setForm({ name: "", email: "", subject: "", message: "" });
+    setSubmitted(false);
+    setSubmissionId("");
+  };
 
   return (
     <div className={`min-h-screen w-full transition-colors duration-500 overflow-hidden ${isDark ? 'bg-hpe-navy text-slate-300' : 'bg-slate-50 text-slate-700'}`}>
@@ -131,67 +215,94 @@ export default function Contact() {
                 {/* Decorative background element */}
                 <div className={`absolute -top-20 -right-24 w-64 h-64 rounded-full blur-[80px] ${isDark ? 'bg-hpe-cyan/5' : 'bg-hpe-cyan/10'}`} />
 
-                <div className="mb-6 relative z-10">
-                  <h3 className={`text-lg font-black mb-1 uppercase tracking-tight ${isDark ? 'text-white' : 'text-hpe-navy'}`}>Initiate Inquiry</h3>
-                  <p className={`${isDark ? 'text-slate-500' : 'text-slate-400'} text-xs font-medium tracking-wide`}>Enter your transmission details below.</p>
-                </div>
+                {submitted ? (
+                  <SuccessBanner submissionId={submissionId} onReset={handleReset} />
+                ) : (
+                  <>
+                    <div className="mb-8 relative z-10">
+                      <h3 className={`text-2xl font-black mb-2 uppercase tracking-tight ${isDark ? 'text-white' : 'text-hpe-navy'}`}>Initiate Inquiry</h3>
+                      <p className={`${isDark ? 'text-slate-500' : 'text-slate-400'} text-sm font-medium tracking-wide`}>Enter your transmission details below.</p>
+                    </div>
 
-                <form className="grid md:grid-cols-2 gap-5 relative z-10">
-                  <div className="space-y-3">
-                    <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Full Name</label>
-                    <input
-                      type="text"
-                      className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
-                        ${isDark
-                          ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
-                          : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Corporate Email</label>
-                    <input
-                      type="email"
-                      className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
-                        ${isDark
-                          ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
-                          : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                      placeholder="Enter your corporate email"
-                    />
-                  </div>
-                  <div className="md:col-span-2 space-y-3">
-                    <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Transmission Subject</label>
-                    <input
-                      type="text"
-                      className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
-                        ${isDark
-                          ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
-                          : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                      placeholder="Enter submission subject"
-                    />
-                  </div>
-                  <div className="md:col-span-2 space-y-3">
-                    <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Message Detail</label>
-                    <textarea
-                      rows="5"
-                      className={`w-full p-4 rounded-xl border transition-all font-semibold resize-none focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
-                        ${isDark
-                          ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
-                          : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                      placeholder="Enter your detailed message here..."
-                    ></textarea>
-                  </div>
+                    <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6 relative z-10">
+                      <div className="space-y-3">
+                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Full Name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
+                          required
+                          className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
+                            ${isDark
+                              ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
+                              : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
+                          placeholder="e.g. Satya Nadella"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Corporate Email</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          required
+                          className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
+                            ${isDark
+                              ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
+                              : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
+                          placeholder="name@enterprise.com"
+                        />
+                      </div>
+                      <div className="md:col-span-2 space-y-3">
+                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Transmission Subject</label>
+                        <input
+                          type="text"
+                          name="subject"
+                          value={form.subject}
+                          onChange={handleChange}
+                          required
+                          className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
+                            ${isDark
+                              ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
+                              : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
+                          placeholder="Infrastructure Automation Inquiry"
+                        />
+                      </div>
+                      <div className="md:col-span-2 space-y-3">
+                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Message Detail</label>
+                        <textarea
+                          name="message"
+                          value={form.message}
+                          onChange={handleChange}
+                          required
+                          rows="5"
+                          className={`w-full p-4 rounded-xl border transition-all font-semibold resize-none focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
+                            ${isDark
+                              ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
+                              : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
+                          placeholder="Outline your technical requirements here..."
+                        ></textarea>
+                      </div>
 
-                  <div className="md:col-span-2 pt-4">
-                    <button
-                      type="submit"
-                      className="group w-full py-4 sm:py-5 bg-hpe-cyan text-hpe-navy rounded-xl font-black uppercase tracking-[0.2em] transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(0,229,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-3 sm:gap-4"
-                    >
-                      <span className="text-[11px] sm:text-xs">Process Submission</span>
-                      <Send size={18} className="flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                    </button>
-                  </div>
-                </form>
+                      <div className="md:col-span-2 pt-4">
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="group w-full py-5 bg-hpe-cyan text-hpe-navy rounded-xl font-black uppercase tracking-[0.2em] transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(0,229,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-4 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                        >
+                          {submitting ? (
+                            <>Processing… <span className="w-5 h-5 border-2 border-hpe-navy/40 border-t-hpe-navy rounded-full animate-spin" /></>
+                          ) : (
+                            <>Process Submission <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" /></>
+                          )}
+                        </button>
+                        <p className="text-center mt-6 text-[10px] font-bold text-slate-600 uppercase tracking-widest">Secure AES-256 Encrypted Protocol</p>
+                      </div>
+                    </form>
+                  </>
+                )}
               </div>
             </div>
 
@@ -321,6 +432,12 @@ export default function Contact() {
         .leaflet-popup-content { margin: 0 !important; }
         .leaflet-container { background: #0a0e1a !important; }
         .hpe-dark-popup .leaflet-popup-tip { display: none; }
+        @keyframes bounce-once {
+          0%, 100% { transform: translateY(0); }
+          30% { transform: translateY(-12px); }
+          60% { transform: translateY(-4px); }
+        }
+        .animate-bounce-once { animation: bounce-once 0.7s ease-out; }
       `}} />
     </div >
   );
