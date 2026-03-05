@@ -54,8 +54,8 @@ const ProjectSection = ({ project, index }) => {
 
                     {isEven ? (
                         <>
-                            {/* IMAGE LEFT */}
-                            <FadeIn className="lg:col-span-7 order-1">
+                            {/* IMAGE LEFT ON DESKTOP - Move to order-2 on mobile */}
+                            <FadeIn className="lg:col-span-7 order-2 lg:order-1">
                                 <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl group">
                                     <img
                                         src={project.image}
@@ -66,8 +66,8 @@ const ProjectSection = ({ project, index }) => {
                                 </div>
                             </FadeIn>
 
-                            {/* CONTENT RIGHT */}
-                            <FadeUp delay={0.1} className="lg:col-span-5 order-2">
+                            {/* CONTENT RIGHT ON DESKTOP - Move to order-1 on mobile */}
+                            <FadeUp delay={0.1} className="lg:col-span-5 order-1 lg:order-2">
                                 <div className="space-y-6">
                                     <h2 className="text-lg md:text-2xl font-black text-slate-900 dark:text-white leading-tight uppercase mb-8">
                                         {project.name}
@@ -99,8 +99,8 @@ const ProjectSection = ({ project, index }) => {
                         </>
                     ) : (
                         <>
-                            {/* CONTENT LEFT */}
-                            <FadeUp delay={0.1} className="lg:col-span-5 order-2 lg:order-1">
+                            {/* CONTENT LEFT ON DESKTOP - Move to order-1 on mobile */}
+                            <FadeUp delay={0.1} className="lg:col-span-5 order-1 lg:order-1">
                                 <div className="space-y-6">
                                     <h2 className="text-lg md:text-2xl font-black text-slate-900 dark:text-white leading-tight uppercase mb-8">
                                         {project.name}
@@ -130,8 +130,8 @@ const ProjectSection = ({ project, index }) => {
                                 </div>
                             </FadeUp>
 
-                            {/* IMAGE RIGHT */}
-                            <FadeIn className="lg:col-span-7 order-1 lg:order-2">
+                            {/* IMAGE RIGHT ON DESKTOP - Move to order-2 on mobile */}
+                            <FadeIn className="lg:col-span-7 order-2 lg:order-2">
                                 <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl group">
                                     <img
                                         src={project.image}

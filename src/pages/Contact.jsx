@@ -67,23 +67,31 @@ const ContactHero = ({ isDark }) => (
 /**
  * Sub-Component: Info Card
  */
-const InfoRow = ({ icon: Icon, title, value, isDark }) => (
-  <div className="flex items-start gap-4 group cursor-default py-3 border-b border-white/[0.06] last:border-0">
-    <div className={`mt-0.5 transition-all duration-300 group-hover:scale-110 ${isDark ? 'text-hpe-cyan' : 'text-hpe-navy'
-      }`}>
-      <Icon
-        size={16}
-        className="group-hover:animate-pulse"
-      />
-    </div>
-    <div>
-      <p className={`text-[9px] font-black uppercase tracking-[0.25em] mb-0.5 ${isDark ? 'text-white/30' : 'text-slate-400'
-        }`}>{title}</p>
-      <p className={`text-sm font-semibold leading-snug ${isDark ? 'text-white' : 'text-hpe-navy'
-        }`}>{value}</p>
-    </div>
-  </div>
-);
+const InfoRow = ({ icon: Icon, title, value, isDark, href }) => {
+  const Component = href ? "a" : "div";
+  return (
+    <Component
+      href={href}
+      target={href?.startsWith("http") ? "_blank" : undefined}
+      rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+      className={`flex items-start gap-4 group cursor-default py-3 border-b border-white/[0.06] last:border-0 hover:no-underline ${href ? "hover:translate-x-1 transition-transform" : ""}`}
+    >
+      <div className={`mt-0.5 transition-all duration-300 group-hover:scale-110 ${isDark ? 'text-hpe-cyan' : 'text-hpe-navy'
+        }`}>
+        <Icon
+          size={16}
+          className="group-hover:animate-pulse"
+        />
+      </div>
+      <div>
+        <p className={`text-[9px] font-black uppercase tracking-[0.25em] mb-0.5 ${isDark ? 'text-white/30' : 'text-slate-400'
+          }`}>{title}</p>
+        <p className={`text-sm font-semibold leading-snug ${isDark ? 'text-white' : 'text-hpe-navy'
+          }`}>{value}</p>
+      </div>
+    </Component>
+  );
+};
 
 // ── Success Banner shown after form submission ─────────────────────────────────
 const SuccessBanner = ({ submissionId, onReset }) => (
@@ -199,8 +207,20 @@ export default function Contact() {
               </div>
 
               <div className="space-y-0">
-                <InfoRow icon={Mail} title="Strategic Email" value="support@hpeitsolutions.com" isDark={isDark} />
-                <InfoRow icon={Phone} title="Direct Hotline" value="+91 9154399144" isDark={isDark} />
+                <InfoRow
+                  icon={Mail}
+                  title="Strategic Email"
+                  value="support@hpeitsolutions.com"
+                  isDark={isDark}
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=support@hpeitsolutions.com"
+                />
+                <InfoRow
+                  icon={Phone}
+                  title="Direct Hotline"
+                  value="+91 9154399144"
+                  isDark={isDark}
+                  href="tel:+919154399144"
+                />
                 <InfoRow icon={MapPin} title="Corporate Hub" value="Hyderabad, Telangana, India" isDark={isDark} />
                 <InfoRow icon={Globe} title="Regional Support" value="Pan-India Operational Matrix" isDark={isDark} />
               </div>

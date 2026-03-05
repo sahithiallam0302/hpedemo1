@@ -210,7 +210,7 @@ const EnterpriseService = () => {
 
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
 
                         {/* Left: Text */}
                         <div>
@@ -233,7 +233,7 @@ const EnterpriseService = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.3 }}
-                                className="text-base md:text-lg text-slate-400 font-medium max-w-xl leading-relaxed border-l-2 border-hpe-cyan/40 pl-5 mb-12"
+                                className="text-base md:text-lg text-slate-400 font-medium max-w-xl leading-relaxed border-l-2 border-hpe-cyan/40 pl-5 mb-6 md:mb-12"
                             >
                                 The Enterprise IT Division designs, develops, and manages secure, scalable enterprise ecosystems supporting multi-entity and multi-location operations.
                             </motion.p>
@@ -244,7 +244,7 @@ const EnterpriseService = () => {
                             initial={{ opacity: 0, x: 40 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl hidden lg:block"
+                            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl block mt-6 lg:mt-0"
                         >
                             <img
                                 src="/enterprise.png"
@@ -351,10 +351,10 @@ const EnterpriseService = () => {
                 </div>
 
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
-                        {/* Left: Visual */}
-                        <FadeUp delay={0}>
+                        {/* Visual - Image on Right for Laptop, but bottom for mobile */}
+                        <FadeUp delay={0.15} className="lg:order-2 order-2">
                             <div className="relative">
                                 {/* Image */}
                                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
@@ -390,8 +390,8 @@ const EnterpriseService = () => {
                             </div>
                         </FadeUp>
 
-                        {/* Right: Content */}
-                        <FadeUp delay={0.15}>
+                        {/* Content - Text on Left for laptop, but top for mobile */}
+                        <FadeUp delay={0} className="lg:order-1 order-1">
                             <div className="space-y-8">
                                 <div>
                                     <Label text="Enterprise-Grade Commitment" color="text-hpe-cyan" />

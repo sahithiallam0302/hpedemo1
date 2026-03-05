@@ -37,42 +37,13 @@ const AboutUsSection = () => {
             <div className="max-w-7xl mx-auto relative z-10 font-sans">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-                    {/* LEFT SIDE: Animated Image Container */}
-                    <motion.div
-                        variants={fadeIn('right', 0.2)}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true, amount: 0.3 }}
-                        className="relative"
-                    >
-                        {/* Decorative Background Box */}
-                        <div className="absolute -top-6 -left-6 w-full h-full border-2 border-[#00b0d4]/20 rounded-2xl -z-10 transition-transform duration-500" />
-                        <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#ff8d00]/20 rounded-2xl -z-10" />
-
-                        <div className="relative group overflow-hidden rounded-2xl shadow-2xl glass-reflection border border-white/10">
-                            <img
-                                src="/infra_ecosys.png"
-                                alt="HPE IT Solutions Infrastructure Ecosystems"
-                                className="w-full h-[400px] md:h-[550px] object-cover transition-transform duration-1000 group-hover:scale-105"
-                            />
-                            {/* Refined Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700" />
-
-                            {/* Floating Stats Badge */}
-                            <div className="absolute bottom-6 right-6 bg-white/90 dark:bg-[#022534]/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/20 dark:border-white/10 max-w-[200px] transform hover:scale-105 transition-transform">
-                                <p className="text-3xl font-black text-[#ff8d00] leading-none mb-1">70+</p>
-                                <p className="text-[10px] font-black uppercase tracking-widest text-[#011b26] dark:text-white opacity-70">Strategic Global Mergers</p>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* RIGHT SIDE: Text Content */}
+                    {/* RIGHT SIDE: Text Content - Top for Mobile, Left for Laptop */}
                     <motion.div
                         variants={fadeIn('left', 0.4)}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true, amount: 0.3 }}
-                        className="flex flex-col space-y-8"
+                        className="flex flex-col space-y-8 lg:order-2 order-1"
                     >
                         <div className="space-y-4">
                             <span className="inline-block font-rajdhani text-brand-orange dark:text-[#ff8d00] tracking-[0.4em] font-black text-xs uppercase px-4 py-1.5 bg-[#ff8d00]/10 dark:bg-[#ff8d00]/10 rounded-full">
@@ -112,6 +83,35 @@ const AboutUsSection = () => {
                                 <span>Read More about us</span>
                                 <ArrowRight className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:translate-x-3" />
                             </motion.button>
+                        </div>
+                    </motion.div>
+
+                    {/* LEFT SIDE: Animated Image Container - Bottom for Mobile, Left for Laptop */}
+                    <motion.div
+                        variants={fadeIn('right', 0.2)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.3 }}
+                        className="relative lg:order-1 order-2"
+                    >
+                        {/* Decorative Background Box */}
+                        <div className="absolute -top-6 -left-6 w-full h-full border-2 border-[#00b0d4]/20 rounded-2xl -z-10 transition-transform duration-500" />
+                        <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#ff8d00]/20 rounded-2xl -z-10" />
+
+                        <div className="relative group overflow-hidden rounded-2xl shadow-2xl glass-reflection border border-white/10">
+                            <img
+                                src="/infra_ecosys.png"
+                                alt="HPE IT Solutions Infrastructure Ecosystems"
+                                className="w-full h-[400px] md:h-[550px] object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                            {/* Refined Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700" />
+
+                            {/* Floating Stats Badge */}
+                            <div className="absolute bottom-6 right-6 bg-white/90 dark:bg-[#022534]/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/20 dark:border-white/10 max-w-[200px] transform hover:scale-105 transition-transform">
+                                <p className="text-3xl font-black text-[#ff8d00] leading-none mb-1">70+</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-[#011b26] dark:text-white opacity-70">Strategic Global Mergers</p>
+                            </div>
                         </div>
                     </motion.div>
                 </div>

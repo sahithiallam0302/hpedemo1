@@ -133,16 +133,20 @@ function Footer() {
 
                     {/* ✅ Brand Info */}
                     <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-6">
-                        <Link to="/" className="flex items-center group">
+                        <Link to="/" className="flex flex-col items-center sm:items-start gap-4 group">
                             <img
                                 src="/HPE LOGO.png"
                                 alt="HPE IT Solutions"
                                 className="h-[70px] sm:h-[94px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                             />
+                            <div className="flex flex-col">
+                                <span className="text-white font-black text-xl tracking-tight">HPE IT <span className="text-[#ff8d00]">Solutions</span></span>
+                                <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-1">Corporate Office – Hyderabad</span>
+                            </div>
                         </Link>
 
-                        <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-                            At HPE IT Solutions, we empower businesses with cutting-edge technology and innovative digital strategies. Leading the future of enterprise excellence with dedication.
+                        <p className="text-slate-400 text-sm leading-relaxed max-w-sm italic font-medium">
+                            “Engineering Infrastructure Through Technology.”
                         </p>
 
                         <div className="flex space-x-5">
@@ -188,12 +192,9 @@ function Footer() {
                         <ul className="grid grid-cols-2 sm:grid-cols-1 gap-4">
                             {['Cloud Integration', 'Cybersecurity', 'AI & Automation', 'Enterprise ERP', 'Data Analytics'].map((item) => (
                                 <li key={item} className="text-center sm:text-left">
-                                    <a
-                                        href="#"
-                                        className="text-gray-400 hover:text-white text-xs sm:text-sm transition-colors block"
-                                    >
+                                    <div className="text-gray-400 text-xs sm:text-sm cursor-default">
                                         {item}
-                                    </a>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
@@ -212,27 +213,35 @@ function Footer() {
                                     <MapPin size={18} />
                                 </div>
                                 <span className="text-gray-400 text-xs leading-relaxed max-w-[200px]">
-                                    123 Technology Hub, Digital City, Bangalore - 560001
+                                    Corporate Office – Hyderabad
                                 </span>
                             </div>
 
-                            <div className="flex items-center space-x-4 group text-gray-400 hover:text-white transition-colors cursor-pointer text-left">
+                            <a
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=support@hpeitsolutions.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center space-x-4 group text-gray-400 hover:text-white transition-colors cursor-pointer text-left"
+                            >
                                 <div className="p-3 bg-white/5 rounded-lg text-[#00b0d4]">
                                     <Mail size={18} />
                                 </div>
                                 <span className="text-xs font-bold tracking-widest">
-                                    contact@hpe-it.com
+                                    support@hpeitsolutions.com
                                 </span>
-                            </div>
+                            </a>
 
-                            <div className="flex items-center space-x-4 group text-gray-400 hover:text-white transition-colors cursor-pointer text-left">
+                            <a
+                                href="tel:+919154399144"
+                                className="flex items-center space-x-4 group text-gray-400 hover:text-white transition-colors cursor-pointer text-left"
+                            >
                                 <div className="p-3 bg-white/5 rounded-lg text-white">
                                     <Phone size={18} />
                                 </div>
                                 <span className="text-xs font-bold tracking-widest">
-                                    +91 (80) 4567 8901
+                                    +91 9154399144
                                 </span>
-                            </div>
+                            </a>
 
                         </div>
                     </div>
