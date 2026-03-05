@@ -325,18 +325,22 @@ HPE IT Solutions Team`,
                       </div>
                       <div className="space-y-3">
                         <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Transmission Subject</label>
-                        <input
-                          type="text"
+                        <select
                           name="subject"
                           value={form.subject}
                           onChange={handleChange}
                           required
-                          className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
+                          className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30 appearance-none
                             ${isDark
-                              ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
-                              : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                          placeholder="Infrastructure Automation Inquiry"
-                        />
+                              ? 'bg-hpe-navy/50 border-white/10 text-white focus:border-hpe-cyan focus:bg-hpe-navy/80'
+                              : 'bg-slate-50 border-slate-200 text-hpe-navy focus:border-hpe-cyan focus:bg-white'}`}
+                        >
+                          <option value="" disabled className={isDark ? "bg-hpe-navy text-slate-500" : "bg-white text-slate-400"}>Select Service Category</option>
+                          <option value="Enterprise IT Solutions" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Enterprise IT Solutions</option>
+                          <option value="Infrastructure & Brick Services" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Infrastructure & Brick Services</option>
+                          <option value="Workforce & Managed Services" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Workforce & Managed Services</option>
+                          <option value="Other Queries" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Other Queries</option>
+                        </select>
                       </div>
                       <div className="md:col-span-2 space-y-3">
                         <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Message Detail</label>
