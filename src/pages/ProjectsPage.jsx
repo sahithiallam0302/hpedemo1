@@ -320,7 +320,7 @@ export default function ProjectsPage() {
                 {/* ══════════════════════════════════════
                 ALL 10 PROJECTS SHOWCASE
             ══════════════════════════════════════ */}
-                <section className="py-32 bg-[#020817] border-t border-white/5 relative overflow-hidden group/all">
+                <section className="pt-12 pb-32 bg-[#020817] border-t border-white/5 relative overflow-hidden group/all">
                     {/* Background Decor */}
                     <div className="absolute inset-0 opacity-20 pointer-events-none"
                         style={{ backgroundImage: 'radial-gradient(circle, #334155 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
@@ -394,21 +394,21 @@ export default function ProjectsPage() {
                 ══════════════════════════════════════ */}
                 <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden border-t border-white/5">
                     <img
-                        src="/Inside_cover.png"
+                        src="/projectfullscreen.png"
                         alt="HPE IT Solutions Impact"
-                        className="absolute inset-0 w-full h-full object-cover grayscale-[0.4] brightness-50"
+                        className="absolute inset-0 w-full h-full object-cover brightness-[0.6] transition-all duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#020817] via-transparent to-[#020817]/90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020817] via-transparent to-[#020817]/60" />
 
                     <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-8 text-center">
                         <FadeUp>
-                            <span className="text-blue-400 text-[10px] md:text-xs font-black uppercase tracking-[0.5em] mb-6 block">
+                            <span className="text-hpe-orange text-[10px] md:text-sm font-black uppercase tracking-[0.6em] mb-6 block drop-shadow-lg">
                                 Beyond Infrastructure
                             </span>
-                            <h2 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-tighter max-w-4xl leading-snug">
-                                Transforming the <br /> National <span className="text-blue-400">Digital</span> Landscape
+                            <h2 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tight max-w-4xl leading-tight drop-shadow-xl">
+                                Transforming the <br /> National <span className="text-hpe-orange">Digital</span> Landscape
                             </h2>
-                            <p className="text-slate-400 text-base md:text-xl font-medium mt-8 max-w-2xl mx-auto">
+                            <p className="text-slate-100 text-base md:text-xl font-medium mt-10 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
                                 Every project we undertake is a step towards a more connected and efficient future for India.
                             </p>
                         </FadeUp>

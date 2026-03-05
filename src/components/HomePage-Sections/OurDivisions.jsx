@@ -29,7 +29,7 @@ const DivisionCard = ({ title, icon: Icon, services, delay, index }) => {
             viewport={{ once: true, amount: 0.25 }}
             className="group relative flex flex-col h-full"
         >
-            <div className={`h-full relative z-10 p-[1px] rounded-xl transition-all duration-500 overflow-hidden bg-[#0a1219] border border-white/5 hover:border-brand-cyan/30 ${index === 2 ? 'border-t-2 border-t-brand-cyan/50' : ''}`}>
+            <div className={`h-full relative z-10 p-[1px] rounded-xl transition-all duration-500 overflow-hidden bg-[#0a1219] border border-white/5 hover:border-brand-cyan/30 border-t-2 border-t-brand-cyan/50 hover:shadow-[0_4px_25px_rgba(0,176,212,0.2)]`}>
 
                 {/* Background Number */}
                 <div className="absolute top-6 right-8 text-7xl font-black text-white/[0.03] pointer-events-none z-0">
