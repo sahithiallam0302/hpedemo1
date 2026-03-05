@@ -52,7 +52,7 @@ const WhyChooseUs = () => {
                             WHY PARTNER WITH US
                         </span>
 
-                        <h2 className="text-xl md:text-3xl font-rajdhani font-semibold text-white leading-tight uppercase mb-5 tracking-tight">
+                        <h2 className="text-3xl md:text-5xl font-rajdhani font-semibold text-white leading-tight uppercase mb-5 tracking-tight">
                             WHY HPE IT <span className="text-brand-cyan">SOLUTIONS</span>
                         </h2>
 

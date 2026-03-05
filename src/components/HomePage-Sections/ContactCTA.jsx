@@ -43,33 +43,41 @@ const ContactCTA = () => {
                             </div>
                             <div>
                                 <h3 className="text-xs font-black text-[#00b0d4] uppercase tracking-widest mb-1">Office Address</h3>
-                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-medium">
-                                    Cyber Towers, HITEC City, Hyderabad, <br /> Telangana 500081
+                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-bold uppercase transition-colors">
+                                    Corporate Office– Hyderabad
                                 </p>
                             </div>
                         </div>
 
                         {/* Phone Card */}
-                        <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-2xl flex items-start space-x-5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none">
+                        <a
+                            href="tel:+919154399144"
+                            className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-2xl flex items-start space-x-5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none cursor-pointer no-underline"
+                        >
                             <div className="bg-brand-orange/10 p-3 rounded-xl">
                                 <Phone className="w-6 h-6 text-brand-orange" />
                             </div>
                             <div>
                                 <h3 className="text-xs font-black text-brand-orange uppercase tracking-widest mb-1">Phone Number</h3>
-                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-medium">+91 40 2345 6789</p>
+                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-bold tracking-wider">+91 9154399144</p>
                             </div>
-                        </div>
+                        </a>
 
                         {/* Email Card */}
-                        <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-2xl flex items-start space-x-5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none">
+                        <a
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@hpeitsolutions.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-2xl flex items-start space-x-5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none cursor-pointer no-underline"
+                        >
                             <div className="bg-emerald-500/10 p-3 rounded-xl">
                                 <Mail className="w-6 h-6 text-emerald-500 dark:text-emerald-400" />
                             </div>
                             <div>
                                 <h3 className="text-xs font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-widest mb-1">Email Inquiry</h3>
-                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-medium underline underline-offset-4 decoration-slate-300 dark:decoration-white/20">info@hpeitsolutions.com</p>
+                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-bold lowercase transition-colors">support@hpeitsolutions.com</p>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -69,11 +69,10 @@ function Navbar() {
                 },
                 {
                     title: "Governance & Operations",
-                    path: "/corporate-structure#governance-model",
                     links: [
-                        { name: "Governance Model", path: "/corporate-structure#governance-model" },
-                        { name: "Executive Leadership", path: "/corporate-structure#executive-leadership" },
-                        { name: "National Footprint", path: "/about#footprint" },
+                        { name: "Governance Model" },
+                        { name: "Executive Leadership" },
+                        { name: "National Footprint" },
                     ]
                 }
             ]
@@ -82,8 +81,7 @@ function Navbar() {
             intro: {
                 title: "Strategic Service Divisions",
                 desc: "HPE IT Solutions operates across three specialized divisions, providing integrated technology and infrastructure excellence at national scale.",
-                cta: "Strategic Overview",
-                path: "/services"
+                cta: "Strategic Overview"
             },
             columns: [
                 {
@@ -97,18 +95,18 @@ function Navbar() {
                 {
                     title: "Service Excellence",
                     links: [
-                        { name: "National Support Network", path: "/services#support", icon: <Headphones className="w-3.5 h-3.5" /> },
-                        { name: "Annual Maintenance (AMC)", path: "/services#amc", icon: <Shield className="w-3.5 h-3.5" /> },
-                        { name: "Consulting & Strategy", path: "/services#consulting", icon: <Activity className="w-3.5 h-3.5" /> },
+                        { name: "National Support Network", icon: <Headphones className="w-3.5 h-3.5" /> },
+                        { name: "Annual Maintenance (AMC)", icon: <Shield className="w-3.5 h-3.5" /> },
+                        { name: "Consulting & Strategy", icon: <Activity className="w-3.5 h-3.5" /> },
                     ]
                 }
             ],
-            featured: {
-                title: "Nationwide Delivery",
-                label: "Operational Excellence",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
-                path: "/services"
-            }
+            // featured: {
+            //     title: "Nationwide Delivery",
+            //     label: "Operational Excellence",
+            //     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+            //     path: "/services"
+            // }
         },
         projects: {
             intro: {
@@ -299,14 +297,9 @@ function Navbar() {
                                     <p className="text-white/60 text-sm leading-relaxed">
                                         {megaContent[activeMega].intro.desc}
                                     </p>
-                                    <Link
-                                        to={megaContent[activeMega].intro.path}
-                                        onClick={() => setActiveMega(null)}
-                                        className="inline-flex items-center gap-2 text-[11px] font-black text-[#ff8d00] hover:text-[#00b0d4] uppercase tracking-widest transition-colors group"
-                                    >
+                                    <div className="inline-flex items-center gap-2 text-[11px] font-black text-[#ff8d00]/60 uppercase tracking-widest cursor-default">
                                         {megaContent[activeMega].intro.cta}
-                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
+                                    </div>
                                 </div>
 
                                 {/* Col 2+ — Link Columns & Featured */}
@@ -329,21 +322,37 @@ function Navbar() {
                                                 )}
                                                 <div className="flex flex-col gap-1">
                                                     {col.links.map((link) => (
-                                                        <Link
-                                                            key={link.name}
-                                                            to={link.path}
-                                                            onClick={() => setActiveMega(null)}
-                                                            className="group flex items-center gap-2.5 py-1.5 text-white/75 hover:text-[#00b0d4] transition-colors"
-                                                        >
-                                                            {link.icon && (
-                                                                <span className="text-white/30 group-hover:text-[#ff8d00] transition-colors">
-                                                                    {link.icon}
+                                                        link.path ? (
+                                                            <Link
+                                                                key={link.name}
+                                                                to={link.path}
+                                                                onClick={() => setActiveMega(null)}
+                                                                className="group flex items-center gap-2.5 py-1.5 text-white/75 hover:text-[#00b0d4] transition-colors"
+                                                            >
+                                                                {link.icon && (
+                                                                    <span className="text-white/30 group-hover:text-[#ff8d00] transition-colors">
+                                                                        {link.icon}
+                                                                    </span>
+                                                                )}
+                                                                <span className="text-[13px] font-semibold leading-snug group-hover:translate-x-1 transition-transform">
+                                                                    {link.name}
                                                                 </span>
-                                                            )}
-                                                            <span className="text-[13px] font-semibold leading-snug group-hover:translate-x-1 transition-transform">
-                                                                {link.name}
-                                                            </span>
-                                                        </Link>
+                                                            </Link>
+                                                        ) : (
+                                                            <div
+                                                                key={link.name}
+                                                                className="flex items-center gap-2.5 py-1.5 text-white/70 cursor-default"
+                                                            >
+                                                                {link.icon && (
+                                                                    <span className="text-white/30">
+                                                                        {link.icon}
+                                                                    </span>
+                                                                )}
+                                                                <span className="text-[13px] font-semibold leading-snug">
+                                                                    {link.name}
+                                                                </span>
+                                                            </div>
+                                                        )
                                                     ))}
                                                 </div>
                                             </div>
@@ -426,23 +435,24 @@ function Navbar() {
                                     >
                                         <ul className="space-y-1">
                                             {navLinks.map((nav) => (
-                                                <li key={nav.name} className="border-b border-white/5 last:border-0">
-                                                    {nav.mega ? (
+                                                <li key={nav.name} className="border-b border-white/5 last:border-0 flex items-center group">
+                                                    <Link
+                                                        to={nav.path}
+                                                        onClick={() => setMenuOpen(false)}
+                                                        className="flex-grow py-4 text-base font-semibold tracking-tight text-white/90 hover:text-[#00b0d4] transition-colors"
+                                                    >
+                                                        {nav.name}
+                                                    </Link>
+                                                    {nav.mega && (
                                                         <button
-                                                            onClick={() => setMobileView(nav.mega)}
-                                                            className="w-full py-6 flex items-center justify-between text-white group"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setMobileView(nav.mega);
+                                                            }}
+                                                            className="h-[56px] w-[56px] flex items-center justify-center text-[#ff8d00] hover:text-[#00b0d4] transition-colors border-l border-white/5"
                                                         >
-                                                            <span className="text-xl font-bold tracking-tight">{nav.name}</span>
-                                                            <ArrowRight className="w-5 h-5 text-[#00b0d4] group-hover:translate-x-1 transition-transform" />
+                                                            <ChevronDown className="w-4 h-4 -rotate-90" />
                                                         </button>
-                                                    ) : (
-                                                        <Link
-                                                            to={nav.path}
-                                                            onClick={() => setMenuOpen(false)}
-                                                            className="block py-6 text-xl font-bold tracking-tight text-white/90 hover:text-white transition-colors"
-                                                        >
-                                                            {nav.name}
-                                                        </Link>
                                                     )}
                                                 </li>
                                             ))}
@@ -475,9 +485,19 @@ function Navbar() {
 
                                         {/* Sub-menu Content */}
                                         <div className="px-6 py-8">
-                                            <h2 className="text-3xl font-black text-white mb-8 tracking-tighter uppercase">
-                                                {navLinks.find(l => l.mega === mobileView)?.name}
-                                            </h2>
+                                            <Link
+                                                to={navLinks.find(l => l.mega === mobileView)?.path}
+                                                onClick={() => setMenuOpen(false)}
+                                                className="group inline-flex flex-col mb-8"
+                                            >
+                                                <h2 className="text-2xl font-black text-white tracking-tighter uppercase group-hover:text-[#00b0d4] transition-colors">
+                                                    {navLinks.find(l => l.mega === mobileView)?.name}
+                                                </h2>
+                                                <div className="flex items-center gap-2 mt-1">
+                                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#ff8d00]">View Main Page</span>
+                                                    <ArrowRight className="w-3 h-3 text-[#ff8d00] group-hover:translate-x-1 transition-all" />
+                                                </div>
+                                            </Link>
 
                                             <div className="space-y-10">
                                                 {megaContent[mobileView].columns.map((col, idx) => (
@@ -487,15 +507,24 @@ function Navbar() {
                                                         </h3>
                                                         <div className="flex flex-col gap-5">
                                                             {col.links.map((link) => (
-                                                                <Link
-                                                                    key={link.name}
-                                                                    to={link.path}
-                                                                    onClick={() => setMenuOpen(false)}
-                                                                    className="text-lg font-bold text-white/80 hover:text-white transition-colors flex items-center justify-between group"
-                                                                >
-                                                                    <span>{link.name}</span>
-                                                                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                                                                </Link>
+                                                                link.path ? (
+                                                                    <Link
+                                                                        key={link.name}
+                                                                        to={link.path}
+                                                                        onClick={() => setMenuOpen(false)}
+                                                                        className="text-base font-semibold text-white/80 hover:text-white transition-colors flex items-center justify-between group"
+                                                                    >
+                                                                        <span>{link.name}</span>
+                                                                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                                                    </Link>
+                                                                ) : (
+                                                                    <div
+                                                                        key={link.name}
+                                                                        className="text-base font-semibold text-white/50 flex items-center justify-between cursor-default"
+                                                                    >
+                                                                        <span>{link.name}</span>
+                                                                    </div>
+                                                                )
                                                             ))}
                                                         </div>
                                                     </div>

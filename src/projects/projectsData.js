@@ -1,6 +1,5 @@
-// ─── HPE IT Solutions — Projects Data ───────────────────────────────────────
-// All 10 enterprise projects. Edit data here; UI auto-updates everywhere.
 
+// Projects data
 export const projects = [
     // ── GROUP 1: Detailed Case Studies (1–3) ─────────────────────────────────
     {

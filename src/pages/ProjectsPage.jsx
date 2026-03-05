@@ -201,7 +201,7 @@ export default function ProjectsPage() {
                 {/* ══════════════════════════════════════
                     HEADER — Typographic Hero (No Image)
                 ══════════════════════════════════════ */}
-                <section className="relative px-8 md:px-16 py-10 md:py-12 border-b border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-[#020c13] overflow-hidden">
+                <section className="relative px-8 md:px-16 py-10 md:py-12 border-b border-white/5 bg-[#020c13] overflow-hidden">
 
                     {/* Subtle background grid */}
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -236,8 +236,8 @@ export default function ProjectsPage() {
                                 <div className="overflow-hidden mb-3">
                                     <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold uppercase tracking-tight leading-tight">
                                         {[
-                                            { word: 'Project', color: 'text-slate-900 dark:text-white' },
-                                            { word: 'Portfolio', color: 'text-blue-600 dark:text-blue-400' },
+                                            { word: 'Project', color: 'text-white' },
+                                            { word: 'Portfolio', color: 'text-blue-400' },
                                         ].map(({ word, color }, wi) => (
                                             <motion.span
                                                 key={wi}
@@ -267,7 +267,7 @@ export default function ProjectsPage() {
 
                                 {/* Description paragraph */}
                                 <motion.p
-                                    className="text-slate-500 dark:text-slate-400 text-sm max-w-xl font-medium leading-relaxed"
+                                    className="text-slate-400 text-sm max-w-xl font-medium leading-relaxed"
                                     initial={{ opacity: 0, y: 24 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -290,7 +290,7 @@ export default function ProjectsPage() {
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.6, delay: 0.7 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                                         >
-                                            <span className="text-lg font-bold text-slate-900 dark:text-white tabular-nums">{stat.value}</span>
+                                            <span className="text-lg font-bold text-white tabular-nums">{stat.value}</span>
                                             <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-slate-400">{stat.label}</span>
                                         </motion.div>
                                     ))}
@@ -302,13 +302,13 @@ export default function ProjectsPage() {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                className="relative lg:block hidden max-w-sm ml-auto w-full"
+                                className="relative block max-w-lg ml-auto w-full mt-10 lg:mt-0"
                             >
-                                <div className="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl transition-all duration-700 hover:shadow-blue-500/10 hover:border-blue-500/20">
+                                <div className="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl transition-all duration-700 hover:shadow-blue-500/10 hover:border-blue-500/20 h-[300px] md:h-[380px]">
                                     <img
                                         src="/projectportfolio.jpeg"
                                         alt="Project Portfolio Dashboard"
-                                        className="w-full h-auto object-cover hover:scale-110 transition-transform duration-1000"
+                                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
                                 </div>

@@ -243,22 +243,7 @@ const About = () => {
                     <div className="max-w-[1600px] mx-auto">
                         <FadeUp>
                             <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-8 items-stretch">
-                                <div className={`relative overflow-hidden rounded-3xl min-h-[380px] group border transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'}`}>
-                                    <img
-                                        src="/about.png"
-                                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale-[0.25] group-hover:scale-105 ${isDark ? 'opacity-100' : 'opacity-90'}`}
-                                        alt="National Infrastructure"
-                                    />
-                                    <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-black/40 via-transparent to-transparent'}`} />
-                                    <div className="absolute bottom-6 left-6">
-                                        <div className={`backdrop-blur-xl border rounded-2xl px-5 py-3 transition-all duration-500 ${isDark ? 'bg-white/[0.10] border-white/15' : 'bg-white/80 border-slate-200 shadow-xl'}`}>
-                                            <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>20+ States</div>
-                                            <div className={`text-[8px] uppercase font-black tracking-widest mt-1 ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>Sovereign Delivery Footprint</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <Glass className="p-8 md:p-16 flex flex-col justify-center gap-10" isDark={isDark}>
+                                <Glass className="p-8 md:p-16 flex flex-col justify-center gap-10 lg:order-2 order-1" isDark={isDark}>
                                     <div className="space-y-4">
                                         <Label text="Geographic Scale" color="text-blue-400" isDark={isDark} />
                                         <h2 className={`text-lg md:text-2xl font-black uppercase tracking-tight leading-[1] ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -280,6 +265,21 @@ const About = () => {
                                         <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                                     </Link>
                                 </Glass>
+
+                                <div className={`relative overflow-hidden rounded-3xl min-h-[380px] group border transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'} lg:order-1 order-2`}>
+                                    <img
+                                        src="/about.png"
+                                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale-[0.25] group-hover:scale-105 ${isDark ? 'opacity-100' : 'opacity-90'}`}
+                                        alt="National Infrastructure"
+                                    />
+                                    <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-black/40 via-transparent to-transparent'}`} />
+                                    <div className="absolute bottom-6 left-6">
+                                        <div className={`backdrop-blur-xl border rounded-2xl px-5 py-3 transition-all duration-500 ${isDark ? 'bg-white/[0.10] border-white/15' : 'bg-white/80 border-slate-200 shadow-xl'}`}>
+                                            <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>20+ States</div>
+                                            <div className={`text-[8px] uppercase font-black tracking-widest mt-1 ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>Sovereign Delivery Footprint</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </FadeUp>
                     </div>

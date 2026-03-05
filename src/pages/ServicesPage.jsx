@@ -7,7 +7,8 @@ import {
     CheckCircle2, ArrowRight, ChevronRight,
     Code2, Cloud, BarChart3,
     HardHat, Wifi, DollarSign,
-    Wrench, FileText, Settings
+    Wrench, FileText, Settings,
+    Headphones, Shield, Activity
 } from 'lucide-react';
 
 /* ─── Scroll Animation Wrapper ─── */
@@ -125,6 +126,63 @@ const DivisionCard = ({
                 </Glass>
             </Link>
         </motion.div>
+    );
+};
+
+/* ─── Service Excellence Section ─── */
+const ServiceExcellence = ({ isDark }) => {
+    const items = [
+        {
+            id: 'support',
+            title: 'National Support Network',
+            icon: Headphones,
+            desc: 'A robust, pan-India technical support layer ensuring rapid response and on-ground assistance across all 45+ operational zones.'
+        },
+        {
+            id: 'amc',
+            title: 'Annual Maintenance (AMC)',
+            icon: Shield,
+            desc: 'Comprehensive lifecycle management and 24/7 preventative maintenance programs for mission-critical IT and physical infrastructure.'
+        },
+        {
+            id: 'consulting',
+            title: 'Consulting & Strategy',
+            icon: Activity,
+            desc: 'Strategic technology roadmapping and infrastructure governance consulting to align digital investments with long-term business objectives.'
+        }
+    ];
+
+    return (
+        <section className={`py-24 px-6 ${isDark ? 'bg-[#011b26]' : 'bg-white'}`}>
+            <div className="max-w-7xl mx-auto">
+                <FadeUp>
+                    <div className="mb-16">
+                        <Label text="Operational Quality" color="text-hpe-orange" />
+                        <h2 className={`text-xl md:text-3xl font-black uppercase tracking-tight mt-3 ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
+                            Service Excellence
+                        </h2>
+                    </div>
+                </FadeUp>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    {items.map((item, i) => (
+                        <FadeUp key={i} delay={i * 0.15}>
+                            <div className={`p-10 rounded-[2.5rem] border ${isDark ? 'bg-white/[0.02] border-white/5' : 'bg-slate-50 border-slate-200'} relative overflow-hidden group`}>
+                                <div className={`w-14 h-14 rounded-2xl ${isDark ? 'bg-hpe-cyan/10' : 'bg-hpe-cyan/5'} flex items-center justify-center mb-8 border ${isDark ? 'border-hpe-cyan/20' : 'border-hpe-cyan/10'}`}>
+                                    <item.icon className={`w-7 h-7 ${isDark ? 'text-hpe-cyan' : 'text-hpe-cyan-dark'}`} strokeWidth={1.5} />
+                                </div>
+                                <h3 className={`text-lg md:text-xl font-black uppercase tracking-tight mb-5 ${isDark ? 'text-white' : 'text-[#011b26]'}`}>
+                                    {item.title}
+                                </h3>
+                                <p className={`text-sm font-medium leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                    {item.desc}
+                                </p>
+                            </div>
+                        </FadeUp>
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 };
 
@@ -312,6 +370,11 @@ const ServicesPage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* ──────────────────────────────────────────
+                SERVICE EXCELLENCE
+            ────────────────────────────────────────── */}
+            <ServiceExcellence isDark={isDark} />
 
             {/* ──────────────────────────────────────────
                 INTEGRATION SECTION — How they work together
