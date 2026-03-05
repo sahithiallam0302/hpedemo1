@@ -1,66 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import api from "../api/axios";
 import {
     Mail, Phone, User, MessageSquare, Clock, Search, Filter,
     Eye, Trash2, CheckCircle, AlertCircle, XCircle, LogOut,
     Inbox, RefreshCw, X, ChevronDown, Menu,
-    Calendar, Tag, Shield, Reply, Send, Check
+    Calendar, Tag, Shield, Reply, Send, Check, Loader2
 } from "lucide-react";
 
-// ─── Static seed data (the shape matches the Contact form) ─────────────────────
-const SEED_SUBMISSIONS = [
-    {
-        id: "SUB-001",
-        name: "Rajesh Kumar",
-        email: "22h41f0054balaji@gmail.com",
-        subject: "Infrastructure Automation Inquiry",
-        message:
-            "We are looking to automate our on-premise server provisioning across 12 data centres. Please share your enterprise automation capabilities and pricing.",
-        status: "new",
-        timestamp: "2026-03-04T08:12:44.000Z",
-    },
-    {
-        id: "SUB-002",
-        name: "Priya Sharma",
-        email: "priya.sharma@finserv.com",
-        subject: "Workforce Managed Services Partnership",
-        message:
-            "Interested in a long-term managed-services engagement for our IT workforce. Could you please schedule a discovery call at your earliest convenience?",
-        status: "read",
-        timestamp: "2026-03-03T14:55:10.000Z",
-    },
-    {
-        id: "SUB-003",
-        name: "Balaji Rekha",
-        email: "rekhabalaji37@gmail.com",
-        subject: "Enterprise IT Rollout – Phase 2",
-        message:
-            "Following our Phase 1 collaboration, we'd like to discuss the Phase 2 scope covering 28 district offices. Please share the project execution plan template.",
-        status: "responded",
-        timestamp: "2026-03-02T11:30:00.000Z",
-    },
-    {
-        id: "SUB-004",
-        name: "Meera Nair",
-        email: "aishwaryamandhare13@gmail.com",
-        subject: "Network Cabling & Brick Services",
-        message:
-            "Our new campus in Pune requires structured cabling for 500+ nodes. Looking for your infrastructure build capabilities and SLAs.",
-        status: "new",
-        timestamp: "2026-03-04T06:01:22.000Z",
-    },
-    {
-        id: "SUB-005",
-        name: "Siddharth Patel",
-        email: "sid.patel@startup.co",
-        subject: "Cloud Migration Support",
-        message:
-            "We need assistance migrating our legacy ERP to a hybrid cloud setup. Timeline is Q2 FY26. Please advise.",
-        status: "read",
-        timestamp: "2026-03-01T09:45:00.000Z",
-    },
-];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 const STATUS_CONFIG = {
@@ -164,14 +113,25 @@ function DetailModal({ sub, onClose, onStatusChange, onDelete }) {
                 {
                     to_email: sub.email,
                     to_name: sub.name,
-                    message: replyDraft,
+                    subject: "HPE IT SOLUTIONS | Response to Your Inquiry",
+                    message: `Hello ${sub.name},
+
+Thank you for reaching out to HPE IT Solutions.
+Our team has reviewed your message and provided the response below:
+
+${replyDraft}
+
+If you require further information, please reply to this email.
+
+Best Regards,
+HPE IT Solutions Team`,
                 }
             );
 
             console.log("Email sent successfully:", response.status, response.text);
             setIsSending(false);
             setShowSuccess(true);
-            onStatusChange(sub.id, "responded");
+            onStatusChange(sub, "responded");
 
             setTimeout(() => {
                 setShowSuccess(false);
@@ -217,8 +177,9 @@ function DetailModal({ sub, onClose, onStatusChange, onDelete }) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <InfoRow icon={User} label="Full Name" value={sub.name} />
                                 <InfoRow icon={Mail} label="Email" value={sub.email} />
+                                <InfoRow icon={Phone} label="Phone Number" value={sub.phone || "N/A"} />
+                                <InfoRow icon={Calendar} label="Received" value={formatDate(sub.timestamp)} />
                                 <InfoRow icon={Tag} label="Subject" value={sub.subject} span />
-                                <InfoRow icon={Calendar} label="Received" value={formatDate(sub.timestamp)} span />
                             </div>
 
                             <div>
@@ -255,7 +216,7 @@ function DetailModal({ sub, onClose, onStatusChange, onDelete }) {
                                     {statuses.map((s) => (
                                         <button
                                             key={s}
-                                            onClick={() => onStatusChange(sub.id, s)}
+                                            onClick={() => onStatusChange(sub, s)}
                                             className={`px-2.5 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border transition-all duration-200 ${sub.status === s
                                                 ? `${STATUS_CONFIG[s].bg} ${STATUS_CONFIG[s].color}`
                                                 : "border-white/10 text-slate-500 hover:border-white/20 hover:text-slate-300"
@@ -295,7 +256,7 @@ function DetailModal({ sub, onClose, onStatusChange, onDelete }) {
                                         <Reply size={13} /> Reply
                                     </button>
                                     <button
-                                        onClick={() => { onDelete(sub.id); onClose(); }}
+                                        onClick={() => { onDelete(sub); onClose(); }}
                                         className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 text-xs font-bold uppercase tracking-wider transition-all"
                                     >
                                         <Trash2 size={13} /> Delete
@@ -325,22 +286,43 @@ function InfoRow({ icon: Icon, label, value, span }) {
 export default function AdminDashboard() {
     const navigate = useNavigate();
 
-    const [submissions, setSubmissions] = useState(() => {
-        try {
-            const raw = localStorage.getItem("hpe_contact_submissions");
-            const live = raw ? JSON.parse(raw) : [];
-            const ids = new Set(live.map((s) => s.id));
-            return [...live, ...SEED_SUBMISSIONS.filter((s) => !ids.has(s.id))];
-        } catch {
-            return SEED_SUBMISSIONS;
-        }
-    });
-
+    const [submissions, setSubmissions] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedSub, setSelectedSub] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
     const [showFilter, setShowFilter] = useState(false);
     const [showMobileNav, setShowMobileNav] = useState(false);
+
+    const fetchSubmissions = async () => {
+        setLoading(true);
+        try {
+            const response = await api.get("/api/contacts/all");
+            // Map backend fields to frontend fields
+            const mappedSubmissions = response.data.map(sub => ({
+                id: `SUB-${String(sub.id).padStart(3, "0")}`,
+                dbId: sub.id, // Keep numeric ID for deletion/update
+                name: sub.name,
+                email: sub.email,
+                phone: sub.phone,
+                subject: sub.category,
+                message: sub.description,
+                status: sub.status || "new",
+                timestamp: sub.timestamp || new Date().toISOString(),
+            }));
+
+            setSubmissions(mappedSubmissions);
+        } catch (error) {
+            console.error("Failed to fetch submissions:", error);
+            setSubmissions([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchSubmissions();
+    }, []);
 
     // ── Stats ──────────────────────────────────────────────────────────────────
     const total = submissions.length;
@@ -364,26 +346,45 @@ export default function AdminDashboard() {
     // ── Handlers ───────────────────────────────────────────────────────────────
     const handleOpen = (sub) => {
         setSelectedSub(sub);
-        if (sub.status === "new") handleStatusChange(sub.id, "read");
+        if (sub.status === "new") handleStatusChange(sub, "read");
     };
 
-    const handleStatusChange = (id, status) => {
-        setSubmissions((prev) => prev.map((s) => (s.id === id ? { ...s, status } : s)));
-        setSelectedSub((prev) => (prev?.id === id ? { ...prev, status } : prev));
+    const handleStatusChange = async (sub, status) => {
+        const subId = typeof sub === "object" ? sub.id : sub;
+        const dbId = typeof sub === "object" ? sub.dbId : submissions.find(s => s.id === subId)?.dbId;
+
+        // Optimistically update local state
+        setSubmissions((prev) => prev.map((s) => (s.id === subId ? { ...s, status } : s)));
+        setSelectedSub((prev) => (prev?.id === subId ? { ...prev, status } : prev));
+
+        if (dbId) {
+            try {
+                await api.patch(`/api/contact/status/${dbId}`, { status });
+            } catch (error) {
+                console.error("Failed to update status on server:", error);
+            }
+        }
     };
 
-    const handleDelete = (id) => {
-        setSubmissions((prev) => prev.filter((s) => s.id !== id));
-        setSelectedSub(null);
+    const handleDelete = async (sub) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this submission?");
+        if (!confirmDelete) return;
+
+        try {
+            // Check if it's a backend submission or seed data
+            if (sub.dbId) {
+                await api.delete(`/api/contact/delete/${sub.dbId}`);
+            }
+            setSubmissions((prev) => prev.filter((s) => s.id !== sub.id));
+            setSelectedSub(null);
+        } catch (error) {
+            console.error("Failed to delete submission:", error);
+            alert("Failed to delete submission from server.");
+        }
     };
 
     const handleRefresh = () => {
-        try {
-            const raw = localStorage.getItem("hpe_contact_submissions");
-            const live = raw ? JSON.parse(raw) : [];
-            const ids = new Set(live.map((s) => s.id));
-            setSubmissions([...live, ...SEED_SUBMISSIONS.filter((s) => !ids.has(s.id))]);
-        } catch {/* ignore */ }
+        fetchSubmissions();
     };
 
     const handleSignOut = () => {
@@ -514,7 +515,12 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* Table body */}
-                        {filtered.length === 0 ? (
+                        {loading ? (
+                            <div className="py-24 text-center text-slate-600">
+                                <Loader2 size={40} className="mx-auto mb-4 opacity-40 animate-spin text-cyan-400" />
+                                <p className="font-bold text-sm">Loading transmissions...</p>
+                            </div>
+                        ) : filtered.length === 0 ? (
                             <div className="py-24 text-center text-slate-600">
                                 <Inbox size={40} className="mx-auto mb-4 opacity-40" />
                                 <p className="font-bold text-sm">No submissions found</p>
@@ -568,7 +574,7 @@ export default function AdminDashboard() {
                                                     <td className="px-5 py-4">
                                                         <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                             <button onClick={(e) => { e.stopPropagation(); handleOpen(sub); }} className="w-8 h-8 rounded-lg flex items-center justify-center text-cyan-400 bg-cyan-400/10"><Eye size={13} /></button>
-                                                            <button onClick={(e) => { e.stopPropagation(); handleDelete(sub.id); }} className="w-8 h-8 rounded-lg flex items-center justify-center text-red-400 bg-red-400/10"><Trash2 size={13} /></button>
+                                                            <button onClick={(e) => { e.stopPropagation(); handleDelete(sub); }} className="w-8 h-8 rounded-lg flex items-center justify-center text-red-400 bg-red-400/10"><Trash2 size={13} /></button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -598,7 +604,7 @@ export default function AdminDashboard() {
                                                 <span className="text-[10px] text-slate-600">{timeAgo(sub.timestamp)}</span>
                                                 <div className="flex items-center gap-2">
                                                     <button onClick={(e) => { e.stopPropagation(); handleOpen(sub); }} className="p-2 rounded-lg bg-cyan-400/10 text-cyan-400"><Eye size={14} /></button>
-                                                    <button onClick={(e) => { e.stopPropagation(); handleDelete(sub.id); }} className="p-2 rounded-lg bg-red-400/10 text-red-400"><Trash2 size={14} /></button>
+                                                    <button onClick={(e) => { e.stopPropagation(); handleDelete(sub); }} className="p-2 rounded-lg bg-red-400/10 text-red-400"><Trash2 size={14} /></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -636,20 +642,39 @@ function SidebarContent({ newCount, handleSignOut }) {
     return (
         <>
             {/* Logo */}
-            <div className="px-8 py-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-cyan-400/10 border border-cyan-400/20">
-                        <Shield size={18} className="text-cyan-400" />
-                    </div>
+            <div className="px-8 pt-8 pb-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="flex flex-col gap-0"
+                >
+                    <motion.div
+                        whileHover={{ scale: 1.05, filter: "brightness(1.2) drop-shadow(0 0 15px rgba(0,229,255,0.4))" }}
+                        className="relative group cursor-pointer"
+                    >
+                        <img
+                            src="/HPE LOGO.png"
+                            alt="HPE Logo"
+                            className="w-32 h-auto drop-shadow-[0_0_8px_rgba(0,229,255,0.2)] transition-all duration-500"
+                        />
+                        <div className="absolute -inset-2 bg-cyan-400/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </motion.div>
                     <div>
-                        <p className="text-white font-black text-base leading-none">HPE-IT</p>
-                        <p className="text-cyan-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-1 text-nowrap">Admin Portal</p>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em] text-nowrap -mt-2"
+                        >
+                            Admin Portal
+                        </motion.p>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
             {/* Nav */}
-            <nav className="flex-1 px-4 py-8 space-y-2">
+            <nav className="flex-1 px-4 py-4 space-y-2">
                 {[
                     { icon: Inbox, label: "Submissions", active: true, badge: newCount },
                 ].map(({ icon: Icon, label, active, badge }) => (

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send, Globe, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import { Mail, Phone, MapPin, Send, Globe, ArrowRight, AlertCircle } from "lucide-react";
 import {
   MapContainer,
   TileLayer,
@@ -10,6 +11,7 @@ import {
 import L from "leaflet";
 import { useTheme } from "../context/ThemeContext";
 import { citiesData } from "../data/contactLocations";
+import api from "../api/axios";
 
 // Fix Leaflet default icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -145,44 +147,75 @@ export default function Contact() {
   const [selectedCity, setSelectedCity] = useState(null);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const [error, setError] = useState("");
 
-  // Form state
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  useEffect(() => {
+    emailjs.init(import.meta.env.VITE_EMAIL_PUBLIC_KEY);
+  }, []);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submissionId, setSubmissionId] = useState("");
 
   const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.subject || !form.message) return;
+    if (!form.name || !form.email || !form.phone || !form.subject || !form.message) return;
 
     setSubmitting(true);
+    setError("");
 
-    // Simulate brief processing delay
-    setTimeout(() => {
-      const id = generateId();
-      const submission = {
-        id,
+    try {
+      const response = await api.post("/api/contact/save", {
         name: form.name,
         email: form.email,
-        subject: form.subject,
-        message: form.message,
-        status: "new",
-        timestamp: new Date().toISOString(),
-      };
-      saveSubmission(submission);
-      setSubmissionId(id);
-      setSubmitted(true);
+        phone: form.phone,
+        category: form.subject,
+        description: form.message
+      });
+
+      if (response.status === 200) {
+        // Automatically send response message to form.email
+        await emailjs.send(
+          import.meta.env.VITE_EMAIL_SERVICE_ID,
+          import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+          {
+            to_email: form.email,
+            to_name: form.name,
+            subject: "HPE IT SOLUTIONS | Response to Your Inquiry",
+            message: `Hello ${form.name},
+
+Thank you for reaching out to HPE IT Solutions.
+Our team has reviewed your message and provided the response below:
+
+Thank you for your inquiry regarding ${form.subject}.
+Our enterprise team will share the detailed execution plan shortly.
+
+If you require further information, please reply to this email.
+
+Best Regards,
+HPE IT Solutions Team`,
+          }
+        );
+
+        setSubmissionId(generateId());
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      const errorMessage = err.response?.data?.error || "Failed to send transmission. Please try again.";
+      setError(errorMessage);
+    } finally {
       setSubmitting(false);
-    }, 800);
+    }
   };
 
   const handleReset = () => {
-    setForm({ name: "", email: "", subject: "", message: "" });
+    setForm({ name: "", email: "", phone: "", subject: "", message: "" });
     setSubmitted(false);
     setSubmissionId("");
+    setError("");
   };
 
   return (
@@ -275,20 +308,39 @@ export default function Contact() {
                           placeholder="name@enterprise.com"
                         />
                       </div>
-                      <div className="md:col-span-2 space-y-3">
-                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Transmission Subject</label>
+                      <div className="space-y-3">
+                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Phone Number</label>
                         <input
-                          type="text"
-                          name="subject"
-                          value={form.subject}
+                          type="tel"
+                          name="phone"
+                          value={form.phone}
                           onChange={handleChange}
                           required
                           className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
                             ${isDark
                               ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
                               : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                          placeholder="Infrastructure Automation Inquiry"
+                          placeholder="+91 90000 00000"
                         />
+                      </div>
+                      <div className="space-y-3">
+                        <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Transmission Subject</label>
+                        <select
+                          name="subject"
+                          value={form.subject}
+                          onChange={handleChange}
+                          required
+                          className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30 appearance-none
+                            ${isDark
+                              ? 'bg-hpe-navy/50 border-white/10 text-white focus:border-hpe-cyan focus:bg-hpe-navy/80'
+                              : 'bg-slate-50 border-slate-200 text-hpe-navy focus:border-hpe-cyan focus:bg-white'}`}
+                        >
+                          <option value="" disabled className={isDark ? "bg-hpe-navy text-slate-500" : "bg-white text-slate-400"}>Select Service Category</option>
+                          <option value="Enterprise IT Solutions" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Enterprise IT Solutions</option>
+                          <option value="Infrastructure & Brick Services" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Infrastructure & Brick Services</option>
+                          <option value="Workforce & Managed Services" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Workforce & Managed Services</option>
+                          <option value="Other Queries" className={isDark ? "bg-hpe-navy text-white" : "bg-white text-hpe-navy"}>Other Queries</option>
+                        </select>
                       </div>
                       <div className="md:col-span-2 space-y-3">
                         <label className={`text-xs font-black uppercase tracking-[0.1em] ml-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Message Detail</label>
@@ -305,6 +357,12 @@ export default function Contact() {
                           placeholder="Outline your technical requirements here..."
                         ></textarea>
                       </div>
+
+                      {error && (
+                        <div className="md:col-span-2 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2">
+                          <AlertCircle size={14} /> {error}
+                        </div>
+                      )}
 
                       <div className="md:col-span-2 pt-4">
                         <button

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient, ReturnDocument
 from flasgger import Swagger
+from datetime import datetime
 
 app = Flask(__name__, template_folder='.')
 CORS(app)
@@ -71,6 +72,10 @@ def get_all_contacts():
                 type: string
               description:
                 type: string
+              status:
+                type: string
+              timestamp:
+                type: string
     """
     contacts = list(contacts_col.find().sort("cid", -1)) # Newest first
     output = []
@@ -81,7 +86,9 @@ def get_all_contacts():
             "email": c.get("contactmail"),
             "phone": c.get("contactno"),
             "category": c.get("contactcategory"),
-            "description": c.get("contactdescription")
+            "description": c.get("contactdescription"),
+            "status": c.get("status", "new"),
+            "timestamp": c.get("timestamp", datetime.now().isoformat())
         })
     return jsonify(output), 200
 
@@ -143,7 +150,9 @@ def contact_form():
             "contactmail": email,
             "contactno": phone,
             "contactcategory": data.get("category"),
-            "contactdescription": data.get("description")
+            "contactdescription": data.get("description"),
+            "status": "new",
+            "timestamp": datetime.now().isoformat()
         })
         return jsonify({"message": "✅ Message Sent Successfully!"}), 200
     except Exception as e:
@@ -171,6 +180,42 @@ def delete_contact(contact_id):
     # Now we just filter by the simple integer 'cid'
     result = contacts_col.delete_one({"cid": contact_id})
     if result.deleted_count > 0:
+        return jsonify({"success": True}), 200
+    return jsonify({"success": False, "message": "Record not found"}), 404
+
+@app.route("/api/contact/status/<int:contact_id>", methods=["PATCH"])
+def update_contact_status(contact_id):
+    """
+    Update contact status
+    ---
+    tags:
+      - Contacts
+    parameters:
+      - name: contact_id
+        in: path
+        type: integer
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+    responses:
+      200:
+        description: Status updated successfully
+    """
+    data = request.json
+    new_status = data.get("status")
+    
+    result = contacts_col.update_one(
+        {"cid": contact_id},
+        {"$set": {"status": new_status}}
+    )
+    
+    if result.modified_count > 0 or result.matched_count > 0:
         return jsonify({"success": True}), 200
     return jsonify({"success": False, "message": "Record not found"}), 404
 
