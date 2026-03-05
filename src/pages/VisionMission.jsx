@@ -118,7 +118,7 @@ const VisionMission = () => {
                 {/* VISION SECTION */}
                 <section className="px-8 md:px-16">
                     <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-start">
-                        <FadeUp className="lg:col-span-7 space-y-10">
+                        <FadeUp className="lg:col-span-6 space-y-10">
                             <div className="space-y-5">
                                 <Label text="Our Vision" color="text-orange-400" isDark={isDark} />
                                 <h2 className={`text-2xl md:text-3xl font-bold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -151,10 +151,10 @@ const VisionMission = () => {
                             </div>
                         </FadeUp>
 
-                        <FadeUp delay={0.2} className="lg:col-span-5 space-y-4">
-                            <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 shadow-xl aspect-[3/4] lg:aspect-auto lg:h-[580px] ${isDark ? 'border-white/10 shadow-[0_12px_48px_rgba(0,0,0,0.5)]' : 'border-slate-200 shadow-slate-200/50'}`}>
+                        <FadeUp delay={0.2} className="lg:col-span-6 space-y-4">
+                            <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 shadow-xl aspect-[4/3] lg:aspect-auto lg:h-[450px] ${isDark ? 'border-white/10 shadow-[0_12px_48px_rgba(0,0,0,0.5)]' : 'border-slate-200 shadow-slate-200/50'}`}>
                                 <img
-                                    src="/vision.png"
+                                    src="/vision3.png"
                                     alt="Vision"
                                     className="w-full h-full object-cover"
                                 />

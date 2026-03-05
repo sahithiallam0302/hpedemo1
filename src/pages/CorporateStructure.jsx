@@ -191,7 +191,7 @@ const CorporateStructure = () => {
                     </FadeUp>
                     <FadeUp className={`group relative overflow-hidden rounded-2xl border transition-colors ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'} min-h-[400px] lg:order-1 order-2`}>
                         <img
-                            src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069"
+                            src="./boarddriven-institutional.png"
                             alt="Leadership"
                             className={`absolute inset-0 w-full h-full object-cover grayscale-[0.1] group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-60 group-hover:opacity-75' : 'opacity-90'}`}
                         />

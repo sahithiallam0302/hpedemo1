@@ -62,56 +62,58 @@ const GrowthChart = () => {
                 </div>
             </div>
 
-            <div className="relative h-64 flex items-end justify-between gap-4 md:gap-8 px-4">
+            <div className="relative h-72 flex items-end justify-between gap-2 md:gap-4 px-2">
                 {/* Horizontal Grid lines */}
-                <div className="absolute inset-x-0 top-0 bottom-0 flex flex-col justify-between pointer-events-none opacity-10">
-                    {[1, 2, 3, 4].map(i => (
+                <div className="absolute inset-x-0 top-0 bottom-0 flex flex-col justify-between pointer-events-none opacity-[0.05]">
+                    {[0, 1, 2, 3, 4].map(i => (
                         <div key={i} className={`w-full h-px ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
                     ))}
                 </div>
 
                 {data.map((item, idx) => (
-                    <div key={item.year} className="relative flex-grow flex flex-col items-center group">
+                    <div key={item.year} className="relative flex-grow flex flex-col items-center group h-full justify-end">
+                        {/* Value Label (Top) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1 + idx * 0.1 }}
+                            className="mb-4"
+                        >
+                            <span className={`text-[11px] font-black tracking-tight ${idx === data.length - 1 ? 'text-brand-orange' : 'text-brand-cyan'}`}>
+                                {item.val}%
+                            </span>
+                        </motion.div>
+
                         <motion.div
                             initial={{ height: 0 }}
-                            whileInView={{ height: `${(item.val / maxVal) * 100}%` }}
-                            transition={{ duration: 1.5, delay: idx * 0.1, ease: 'circOut' }}
+                            whileInView={{ height: `${(item.val / maxVal) * 80}%` }}
+                            transition={{ duration: 1.5, delay: idx * 0.1, ease: [0.33, 1, 0.68, 1] }}
                             viewport={{ once: true }}
-                            className="w-full max-w-[60px] relative rounded-t-xl overflow-hidden"
+                            className="w-full max-w-[45px] relative rounded-t-xl overflow-hidden shadow-lg group-hover:shadow-brand-cyan/20 transition-shadow duration-500"
                             style={{
                                 background: idx === data.length - 1
-                                    ? 'linear-gradient(to top, #00b0d4, #00e5ff)'
-                                    : isDark ? 'rgba(255,255,255,0.05)' : 'rgba(2, 27, 38, 0.05)'
+                                    ? 'linear-gradient(to top, #ff8a00, #ffb800)'
+                                    : 'linear-gradient(to top, #00b0d4, #00e5ff)'
+                                ,
+                                opacity: idx === data.length - 1 ? 1 : 0.7
                             }}
                         >
-                            {/* Inner glow for bars */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-
-                            {/* Hover highlight */}
-                            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            {/* Glossy Overlay */}
+                            <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent" />
                         </motion.div>
 
-                        <div className="mt-4 text-center">
-                            <p className={`text-[11px] font-black uppercase tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.year}</p>
-                            <p className={`text-[9px] font-bold uppercase tracking-widest mt-1 ${idx === data.length - 1 ? 'text-brand-orange' : isDark ? 'text-white/20' : 'text-slate-400'
+                        <div className="mt-6 text-center">
+                            <p className={`text-[10px] font-black uppercase tracking-widest ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.year}</p>
+                            <p className={`text-[8px] font-bold uppercase tracking-[0.2em] mt-1.5 ${idx === data.length - 1 ? 'text-brand-orange' : isDark ? 'text-white/30' : 'text-slate-400'
                                 }`}>{item.label}</p>
                         </div>
-
-                        {/* Value tooltip on top */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 1.2 + idx * 0.1 }}
-                            className="absolute -top-8 left-1/2 -translate-x-1/2"
-                        >
-                            <span className="text-[10px] font-black text-brand-cyan tracking-tight">{item.val}%</span>
-                        </motion.div>
                     </div>
                 ))}
             </div>
 
-            <div className={`mt-12 pt-8 border-t ${isDark ? 'border-white/5' : 'border-slate-100'}`}>
-                <p className={`text-xs md:text-sm font-medium leading-relaxed max-w-2xl ${isDark ? 'text-white/40' : 'text-slate-500'}`}>
+            <div className={`mt-16 pt-8 border-t ${isDark ? 'border-white/5' : 'border-slate-100'}`}>
+                <p className={`text-[10px] md:text-xs font-medium leading-relaxed max-w-2xl uppercase tracking-wider ${isDark ? 'text-white/30' : 'text-slate-500'}`}>
                     *Projected compounding annual growth rate (CAGR) based on strategic expansion mandates in Tier-2/3 cities and increased workforce lifecycle capacity.
                 </p>
             </div>
@@ -209,7 +211,7 @@ const GrowthStrategy = () => {
         <article className={`transition-colors duration-500 overflow-x-hidden font-sans ${isDark ? 'bg-[#0a0f1e] text-white' : 'bg-[#f8fafc] text-slate-900'}`}>
 
             {/* --- HERO SECTION --- */}
-            <section className="relative w-full pt-28 pb-12 md:pt-36 md:pb-16 bg-[#011b26] flex items-center justify-center overflow-hidden">
+            <section className="relative w-full pt-24 pb-10 md:pt-32 md:pb-12 bg-[#011b26] flex items-center overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-cyan/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/4" />
@@ -220,29 +222,47 @@ const GrowthStrategy = () => {
                     />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-8 relative z-10 w-full flex flex-col items-center text-center">
+                <div className="max-w-7xl mx-auto px-8 relative z-10 w-full grid lg:grid-cols-12 gap-12 items-center">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="max-w-4xl"
+                        className="lg:col-span-7 space-y-5"
                     >
-                        <span className="inline-block text-[10px] font-black uppercase tracking-[0.55em] text-brand-orange mb-8">
+                        <span className="inline-block text-[10px] font-black uppercase tracking-[0.55em] text-brand-orange">
                             Forward Momentum · Horizon 2025
                         </span>
 
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tight leading-[1.1] text-white mb-6">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tight leading-[1.1] text-white">
                             Growth &amp; <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-white to-brand-orange">
                                 Expansion
                             </span> Strategy
                         </h1>
 
-                        <div className="w-14 h-1 bg-brand-cyan rounded-full mb-8 mx-auto" />
+                        <div className="w-14 h-1 bg-brand-cyan rounded-full" />
 
-                        <p className="text-sm md:text-base text-slate-300 font-medium leading-relaxed max-w-xl mx-auto">
+                        <p className="text-sm md:text-base text-slate-300 font-medium leading-relaxed max-w-xl">
                             HPE IT Solutions is navigating a high-velocity expansion roadmap, focused on national reach, institutional capability, and next-gen technological infrastructure.
                         </p>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="lg:col-span-5 relative group"
+                    >
+                        <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-[350px] md:h-[400px]">
+                            <img
+                                src="/growthstrategy.png"
+                                alt="Growth Strategy"
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60 pointer-events-none" />
+                        </div>
+                        {/* Decorative blur behind image */}
+                        <div className="absolute -inset-4 bg-brand-cyan/20 blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     </motion.div>
                 </div>
             </section>

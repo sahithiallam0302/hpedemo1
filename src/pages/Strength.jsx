@@ -207,11 +207,11 @@ const Strength = () => {
                                         const localizedIcon = L.divIcon({
                                             className: 'custom-div-icon',
                                             html: `
-                                                <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                                                    <div style="background-color: #00b0d4; width: 8px; height: 8px; border: 1.5px solid #fff; border-radius: 50%; box-shadow: 0 0 8px rgba(0,176,212,0.6);"></div>
-                                                    <span style="color: white; font-family: 'Inter', sans-serif; font-size: 7px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 0 1px 3px rgba(0,0,0,0.8); white-space: nowrap;">${city}</span>
-                                                </div>
-                                            `,
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                <div style="background-color: #00b0d4; width: 8px; height: 8px; border: 1.5px solid #fff; border-radius: 50%; box-shadow: 0 0 8px rgba(0,176,212,0.6);"></div>
+                                <span style="color: white; font-family: 'Inter', sans-serif; font-size: 7px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 0 1px 3px rgba(0,0,0,0.8); white-space: nowrap;">${city}</span>
+                            </div>
+                            `,
                                             iconSize: [80, 25],
                                             iconAnchor: [40, 5]
                                         });
@@ -331,7 +331,7 @@ const Strength = () => {
 
             {/* GOVERNANCE BLOCK */}
             <section id="governance" className="px-8 md:px-16 py-12">
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-stretch">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
                     <FadeUp className="lg:col-span-7 space-y-8">
                         <div className={`pl-5 border-l-2 space-y-3 transition-colors duration-500 ${isDark ? contentBlocks[3].borderColor : contentBlocks[3].borderColor.replace('25', '100')}`}>
                             <Label text={contentBlocks[3].label} color={contentBlocks[3].color} isDark={isDark} />
@@ -356,13 +356,19 @@ const Strength = () => {
                         </div>
                     </FadeUp>
 
-                    <FadeUp delay={0.18} className="lg:col-span-5 h-full">
-                        <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 h-full min-h-[360px] group ${isDark ? 'border-white/10' : 'border-slate-200 shadow-xl'}`}>
-                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069" alt="Governance teams" className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale-[0.15] ${isDark ? 'opacity-55 hover:opacity-75' : 'opacity-90'}`} />
-                            <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-black/40 via-transparent to-transparent'}`} />
-                            <div className="absolute bottom-6 left-6">
-                                <p className={`text-xs font-black uppercase tracking-widest ${isDark ? 'text-indigo-400' : 'text-indigo-600'}`}>Governance Architecture</p>
-                                <p className="text-white text-sm font-semibold mt-0.5">Institutional oversight in action</p>
+                    <FadeUp delay={0.18} className="lg:col-span-5 mt-12 lg:mt-0">
+                        <div className={`relative rounded-3xl overflow-hidden transition-all duration-500 group ${!isDark ? 'shadow-2xl' : ''}`}>
+                            <div className="w-full h-[400px] md:h-[450px]">
+                                <img
+                                    src="/governance_girl_image.png"
+                                    alt="Governance Architecture"
+                                    className="w-full h-full object-cover object-top grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                />
+                            </div>
+                            <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none`} />
+                            <div className="absolute bottom-6 left-6 right-6">
+                                <p className="text-white text-xs font-black uppercase tracking-widest opacity-80 mb-1">Governance Architecture</p>
+                                <p className="text-white text-lg font-black uppercase tracking-tight">Institutional Oversight</p>
                             </div>
                         </div>
                     </FadeUp>

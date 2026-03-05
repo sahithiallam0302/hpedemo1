@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { ArrowLeft, ArrowRight, Briefcase } from 'lucide-react';
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const ProjectPortfolio = () => {
     const scrollRef = useRef(null);
+    const { scrollXProgress } = useScroll({ container: scrollRef });
+    const widthProgress = useTransform(scrollXProgress, [0, 1], ["10%", "100%"]);
 
     const projectNames = [
         "National Real Estate ERP Implementation",
@@ -97,9 +99,12 @@ const ProjectPortfolio = () => {
                     ))}
                 </div>
 
-                {/* Visual Scroll Track (Static Decoration) */}
+                {/* Visual Scroll Track (Dynamic) */}
                 <div className="w-full h-[1px] bg-white/5 mt-8 relative">
-                    <div className="absolute top-0 left-0 w-1/4 h-[2px] bg-brand-cyan rounded-full" />
+                    <motion.div
+                        className="absolute top-0 left-0 h-[2px] bg-brand-cyan rounded-full"
+                        style={{ width: widthProgress }}
+                    />
                 </div>
             </div>
         </section>
