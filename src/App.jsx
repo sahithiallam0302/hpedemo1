@@ -21,6 +21,9 @@ import EnterpriseServicesPage from './pages/EnterpriseServicesPage';
 import InfrastructureBrickServicesPage from './pages/InfrastructureBrickServicesPage';
 import WorkforceManagedServicesPage from './pages/WorkforceManagedServicesPage';
 import Contact from './pages/Contact';
+import AdminDashboard from './AdminDashboard/AdminDashboard';
+import AdminLogin from './AdminDashboard/AdminLogin';
+import AdminRoute from './AdminDashboard/AdminRoute';
 import Preloader from './components/common/Preloader';
 import ScrollIndicator from './components/common/ScrollIndicator';
 
@@ -28,6 +31,7 @@ function AppContent() {
   const location = useLocation();
   const [isPreloading, setIsPreloading] = useState(true);
 
+  // ── Title map ──────────────────────────────────────────────────────────────
   React.useEffect(() => {
     const titleMap = {
       '/': 'HPE IT Solutions | Enterprise Infrastructure',
@@ -45,16 +49,35 @@ function AppContent() {
       '/projects/large': 'Large Projects | HPE IT Solutions',
       '/certifications': 'Certifications | HPE IT Solutions',
       '/contact': 'Contact Us | HPE IT Solutions',
+      '/admin/login': 'Admin Login | HPE IT Solutions',
+      '/admin': 'Admin Dashboard | HPE IT Solutions',
     };
     document.title = titleMap[location.pathname] || 'HPE IT Solutions';
   }, [location]);
 
+  // ── Admin routes — NO Navbar / Footer / Preloader ─────────────────────────
+  const isAdminPath = location.pathname.startsWith('/admin');
+  if (isAdminPath) {
+    return (
+      <Routes>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+      </Routes>
+    );
+  }
+
+  // ── Public routes — with Navbar / Footer / Preloader ─────────────────────
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#011b26] flex flex-col transition-colors duration-300">
-      {/* Preloader always renders on top; once done it unmounts */}
       {isPreloading && <Preloader onFinish={() => setIsPreloading(false)} />}
 
-      {/* Hide everything else while the video is playing */}
       {!isPreloading && (
         <>
           <Navbar />
@@ -98,3 +121,4 @@ function App() {
 }
 
 export default App;
+
