@@ -88,7 +88,7 @@ const ProjectSection = ({ project, index }) => {
                                         <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-6 font-sans">Execution Stack</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {project.tech.map((t, i) => (
-                                                <span key={i} className="px-3 py-1.5 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-lg text-[10px) font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:bg-violet-600 group-hover:text-white transition-all cursor-default">
+                                                <span key={i} className="px-3 py-1.5 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:bg-violet-600 group-hover:text-white transition-all cursor-default">
                                                     {t}
                                                 </span>
                                             ))}
@@ -138,7 +138,7 @@ const ProjectSection = ({ project, index }) => {
                                         <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-6 font-sans">Execution Stack</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {project.tech.map((t, i) => (
-                                                <span key={i} className="px-3 py-1.5 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-lg text-[10px) font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:bg-violet-600 hover:text-white transition-all cursor-default">
+                                                <span key={i} className="px-3 py-1.5 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:bg-violet-600 hover:text-white transition-all cursor-default">
                                                     {t}
                                                 </span>
                                             ))}
