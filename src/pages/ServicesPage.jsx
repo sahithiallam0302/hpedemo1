@@ -272,20 +272,21 @@ const ServicesPage = () => {
                         style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
                 </div>
 
-                {/* Right-side floating ring trio */}
-                <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex items-center justify-center z-0 pointer-events-none">
-                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                        className="w-[420px] h-[420px] border border-dashed border-white/[0.07] rounded-full absolute" />
-                    <motion.div animate={{ rotate: -360 }} transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-                        className="w-80 h-80 border border-hpe-cyan/10 rounded-full absolute" />
-                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-                        className="w-48 h-48 border border-dashed border-hpe-orange/10 rounded-full absolute" />
-                    {/* Centre icons */}
-                    <div className="relative flex flex-col items-center gap-3 z-10">
-                        <Database className="w-8 h-8 text-hpe-cyan/30" strokeWidth={1} />
-                        <Building2 className="w-8 h-8 text-hpe-orange/30" strokeWidth={1} />
-                        <Users className="w-8 h-8 text-emerald-400/30" strokeWidth={1} />
-                    </div>
+                {/* Right-side floating image */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block w-1/2 h-full z-0 pointer-events-none">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, x: 20 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="w-full h-full flex items-center justify-center p-12"
+                    >
+                        <img
+                            src="/ServiceDivisions.png"
+                            alt="HPE Service Divisions Architecture"
+                            className="max-w-full max-h-full object-contain drop-shadow-[0_0_50px_rgba(0,176,212,0.15)]"
+                            style={{ clipPath: 'inset(0 0 30px 0)' }}
+                        />
+                    </motion.div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">

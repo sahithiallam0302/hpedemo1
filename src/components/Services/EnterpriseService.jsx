@@ -210,48 +210,85 @@ const EnterpriseService = () => {
 
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-                    <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left: Text */}
-                        <div>
-                            {/* Headline */}
-                            <motion.h1
-                                initial={{ opacity: 0, y: 24 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-rajdhani font-black uppercase tracking-tighter leading-[1.05] text-white mb-6"
-                            >
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.5em] text-hpe-cyan mb-4">Enterprise IT Division</span>
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-rajdhani font-semibold uppercase tracking-tight leading-[1.15] text-white mb-5">
                                 Enterprise <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-hpe-cyan via-white/80 to-hpe-orange">
                                     Architecture,
                                 </span><br />
                                 <span className="text-white">Automation &<br />Digital Governance</span>
-                            </motion.h1>
-
-                            {/* Sub-description */}
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.3 }}
-                                className="text-base md:text-lg text-slate-400 font-medium max-w-xl leading-relaxed border-l-2 border-hpe-cyan/40 pl-5 mb-6 md:mb-12"
-                            >
+                            </h1>
+                            <p className="text-sm md:text-base text-slate-400 font-medium max-w-md leading-relaxed border-l-2 border-hpe-cyan/40 pl-4">
                                 The Enterprise IT Division designs, develops, and manages secure, scalable enterprise ecosystems supporting multi-entity and multi-location operations.
-                            </motion.p>
-                        </div>
+                            </p>
+                        </motion.div>
 
-                        {/* Right: Image */}
+                        {/* Right: Animated visual */}
                         <motion.div
-                            initial={{ opacity: 0, x: 40 }}
+                            initial={{ opacity: 0, x: 30 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl block mt-6 lg:mt-0"
+                            transition={{ duration: 1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                            className="hidden lg:flex items-center justify-center"
                         >
-                            <img
-                                src="/enterprise.png"
-                                alt="Enterprise Architecture & Digital Governance"
-                                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-1000"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/50 via-transparent to-transparent" />
+                            {/* ENTERPRISE: Floating Network Nodes */}
+                            <div className="relative w-80 h-72">
+                                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 320 280">
+                                    {/* Connection lines */}
+                                    <motion.line x1="160" y1="140" x2="60" y2="60" stroke="rgba(0,200,200,0.25)" strokeWidth="1"
+                                        animate={{ opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0 }} />
+                                    <motion.line x1="160" y1="140" x2="260" y2="60" stroke="rgba(0,200,200,0.25)" strokeWidth="1"
+                                        animate={{ opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0.4 }} />
+                                    <motion.line x1="160" y1="140" x2="60" y2="220" stroke="rgba(255,140,0,0.2)" strokeWidth="1"
+                                        animate={{ opacity: [0.2, 0.5, 0.2] }} transition={{ duration: 3, repeat: Infinity, delay: 0.8 }} />
+                                    <motion.line x1="160" y1="140" x2="260" y2="220" stroke="rgba(255,140,0,0.2)" strokeWidth="1"
+                                        animate={{ opacity: [0.2, 0.5, 0.2] }} transition={{ duration: 3, repeat: Infinity, delay: 1.2 }} />
+                                    <motion.line x1="60" y1="60" x2="260" y2="60" stroke="rgba(0,200,200,0.15)" strokeWidth="1"
+                                        animate={{ opacity: [0.1, 0.4, 0.1] }} transition={{ duration: 3.5, repeat: Infinity, delay: 0.6 }} />
+                                    <motion.line x1="60" y1="220" x2="260" y2="220" stroke="rgba(255,140,0,0.15)" strokeWidth="1"
+                                        animate={{ opacity: [0.1, 0.4, 0.1] }} transition={{ duration: 3.5, repeat: Infinity, delay: 1 }} />
+                                </svg>
+                                {/* Central hub */}
+                                <motion.div
+                                    animate={{ scale: [1, 1.1, 1], boxShadow: ['0 0 20px rgba(0,200,200,0.2)', '0 0 40px rgba(0,200,200,0.5)', '0 0 20px rgba(0,200,200,0.2)'] }}
+                                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                                    className="absolute w-14 h-14 rounded-2xl bg-gradient-to-br from-hpe-cyan/30 to-hpe-cyan/10 border border-hpe-cyan/50 flex items-center justify-center"
+                                    style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+                                >
+                                    <svg className="w-6 h-6 text-hpe-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+                                    </svg>
+                                </motion.div>
+                                {/* Satellite nodes */}
+                                {[
+                                    { x: '14%', y: '18%', delay: 0, color: 'hpe-cyan', label: 'React' },
+                                    { x: '74%', y: '18%', delay: 0.3, color: 'hpe-cyan', label: 'Django' },
+                                    { x: '14%', y: '72%', delay: 0.6, color: 'hpe-orange', label: 'AWS' },
+                                    { x: '74%', y: '72%', delay: 0.9, color: 'hpe-orange', label: 'Docker' },
+                                ].map((node, i) => (
+                                    <motion.div
+                                        key={i}
+                                        animate={{ y: [0, -6, 0] }}
+                                        transition={{ duration: 2.8 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: node.delay }}
+                                        className="absolute flex flex-col items-center gap-1"
+                                        style={{ left: node.x, top: node.y }}
+                                    >
+                                        <div className={`w-9 h-9 rounded-xl border flex items-center justify-center text-[9px] font-black uppercase tracking-wide
+                                            ${node.color === 'hpe-cyan'
+                                                ? 'bg-hpe-cyan/15 border-hpe-cyan/40 text-hpe-cyan'
+                                                : 'bg-hpe-orange/15 border-hpe-orange/40 text-hpe-orange'}`}>
+                                            {node.label}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </motion.div>
 
                     </div>

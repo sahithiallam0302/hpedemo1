@@ -32,29 +32,57 @@ function AppContent() {
   const location = useLocation();
   const [isPreloading, setIsPreloading] = useState(true);
 
-  // ── Title map ──────────────────────────────────────────────────────────────
+  // ── SEO Metadata Management ────────────────────────────────────────────────
   React.useEffect(() => {
     const titleMap = {
-      '/': 'HPE IT Solutions | Enterprise Infrastructure',
+      '/': 'HPE IT Solutions | Enterprise Infrastructure & Digital Ecosystems',
       '/about': 'About Us | HPE IT Solutions',
-      '/vision-mission': 'Vision & Mission | HPE IT Solutions',
-      '/strength': 'Our Strength | HPE IT Solutions',
-      '/corporate-structure': 'Corporate Structure | HPE IT Solutions',
-      '/services': 'Our Services | HPE IT Solutions',
-      '/services/enterprise': 'Enterprise IT Services | HPE IT Solutions',
+      '/vision-mission': 'Our Vision & Mission | HPE IT Solutions',
+      '/strength': 'Organizational Strength | HPE IT Solutions',
+      '/corporate-structure': 'Corporate Structure & Governance | HPE IT Solutions',
+      '/services': 'Enterprise IT & Infrastructure Services | HPE IT Solutions',
+      '/services/enterprise': 'Enterprise IT Services & Digital Transformation | HPE IT Solutions',
       '/services/infrastructure': 'Infrastructure & Brick Services | HPE IT Solutions',
-      '/services/workforce': 'Workforce & Managed Services | HPE IT Solutions',
-      '/projects': 'Project Portfolio | HPE IT Solutions',
-      '/projects/major': 'Major Projects | HPE IT Solutions',
-      '/projects/mid': 'Mid Projects | HPE IT Solutions',
-      '/projects/large': 'Large Projects | HPE IT Solutions',
-      '/certifications': 'Certifications | HPE IT Solutions',
-      '/growth-strategy': 'Growth Strategy | HPE IT Solutions',
-      '/contact': 'Contact Us | HPE IT Solutions',
+      '/services/workforce': 'Workforce & Managed Services Deployment | HPE IT Solutions',
+      '/projects': 'Project Portfolio & Case Studies | HPE IT Solutions',
+      '/projects/major': 'Major Enterprise Projects | HPE IT Solutions',
+      '/projects/mid': 'Mid-Scale Infrastructure Projects | HPE IT Solutions',
+      '/projects/large': 'Large-Scale Strategic Projects | HPE IT Solutions',
+      '/certifications': 'ISO Certifications & Compliance | HPE IT Solutions',
+      '/growth-strategy': 'Future Growth & Strategic Roadmap | HPE IT Solutions',
+      '/contact': 'Contact Our Enterprise Team | HPE IT Solutions',
       '/admin/login': 'Admin Login | HPE IT Solutions',
       '/admin': 'Admin Dashboard | HPE IT Solutions',
     };
+
+    const descriptionMap = {
+      '/': 'Pioneering enterprise infrastructure for a digital-first future. HPE IT Solutions provides integrated digital and physical infrastructure ecosystems across India.',
+      '/about': 'Discover our heritage, mission, and commitment to delivering infrastructure excellence across India through structured governance.',
+      '/vision-mission': 'Our roadmap to leading Indias integrated IT and infrastructure transformation ecosystem through governance and scalable frameworks.',
+      '/services': 'Explore our specialized divisions providing enterprise technology, brick-oriented infrastructure, and workforce managed services.',
+      '/projects': 'View our comprehensive record of national-scale infrastructure and digital transformation projects delivered with excellence.',
+      '/certifications': 'Commitment to transparency and quality through ISO-certified governance frameworks and operational protocols.',
+      '/contact': 'Get in touch with hpeitsolutions.com for strategic infrastructure consulting and enterprise-scale project execution.',
+    };
+
     document.title = titleMap[location.pathname] || 'HPE IT Solutions';
+
+    // Update Meta Description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', descriptionMap[location.pathname] || 'Enterprise IT & Non-IT Infrastructure Services across India.');
+    }
+
+    // Update Canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', `https://hpeitsolutions.com${location.pathname}`);
+    } else {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      canonical.setAttribute('href', `https://hpeitsolutions.com${location.pathname}`);
+      document.head.appendChild(canonical);
+    }
   }, [location]);
 
   // ── Admin routes — NO Navbar / Footer / Preloader ─────────────────────────

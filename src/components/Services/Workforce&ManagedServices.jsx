@@ -208,53 +208,86 @@ const WorkforceManagedServices = () => {
                         style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
                 </div>
 
-                {/* Floating animated ring */}
-                <div className="absolute right-12 top-1/2 -translate-y-1/2 hidden xl:block z-0 pointer-events-none">
-                    <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-                        className="w-96 h-96 border-2 border-dashed border-hpe-cyan/15 rounded-full"
-                    />
-                    <motion.div
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-                        className="absolute inset-8 border border-hpe-orange/10 rounded-full"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <Users className="w-20 h-20 text-hpe-cyan/30" strokeWidth={1} />
-                    </div>
-                </div>
-
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-                    <div className="max-w-3xl">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-
-
-
-                        {/* Headline */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 24 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-rajdhani font-black uppercase tracking-tighter leading-[1.05] text-white mb-6"
+                        {/* Left: Text */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            Structured <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-hpe-cyan via-white/80 to-hpe-orange">
-                                National Execution
-                            </span><br />
-                            <span className="text-white">& Operational<br />Support</span>
-                        </motion.h1>
+                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.5em] text-hpe-cyan mb-4">Workforce & Managed Services</span>
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-rajdhani font-semibold uppercase tracking-tight leading-[1.15] text-white mb-5">
+                                Structured <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-hpe-cyan via-white/80 to-hpe-orange">
+                                    National Execution
+                                </span><br />
+                                <span className="text-white">& Operational Support</span>
+                            </h1>
+                            <p className="text-sm md:text-base text-slate-400 font-medium max-w-md leading-relaxed border-l-2 border-hpe-cyan/40 pl-4">
+                                With 2000+ employees deployed across India, HPE IT Solutions operates a centralized workforce governance framework aligned with enterprise execution standards.
+                            </p>
+                        </motion.div>
 
-                        {/* Sub-description */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="text-base md:text-lg text-slate-400 font-medium max-w-xl leading-relaxed border-l-2 border-hpe-cyan/40 pl-5 mb-12"
+                        {/* Right: Animated visual */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                            className="hidden lg:flex items-center justify-center"
                         >
-                            With 2000+ employees deployed across India, HPE IT Solutions operates a centralized workforce governance framework aligned with enterprise execution standards.
-                        </motion.p>
-
+                            {/* WORKFORCE: Radiating Deployment Map */}
+                            <div className="relative w-72 h-72">
+                                {/* Radiating pulse rings */}
+                                {[0, 1, 2].map((i) => (
+                                    <motion.div
+                                        key={i}
+                                        animate={{ scale: [0.4, 1.6], opacity: [0.6, 0] }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: 'easeOut', delay: i * 1 }}
+                                        className="absolute inset-0 rounded-full border border-hpe-cyan/40"
+                                        style={{ margin: 'auto', width: '100%', height: '100%' }}
+                                    />
+                                ))}
+                                {/* Pan-India label */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <motion.div
+                                        animate={{ scale: [1, 1.06, 1] }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                                        className="w-16 h-16 rounded-full bg-gradient-to-br from-hpe-cyan/30 to-indigo-500/20 border-2 border-hpe-cyan/50 flex items-center justify-center shadow-[0_0_40px_rgba(0,200,200,0.3)]"
+                                    >
+                                        <svg className="w-7 h-7 text-hpe-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </motion.div>
+                                </div>
+                                {/* Deployment zone dots */}
+                                {[
+                                    { angle: 30, r: 90, label: 'GPS', sub: 'Tracking' },
+                                    { angle: 110, r: 85, label: 'ITSM', sub: 'ServiceNow' },
+                                    { angle: 200, r: 90, label: 'NOC', sub: 'Monitoring' },
+                                    { angle: 290, r: 80, label: 'Fleet', sub: 'App' },
+                                ].map((dot, i) => {
+                                    const rad = (dot.angle * Math.PI) / 180;
+                                    const cx = 144 + dot.r * Math.cos(rad);
+                                    const cy = 144 + dot.r * Math.sin(rad);
+                                    return (
+                                        <motion.div
+                                            key={i}
+                                            animate={{ scale: [1, 1.15, 1] }}
+                                            transition={{ duration: 2 + i * 0.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
+                                            className="absolute flex flex-col items-center"
+                                            style={{ left: cx - 20, top: cy - 20, width: 40 }}
+                                        >
+                                            <div className="w-2 h-2 rounded-full bg-hpe-cyan shadow-[0_0_6px_rgba(0,200,200,0.8)] mb-0.5" />
+                                            <span className="text-[8px] font-black text-hpe-cyan leading-tight">{dot.label}</span>
+                                            <span className="text-[7px] text-slate-500 uppercase tracking-wide">{dot.sub}</span>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
 
                     </div>
                 </div>
