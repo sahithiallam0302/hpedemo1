@@ -290,7 +290,7 @@ HPE IT Solutions Team`,
                             ${isDark
                               ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
                               : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                          placeholder="e.g. Satya Nadella"
+                          placeholder="Enter your name"
                         />
                       </div>
                       <div className="space-y-3">
@@ -305,7 +305,7 @@ HPE IT Solutions Team`,
                             ${isDark
                               ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
                               : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                          placeholder="name@enterprise.com"
+                          placeholder="Enter your email"
                         />
                       </div>
                       <div className="space-y-3">
@@ -320,7 +320,7 @@ HPE IT Solutions Team`,
                             ${isDark
                               ? 'bg-hpe-navy/50 border-white/10 text-white placeholder:text-slate-700 focus:border-hpe-cyan focus:bg-hpe-navy/80'
                               : 'bg-slate-50 border-slate-200 text-hpe-navy placeholder:text-slate-400 focus:border-hpe-cyan focus:bg-white'}`}
-                          placeholder="+91 90000 00000"
+                          placeholder="Enter your phone number"
                         />
                       </div>
                       <div className="space-y-3">

@@ -109,10 +109,6 @@ export default function AdminLogin() {
                             Username
                         </label>
                         <div className="relative">
-                            <User
-                                size={14}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
-                            />
                             <input
                                 id="admin-username"
                                 type="text"
@@ -120,8 +116,8 @@ export default function AdminLogin() {
                                 autoComplete="username"
                                 value={form.username}
                                 onChange={handleChange}
-                                placeholder="Username"
-                                className="login-input pl-11"
+                                placeholder="Enter your username"
+                                className="login-input px-4"
                             />
                         </div>
                     </div>
@@ -132,10 +128,6 @@ export default function AdminLogin() {
                             Password
                         </label>
                         <div className="relative">
-                            <Lock
-                                size={14}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
-                            />
                             <input
                                 id="admin-password"
                                 type={showPass ? "text" : "password"}
@@ -143,8 +135,8 @@ export default function AdminLogin() {
                                 autoComplete="current-password"
                                 value={form.password}
                                 onChange={handleChange}
-                                placeholder="Password"
-                                className="login-input pl-11 pr-12"
+                                placeholder="Enter your password"
+                                className="login-input px-4"
                             />
                             <button
                                 type="button"
