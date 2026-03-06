@@ -105,7 +105,7 @@ const Strength = () => {
                             <div className={`relative rounded-3xl overflow-hidden border transition-all duration-500 group ${isDark ? 'border-white/10' : 'border-slate-200 shadow-2xl'}`}>
                                 <div className="aspect-square max-h-[400px]">
                                     <img
-                                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070"
+                                        src="infrastructure.png"
                                         alt="Modern Corporate Architecture"
                                         className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                                     />
