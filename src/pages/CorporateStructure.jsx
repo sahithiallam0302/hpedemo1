@@ -175,7 +175,7 @@ const CorporateStructure = () => {
             <Divider isDark={isDark} />
 
             {/* 3) LEADERSHIP OVERVIEW */}
-            <section id="executive-leadership" className="px-8 md:px-16 py-24">
+            <section id="executive-leadership" className="px-8 md:px-16 py-12 md:py-20">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <FadeUp delay={0.15} className="flex flex-col justify-center space-y-8 lg:order-2 order-1">
                         <div className="space-y-5">
@@ -189,13 +189,12 @@ const CorporateStructure = () => {
                             <p>This institutional framework reduces operational ambiguity and ensures consistent delivery quality across all client engagements.</p>
                         </div>
                     </FadeUp>
-                    <FadeUp className={`group relative overflow-hidden rounded-2xl border transition-colors ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'} min-h-[400px] lg:order-1 order-2`}>
+                    <FadeUp className={`group overflow-hidden rounded-2xl border transition-colors ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'} lg:order-1 order-2`}>
                         <img
-                            src="./boarddriven-institutional.png"
+                            src="/Corporate Structure & Governance _ HPE IT Solutions.jpg"
                             alt="Leadership"
-                            className={`absolute inset-0 w-full h-full object-cover grayscale-[0.1] group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-60 group-hover:opacity-75' : 'opacity-90'}`}
+                            className={`w-full h-auto grayscale-[0.1] group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-80 group-hover:opacity-100' : 'opacity-100'}`}
                         />
-                        <div className={`absolute inset-0 transition-colors ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-white/40 via-transparent to-transparent'}`} />
                     </FadeUp>
                 </div>
             </section>
@@ -204,8 +203,8 @@ const CorporateStructure = () => {
 
             {/* 4) OPERATIONS SECTION */}
             <section id="operations" className="px-8 md:px-16 py-24">
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-                    <FadeUp className="flex flex-col justify-center space-y-8 lg:order-1 order-1">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+                    <FadeUp className="flex flex-col justify-center space-y-8 lg:col-span-7 lg:order-1 order-1">
                         <div className="space-y-5">
                             <Label text="Operational Model" color={isDark ? 'text-teal-400' : 'text-teal-600'} />
                             <h2 className={`text-xl font-semibold uppercase tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -224,13 +223,14 @@ const CorporateStructure = () => {
                             ))}
                         </div>
                     </FadeUp>
-                    <FadeUp delay={0.15} className={`group relative overflow-hidden rounded-2xl border transition-colors ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'} min-h-[400px] lg:order-2 order-2`}>
-                        <img
-                            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069"
-                            alt="Operations"
-                            className={`absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-60' : 'opacity-90'}`}
-                        />
-                        <div className={`absolute inset-0 transition-colors ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-white/20 via-transparent to-transparent'}`} />
+                    <FadeUp delay={0.15} className="lg:col-span-5 lg:order-2 order-2">
+                        <div className={`group overflow-hidden rounded-2xl border transition-colors ${isDark ? 'border-white/10' : 'border-slate-200 shadow-lg'} max-w-lg mx-auto`}>
+                            <img
+                                src="/operational_model.jpg"
+                                alt="Operations"
+                                className={`w-full h-auto group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-80 group-hover:opacity-100' : 'opacity-100'}`}
+                            />
+                        </div>
                     </FadeUp>
                 </div>
             </section>

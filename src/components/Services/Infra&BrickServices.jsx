@@ -228,54 +228,65 @@ const InfraBrickServices = () => {
 
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-                    <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left: Text */}
-                        <div>
-
-
-
-
-                            {/* Headline */}
-                            <motion.h1
-                                initial={{ opacity: 0, y: 24 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-rajdhani font-black uppercase tracking-tighter leading-[1.05] text-white mb-6"
-                            >
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.5em] text-hpe-orange mb-4">Infrastructure & Brick Division</span>
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-rajdhani font-semibold uppercase tracking-tight leading-[1.15] text-white mb-5">
                                 Digitally Governed <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-hpe-orange via-amber-300 to-hpe-cyan">
                                     Infrastructure
                                 </span><br />
                                 <span className="text-white">Execution</span>
-                            </motion.h1>
-
-                            {/* Sub-description */}
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.3 }}
-                                className="text-base md:text-lg text-slate-400 font-medium max-w-xl leading-relaxed border-l-2 border-hpe-orange/40 pl-5 mb-6 md:mb-12"
-                            >
+                            </h1>
+                            <p className="text-sm md:text-base text-slate-400 font-medium max-w-md leading-relaxed border-l-2 border-hpe-orange/40 pl-4">
                                 This division integrates digital systems with physical infrastructure operations to create centrally monitored, performance-controlled environments.
-                            </motion.p>
+                            </p>
+                        </motion.div>
 
-
-                        </div>
-
-                        {/* Right: Image */}
+                        {/* Right: Animated visual */}
                         <motion.div
-                            initial={{ opacity: 0, x: 40 }}
+                            initial={{ opacity: 0, x: 30 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl block mt-6 lg:mt-0"
+                            transition={{ duration: 1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                            className="hidden lg:flex items-center justify-center"
                         >
-                            <img
-                                src="/digitalgovernance.jpeg"
-                                alt="Digital Governance Infrastructure"
-                                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-1000"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/50 via-transparent to-transparent" />
+                            {/* INFRASTRUCTURE: Rising Stacked Blocks */}
+                            <div className="flex items-end gap-3 h-56">
+                                {[
+                                    { label: 'Cisco', h: 55, color: 'from-hpe-orange/50 to-hpe-orange/20', border: 'border-hpe-orange/40', delay: 0 },
+                                    { label: 'RFID', h: 80, color: 'from-amber-400/50 to-amber-400/20', border: 'border-amber-400/40', delay: 0.15 },
+                                    { label: 'AWS', h: 110, color: 'from-hpe-cyan/50 to-hpe-cyan/20', border: 'border-hpe-cyan/40', delay: 0.3 },
+                                    { label: 'BI', h: 145, color: 'from-hpe-orange/60 to-hpe-orange/25', border: 'border-hpe-orange/50', delay: 0.45 },
+                                    { label: 'ERP', h: 185, color: 'from-hpe-cyan/60 to-hpe-cyan/25', border: 'border-hpe-cyan/50', delay: 0.6 },
+                                ].map((bar, i) => (
+                                    <div key={i} className="flex flex-col items-center gap-2">
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: bar.h, opacity: 1 }}
+                                            transition={{ duration: 1.2, delay: bar.delay, ease: [0.22, 1, 0.36, 1] }}
+                                            className={`w-12 rounded-t-xl bg-gradient-to-t ${bar.color} border ${bar.border} relative overflow-hidden`}
+                                        >
+                                            <motion.div
+                                                animate={{ y: ['-100%', '200%'] }}
+                                                transition={{ duration: 2.5, repeat: Infinity, ease: 'linear', delay: bar.delay + 0.5 }}
+                                                className="absolute inset-x-0 h-8 bg-gradient-to-b from-white/10 to-transparent"
+                                            />
+                                        </motion.div>
+                                        <motion.span
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: bar.delay + 0.8 }}
+                                            className="text-[9px] font-black uppercase tracking-wide text-slate-500"
+                                        >{bar.label}</motion.span>
+                                    </div>
+                                ))}
+                            </div>
                         </motion.div>
 
                     </div>

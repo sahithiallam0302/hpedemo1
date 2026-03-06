@@ -151,13 +151,13 @@ function Footer() {
 
                         <div className="flex space-x-5">
                             {[Facebook, Twitter, Linkedin, Instagram].map((Icon, i) => (
-                                <a
+                                <span
                                     key={i}
-                                    href="#"
-                                    className="text-gray-500 hover:text-[#ff8d00] transition-all transform hover:-translate-y-1"
+                                    className="text-gray-500 hover:text-[#ff8d00] transition-all transform hover:-translate-y-1 cursor-default"
+                                    aria-label="Social Media"
                                 >
                                     <Icon size={20} />
-                                </a>
+                                </span>
                             ))}
                         </div>
                     </div>
@@ -256,13 +256,12 @@ function Footer() {
 
                     <div className="flex space-x-10">
                         {['Privacy Policy', 'Terms of Service', 'Cookie Settings'].map((policy) => (
-                            <a
+                            <span
                                 key={policy}
-                                href="#"
-                                className="text-gray-500 hover:text-white text-[10px] font-bold tracking-widest uppercase transition-colors"
+                                className="text-gray-500 hover:text-white text-[10px] font-bold tracking-widest uppercase transition-colors cursor-default"
                             >
                                 {policy}
-                            </a>
+                            </span>
                         ))}
                     </div>
                 </div>
