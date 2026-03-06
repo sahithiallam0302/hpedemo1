@@ -101,19 +101,19 @@ const Strength = () => {
                         </div>
 
                         {/* New Side Image */}
-                        <FadeUp delay={0.3} className="lg:col-span-5 mt-12 lg:mt-0">
-                            <div className={`relative rounded-3xl overflow-hidden border transition-all duration-500 group ${isDark ? 'border-white/10' : 'border-slate-200 shadow-2xl'}`}>
-                                <div className="aspect-square max-h-[400px]">
+                        <FadeUp delay={0.3} className="lg:col-span-5 mt-12 lg:mt-0 flex lg:justify-end">
+                            <div className={`relative w-full max-w-[480px] rounded-[2rem] overflow-hidden border transition-all duration-500 group ${isDark ? 'border-white/10 bg-slate-900' : 'border-slate-200 shadow-2xl bg-white'}`}>
+                                <div className="aspect-square relative overflow-hidden">
                                     <img
-                                        src="infrastructure.png"
+                                        src="/infrastructure.png"
                                         alt="Modern Corporate Architecture"
-                                        className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                        className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                                     />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />
                                 </div>
-                                <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none`} />
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <p className="text-white text-xs font-black uppercase tracking-widest opacity-80 mb-1">Corporate Infrastructure</p>
-                                    <p className="text-white text-lg font-black uppercase tracking-tight">Enterprise Scale</p>
+                                <div className="absolute bottom-8 left-8 right-8 z-10">
+                                    <p className="text-white text-[10px] font-black uppercase tracking-[0.4em] opacity-80 mb-2">Corporate Infrastructure</p>
+                                    <p className="text-white text-2xl font-black uppercase tracking-tight leading-none">Enterprise Scale</p>
                                 </div>
                             </div>
                         </FadeUp>
@@ -357,18 +357,18 @@ const Strength = () => {
                     </FadeUp>
 
                     <FadeUp delay={0.18} className="lg:col-span-5 mt-12 lg:mt-0">
-                        <div className={`relative rounded-3xl overflow-hidden transition-all duration-500 group ${!isDark ? 'shadow-2xl' : ''}`}>
-                            <div className="w-full h-[400px] md:h-[450px]">
+                        <div className={`relative w-full rounded-[2rem] overflow-hidden border transition-all duration-500 group ${isDark ? 'border-white/10 bg-slate-900' : 'border-slate-200 shadow-2xl bg-white'}`}>
+                            <div className="w-full h-[400px] md:h-[480px] relative overflow-hidden">
                                 <img
                                     src="/governance_girl_image.png"
                                     alt="Governance Architecture"
-                                    className="w-full h-full object-cover object-top grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                    className="w-full h-full object-cover object-top grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />
                             </div>
-                            <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none`} />
-                            <div className="absolute bottom-6 left-6 right-6">
-                                <p className="text-white text-xs font-black uppercase tracking-widest opacity-80 mb-1">Governance Architecture</p>
-                                <p className="text-white text-lg font-black uppercase tracking-tight">Institutional Oversight</p>
+                            <div className="absolute bottom-8 left-8 right-8 z-10">
+                                <p className="text-white text-[10px] font-black uppercase tracking-[0.4em] opacity-80 mb-2">Governance Architecture</p>
+                                <p className="text-white text-2xl font-black uppercase tracking-tight leading-none">Institutional Oversight</p>
                             </div>
                         </div>
                     </FadeUp>
