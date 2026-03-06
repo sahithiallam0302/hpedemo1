@@ -285,6 +285,7 @@ HPE IT Solutions Team`,
                           name="name"
                           value={form.name}
                           onChange={handleChange}
+                          pattern="(?=.*[a-zA-Z]{3,})[a-zA-Z .]+"
                           required
                           className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
                             ${isDark
@@ -300,6 +301,7 @@ HPE IT Solutions Team`,
                           name="email"
                           value={form.email}
                           onChange={handleChange}
+                          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)\.[a-zA-Z]{2,}$"
                           required
                           className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
                             ${isDark
@@ -315,6 +317,7 @@ HPE IT Solutions Team`,
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
+                          pattern="[6-9][0-9]{9}"
                           required
                           className={`w-full p-4 rounded-xl border transition-all font-semibold focus:outline-none focus:ring-1 focus:ring-hpe-cyan/30
                             ${isDark
