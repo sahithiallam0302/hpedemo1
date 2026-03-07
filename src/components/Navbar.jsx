@@ -405,18 +405,18 @@ function Navbar() {
                         transition={{ duration: 0.4, ease: [0.65, 0, 0.35, 1] }}
                         className="fixed inset-0 z-[10000] bg-[#011b26] flex flex-col h-screen transition-colors duration-500"
                     >
-                        {/* Mobile Header: Search & Close */}
-                        <div className="flex items-center h-20 border-b border-white/10 px-6">
-                            <div className="flex-grow relative">
-                                <input
-                                    type="text"
-                                    placeholder="Search hpe.com"
-                                    className="w-full bg-transparent text-white/90 text-lg font-medium outline-none placeholder:text-white/30"
+                        {/* Mobile Header: Logo & Close */}
+                        <div className="flex items-center justify-between h-20 border-b border-white/10 px-6">
+                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center h-full overflow-hidden">
+                                <img
+                                    src="/HPE LOGO.png"
+                                    alt="HPE IT Solutions"
+                                    className="h-full scale-125 w-auto object-contain"
                                 />
-                            </div>
+                            </Link>
                             <button
                                 onClick={() => setMenuOpen(false)}
-                                className="ml-4 p-2 text-[#00b0d4] hover:text-[#ff8d00] transition-colors"
+                                className="p-2 text-[#00b0d4] hover:text-[#ff8d00] transition-colors"
                             >
                                 <X className="w-8 h-8" />
                             </button>

@@ -192,25 +192,12 @@ export default function Contact() {
     setSubmitting(true);
     setError("");
 
-    try {
-      const response = await api.post("/api/contact/save", {
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        category: form.subject,
-        description: form.message
-      });
-
-      if (response.status === 200) {
-        // Automatically send response message to form.email
-        await emailjs.send(
-          import.meta.env.VITE_EMAIL_SERVICE_ID,
-          import.meta.env.VITE_EMAIL_TEMPLATE_ID,
-          {
-            to_email: form.email,
-            to_name: form.name,
-            subject: "HPE IT SOLUTIONS | Response to Your Inquiry",
-            message: `Hello ${form.name},
+    // Build the emailjs payload once so it can be reused
+    const emailPayload = {
+      to_email: form.email,
+      to_name: form.name,
+      subject: "HPE IT SOLUTIONS | Response to Your Inquiry",
+      message: `Hello ${form.name},
 
 Thank you for reaching out to HPE IT Solutions.
 Our team has reviewed your message and provided the response below:
@@ -222,19 +209,47 @@ If you require further information, please reply to this email.
 
 Best Regards,
 HPE IT Solutions Team`,
-          }
-        );
+    };
 
-        setSubmissionId(generateId());
-        setSubmitted(true);
+    // Fire both requests in parallel — EmailJS is fast; the Render backend
+    // may be slow due to cold-starts, so we don't wait for it to unblock the UI.
+    const [emailResult, backendResult] = await Promise.allSettled([
+      emailjs.send(
+        import.meta.env.VITE_EMAIL_SERVICE_ID,
+        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+        emailPayload
+      ),
+      api.post("/api/contact/save", {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        category: form.subject,
+        description: form.message,
+      }),
+    ]);
+
+    // Log backend result for diagnostics without blocking the user
+    if (backendResult.status === "rejected") {
+      const backendErr = backendResult.reason;
+      // If backend explicitly rejected with a 409 (duplicate), surface that error
+      if (backendErr?.response?.status === 409) {
+        setError(backendErr.response.data?.error || "Email or Phone Number already exists. Please use another one.");
+        setSubmitting(false);
+        return;
       }
-    } catch (err) {
-      console.error("Submission error:", err);
-      const errorMessage = err.response?.data?.error || "Failed to send transmission. Please try again.";
-      setError(errorMessage);
-    } finally {
-      setSubmitting(false);
+      console.warn("Backend save failed (non-blocking):", backendErr?.message);
     }
+
+    // The submission is considered successful as long as the email was sent
+    if (emailResult.status === "fulfilled") {
+      setSubmissionId(generateId());
+      setSubmitted(true);
+    } else {
+      console.error("EmailJS error:", emailResult.reason);
+      setError("Failed to send transmission. Please try again.");
+    }
+
+    setSubmitting(false);
   };
 
   const handleReset = () => {
