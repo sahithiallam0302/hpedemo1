@@ -291,9 +291,9 @@ HPE IT Solutions Team`,
                 <InfoRow
                   icon={Phone}
                   title="Direct Hotline"
-                  value="+91 9154399144"
+                  value="+62 821-3423-5909"
                   isDark={isDark}
-                  href="tel:+919154399144"
+                  href="tel:+6282134235909"
                 />
                 <InfoRow icon={MapPin} title="Corporate Hub" value="Hyderabad, Telangana, India" isDark={isDark} />
                 <InfoRow icon={Globe} title="Regional Support" value="Pan-India Operational Matrix" isDark={isDark} />

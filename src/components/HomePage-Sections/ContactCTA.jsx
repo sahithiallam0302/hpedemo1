@@ -51,7 +51,7 @@ const ContactCTA = () => {
 
                         {/* Phone Card */}
                         <a
-                            href="tel:+919154399144"
+                            href="tel:+6282134235909"
                             className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-2xl flex items-start space-x-5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none cursor-pointer no-underline"
                         >
                             <div className="bg-brand-orange/10 p-3 rounded-xl">
@@ -59,7 +59,7 @@ const ContactCTA = () => {
                             </div>
                             <div>
                                 <h3 className="text-xs font-black text-brand-orange uppercase tracking-widest mb-1">Phone Number</h3>
-                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-bold tracking-wider">+91 9154399144</p>
+                                <p className="text-sm md:text-base text-slate-700 dark:text-slate-200 font-bold tracking-wider">+62 821-3423-5909</p>
                             </div>
                         </a>
 

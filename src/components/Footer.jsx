@@ -237,14 +237,14 @@ function Footer() {
                             </a>
 
                             <a
-                                href="tel:+919154399144"
+                                href="tel:+6282134235909"
                                 className="flex items-center gap-3 group text-gray-400 hover:text-white transition-colors"
                             >
                                 <div className="p-2.5 bg-white/5 rounded-lg text-white shrink-0">
                                     <Phone size={16} />
                                 </div>
                                 <span className="text-xs font-bold tracking-widest">
-                                    +91 9154399144
+                                    +62 821-3423-5909
                                 </span>
                             </a>
                         </div>
