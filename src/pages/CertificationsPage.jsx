@@ -147,22 +147,6 @@ const CertificationsPage = () => {
             iconColor: "text-indigo-500",
             bgColor: "bg-indigo-50"
         },
-        {
-            title: "MSME Registered",
-            badge: "Govt. Recognized",
-            description: "Recognized by Government of India as a Micro, Small & Medium Enterprise (MSME).",
-            icon: <Award />,
-            iconColor: "text-amber-500",
-            bgColor: "bg-amber-50"
-        },
-        {
-            title: "GST & PAN Compliance",
-            badge: "Registered Entity",
-            description: "Fully compliant with Indian taxation and regulatory norms for PAN-India operations.",
-            icon: <FileCheck />,
-            iconColor: "text-brand-cyan",
-            bgColor: "bg-cyan-50"
-        }
     ];
 
     const accreditations = [

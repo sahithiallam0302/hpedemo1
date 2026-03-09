@@ -86,18 +86,6 @@ const Certifications = () => {
             icon: <BarChart3 />,
             bgColor: "bg-indigo-50"
         },
-        {
-            title: "MSME",
-            subtitle: "Registered Enterprise",
-            icon: <Award />,
-            bgColor: "bg-amber-50"
-        },
-        {
-            title: "Compliance",
-            subtitle: "GST & PAN India Registered",
-            icon: <CheckCircle />,
-            bgColor: "bg-slate-50"
-        }
     ];
 
     return (
