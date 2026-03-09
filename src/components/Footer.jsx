@@ -22,7 +22,7 @@ function Footer() {
                                 className="h-[70px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                             />
                             <div className="flex flex-col">
-                                <span className="text-white font-black text-xl tracking-tight">HPE IT <span className="text-[#ff8d00]">Solutions</span></span>
+                                <span className="text-white font-black text-xl tracking-tight">HPE <span className="text-[#ff8d00]">IT Solutions</span></span>
                                 <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-1">Corporate Office – Hyderabad</span>
                             </div>
                         </Link>

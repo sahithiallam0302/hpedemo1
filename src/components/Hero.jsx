@@ -100,7 +100,7 @@ function Hero() {
                             transition={{ duration: 0.8 }}
                             className="text-xl md:text-3xl font-rajdhani font-semibold text-white mb-4 uppercase tracking-wide drop-shadow-lg"
                         >
-                            HPE IT <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-orange via-orange-500 to-amber-600">Solutions</span>
+                            HPE <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-orange via-orange-500 to-amber-600">IT Solutions</span>
                         </motion.h1>
 
                         <motion.div
