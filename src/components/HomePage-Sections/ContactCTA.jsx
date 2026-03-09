@@ -27,7 +27,7 @@ const ContactCTA = () => {
                             Reach out for a expert consultation.
                         </p>
                         <button className="bg-brand-orange hover:bg-white hover:text-[#011b26] text-white px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest transition-all duration-300 flex items-center group cursor-pointer shadow-xl shadow-orange-900/20"
-                            onClick={() => navigate('/contact')}
+                            onClick={() => navigate('/contact#contact-grid')}
                         >
                             Contact Us
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
