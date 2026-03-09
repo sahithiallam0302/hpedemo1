@@ -48,6 +48,17 @@ const Preloader = ({ onFinish }) => {
                         onEnded={dismiss}
                         className="absolute inset-0 w-full h-full object-contain md:object-cover"
                     />
+
+                    {/* Skip Intro Button */}
+                    <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1, duration: 0.8 }}
+                        onClick={dismiss}
+                        className="absolute bottom-8 right-8 z-[1000] px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95"
+                    >
+                        Skip Intro
+                    </motion.button>
                 </motion.div>
             )}
         </AnimatePresence>
