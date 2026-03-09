@@ -56,7 +56,7 @@ function AppContent() {
     };
 
     const descriptionMap = {
-      '/': 'Pioneering enterprise infrastructure for a digital-first future. HPE IT Solutions provides integrated digital and physical infrastructure ecosystems across India.',
+      '/': 'HPE IT Solutions - pioneering enterprise infrastructure for a digital-first future. Providing integrated digital and physical infrastructure ecosystems across India.',
       '/about': 'Discover our heritage, mission, and commitment to delivering infrastructure excellence across India through structured governance.',
       '/vision-mission': 'Our roadmap to leading Indias integrated IT and infrastructure transformation ecosystem through governance and scalable frameworks.',
       '/services': 'Explore our specialized divisions providing enterprise technology, brick-oriented infrastructure, and workforce managed services.',
@@ -76,11 +76,11 @@ function AppContent() {
     // Update Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
-      canonical.setAttribute('href', `https://hpeitsolutions.com${location.pathname}`);
+      canonical.setAttribute('href', `https://www.hpeitsolutions.com${location.pathname}`);
     } else {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
-      canonical.setAttribute('href', `https://hpeitsolutions.com${location.pathname}`);
+      canonical.setAttribute('href', `https://www.hpeitsolutions.com${location.pathname}`);
       document.head.appendChild(canonical);
     }
   }, [location]);
