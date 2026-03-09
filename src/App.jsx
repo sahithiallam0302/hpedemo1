@@ -103,41 +103,49 @@ function AppContent() {
     );
   }
 
+  // ── Body Scroll Lock during Preloading ──────────────────────────
+  React.useEffect(() => {
+    if (isPreloading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isPreloading]);
+
   // ── Public routes — with Navbar / Footer / Preloader ─────────────────────
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#011b26] flex flex-col transition-colors duration-300">
+    <div className={`min-h-screen flex flex-col transition-colors duration-300 ${isPreloading ? 'bg-black' : 'bg-slate-50 dark:bg-[#011b26]'}`}>
       {isPreloading && <Preloader onFinish={() => setIsPreloading(false)} />}
 
-      {!isPreloading && (
-        <>
-          <Navbar />
-          <main className="flex-grow transition-all duration-500 pt-0">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/vision-mission" element={<VisionMission />} />
-              <Route path="/strength" element={<Strength />} />
-              <Route path="/corporate-structure" element={<CorporateStructure />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/enterprise" element={<EnterpriseServicesPage />} />
-              <Route path="/services/infrastructure" element={<InfrastructureBrickServicesPage />} />
-              <Route path="/services/workforce" element={<WorkforceManagedServicesPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/projects/group-1" element={<ProjectsGroup1 />} />
-              <Route path="/projects/group-2" element={<ProjectsGroup2 />} />
-              <Route path="/projects/group-3" element={<ProjectsGroup3 />} />
-              <Route path="/projects/major" element={<MajorProjects />} />
-              <Route path="/projects/mid" element={<MidProjects />} />
-              <Route path="/projects/large" element={<LargeProjects />} />
-              <Route path="/certifications" element={<CertificationsPage />} />
-              <Route path="/growth-strategy" element={<GrowthStrategy />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
-          </main>
-          <Footer />
-          <ScrollIndicator />
-        </>
-      )}
+      <Navbar />
+      <main className="flex-grow transition-all duration-500 pt-0">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/vision-mission" element={<VisionMission />} />
+          <Route path="/strength" element={<Strength />} />
+          <Route path="/corporate-structure" element={<CorporateStructure />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/enterprise" element={<EnterpriseServicesPage />} />
+          <Route path="/services/infrastructure" element={<InfrastructureBrickServicesPage />} />
+          <Route path="/services/workforce" element={<WorkforceManagedServicesPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/group-1" element={<ProjectsGroup1 />} />
+          <Route path="/projects/group-2" element={<ProjectsGroup2 />} />
+          <Route path="/projects/group-3" element={<ProjectsGroup3 />} />
+          <Route path="/projects/major" element={<MajorProjects />} />
+          <Route path="/projects/mid" element={<MidProjects />} />
+          <Route path="/projects/large" element={<LargeProjects />} />
+          <Route path="/certifications" element={<CertificationsPage />} />
+          <Route path="/growth-strategy" element={<GrowthStrategy />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      <Footer />
+      <ScrollIndicator />
     </div>
   );
 }
