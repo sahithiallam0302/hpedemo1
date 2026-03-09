@@ -144,12 +144,12 @@ const ProjectCard = ({ project, index, delay }) => {
                 className="group block h-full min-h-[450px] rounded-3xl overflow-hidden bg-slate-50 dark:bg-[#020817] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3">
 
                 {/* PROJECT IMAGE */}
-                <div className="h-60 overflow-hidden relative bg-slate-950/20">
+                <div className="h-60 overflow-hidden relative">
                     <img
                         src={project.image}
                         alt={project.name}
                         loading="lazy"
-                        className="w-full h-full object-contain p-2 transition-transform duration-1000 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                 </div>
