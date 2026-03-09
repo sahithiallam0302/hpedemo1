@@ -148,6 +148,7 @@ const ProjectCard = ({ project, index, delay }) => {
                     <img
                         src={project.image}
                         alt={project.name}
+                        loading="lazy"
                         className="w-full h-full object-contain p-2 transition-transform duration-1000 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
@@ -308,6 +309,7 @@ export default function ProjectsPage() {
                                     <img
                                         src="/projectportfolio.jpeg"
                                         alt="Project Portfolio Dashboard"
+                                        loading="lazy"
                                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
@@ -396,6 +398,7 @@ export default function ProjectsPage() {
                     <img
                         src="/projectfullscreen.png"
                         alt="HPE IT Solutions Impact"
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover brightness-[0.6] transition-all duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020817] via-transparent to-[#020817]/60" />

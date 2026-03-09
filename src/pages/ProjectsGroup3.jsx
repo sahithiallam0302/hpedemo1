@@ -60,6 +60,7 @@ const ProjectSection = ({ project, index }) => {
                                     <img
                                         src={project.image}
                                         alt={project.name}
+                                        loading="lazy"
                                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-black/5 dark:bg-black/10 transition-opacity group-hover:opacity-0" />
@@ -169,6 +170,7 @@ const ProjectSection = ({ project, index }) => {
                                     <img
                                         src={project.image}
                                         alt={project.name}
+                                        loading="lazy"
                                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-black/5 dark:bg-black/10 transition-opacity group-hover:opacity-0" />

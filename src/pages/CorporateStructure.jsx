@@ -193,6 +193,7 @@ const CorporateStructure = () => {
                         <img
                             src="/Corporate Structure & Governance _ HPE IT Solutions.jpg"
                             alt="Leadership"
+                            loading="lazy"
                             className={`w-full h-auto grayscale-[0.1] group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-80 group-hover:opacity-100' : 'opacity-100'}`}
                         />
                     </FadeUp>
@@ -228,6 +229,7 @@ const CorporateStructure = () => {
                             <img
                                 src="/operational_model.jpg"
                                 alt="Operations"
+                                loading="lazy"
                                 className={`w-full h-auto group-hover:scale-[1.03] transition-all duration-700 ${isDark ? 'opacity-80 group-hover:opacity-100' : 'opacity-100'}`}
                             />
                         </div>

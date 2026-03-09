@@ -156,6 +156,7 @@ const VisionMission = () => {
                                 <img
                                     src="/vision3.png"
                                     alt="Vision"
+                                    loading="lazy"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -177,6 +178,7 @@ const VisionMission = () => {
                                 <img
                                     src="/mission.png"
                                     alt="Mission"
+                                    loading="lazy"
                                     className="w-full h-full object-cover"
                                 />
                             </div>

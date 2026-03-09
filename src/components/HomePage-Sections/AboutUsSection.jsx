@@ -102,6 +102,7 @@ const AboutUsSection = () => {
                             <img
                                 src="/infra_ecosys.png"
                                 alt="HPE IT Solutions Infrastructure Ecosystems"
+                                loading="lazy"
                                 className="w-full h-[400px] md:h-[550px] object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                             {/* Refined Gradient Overlay */}

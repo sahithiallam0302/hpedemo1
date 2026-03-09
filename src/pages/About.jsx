@@ -160,6 +160,7 @@ const About = () => {
                                 <img
                                     src="/aboutimage.png"
                                     alt="HPE IT Solutions Enterprise"
+                                    loading="lazy"
                                     className="w-full h-auto object-contain grayscale-[0.2] hover:grayscale-0 transition-all duration-1000"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/40 via-transparent to-transparent" />
@@ -271,6 +272,7 @@ const About = () => {
                                         src="/about.png"
                                         className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale-[0.25] group-hover:scale-105 ${isDark ? 'opacity-100' : 'opacity-90'}`}
                                         alt="National Infrastructure"
+                                        loading="lazy"
                                     />
                                     <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-t from-[#0a0f1e]/80 via-[#0a0f1e]/10 to-transparent' : 'bg-gradient-to-t from-black/40 via-transparent to-transparent'}`} />
                                     <div className="absolute bottom-6 left-6">
@@ -299,7 +301,7 @@ const About = () => {
                             </h2>
 
                             <div className="flex justify-center">
-                                <Link to="/contact"
+                                <Link to="/contact#contact-grid"
                                     className="inline-flex items-center gap-4 px-10 py-4 bg-white text-black font-black uppercase tracking-[0.2em] text-[10px] rounded-full hover:bg-[#00e5ff] hover:text-black hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl shadow-blue-600/10 group">
                                     Connect with us
                                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

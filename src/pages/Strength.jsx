@@ -107,6 +107,7 @@ const Strength = () => {
                                     <img
                                         src="/infrastructure.png"
                                         alt="Modern Corporate Architecture"
+                                        loading="lazy"
                                         className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />
@@ -362,6 +363,7 @@ const Strength = () => {
                                 <img
                                     src="/governance_girl_image.png"
                                     alt="Governance Architecture"
+                                    loading="lazy"
                                     className="w-full h-full object-cover object-top grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />

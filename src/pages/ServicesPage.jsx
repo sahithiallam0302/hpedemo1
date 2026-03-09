@@ -283,6 +283,7 @@ const ServicesPage = () => {
                         <img
                             src="/ServiceDivisions.png"
                             alt="HPE Service Divisions Architecture"
+                            loading="lazy"
                             className="max-w-full max-h-full object-contain drop-shadow-[0_0_50px_rgba(0,176,212,0.15)]"
                             style={{ clipPath: 'inset(0 0 30px 0)' }}
                         />
@@ -483,7 +484,7 @@ const ServicesPage = () => {
                                 Whether you need enterprise systems, on-ground infrastructure digitization, or a governed national workforce — we deliver end-to-end.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4">
-                                <Link to="/contact" className="w-full sm:w-auto px-10 py-4 bg-hpe-orange text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full shadow-xl shadow-hpe-orange/20 hover:bg-white hover:text-[#011b26] transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 group">
+                                <Link to="/contact#contact-grid" className="w-full sm:w-auto px-10 py-4 bg-hpe-orange text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full shadow-xl shadow-hpe-orange/20 hover:bg-white hover:text-[#011b26] transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 group">
                                     Start a Conversation
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>

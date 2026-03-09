@@ -32,7 +32,7 @@ function Navbar() {
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            }, 100);
+            }, 600);
         } else {
             window.scrollTo(0, 0);
         }
@@ -226,7 +226,8 @@ function Navbar() {
                     <div className="flex items-center space-x-4">
                         {/* CTA (Desktop Only) */}
                         <Link
-                            to="/contact"
+                            // to="/contact"
+                            to="/contact#contact-grid"
                             className="hidden lg:inline-flex bg-[#ff8d00] hover:bg-[#e67e00] text-white px-8 py-3 rounded-full text-xs font-black tracking-widest transition-all transform active:scale-95 shadow-lg shadow-orange-500/20"
                         >
                             GET STARTED

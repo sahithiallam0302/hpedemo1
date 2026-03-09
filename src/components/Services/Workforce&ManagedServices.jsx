@@ -437,6 +437,7 @@ const WorkforceManagedServices = () => {
                                 <img
                                     src="/service3.png"
                                     alt="Workforce & Managed Services"
+                                    loading="lazy"
                                     className="w-full h-full object-cover scale-[1.02] hover:scale-105 transition-transform duration-1000"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#011b26]/60 via-transparent to-transparent" />

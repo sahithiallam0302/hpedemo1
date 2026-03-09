@@ -443,6 +443,7 @@ const InfraBrickServices = () => {
                                     <img
                                         src="/Service2.png"
                                         alt="Infrastructure & Brick Services"
+                                        loading="lazy"
                                         className="w-full h-full object-cover scale-[1.02] hover:scale-105 transition-transform duration-1000"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#011b26] via-transparent to-transparent opacity-60" />

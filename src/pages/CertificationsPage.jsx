@@ -298,6 +298,7 @@ const CertificationsPage = () => {
                                     <img
                                         src="/Certifications__Compliance_about_hero.png"
                                         alt="Certifications & Compliance"
+                                        loading="lazy"
                                         className="w-full h-auto object-cover max-w-md transition-transform duration-700 group-hover:scale-105"
                                     />
                                     {/* Overlay Gradient for depth */}
@@ -413,7 +414,7 @@ const CertificationsPage = () => {
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        onClick={() => navigate('/contact')}
+                                        onClick={() => navigate('/contact#contact-grid')}
                                         className="w-full sm:w-auto bg-brand-orange text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-hpe-navy/20 flex items-center justify-center group cursor-pointer"
                                     >
                                         <PhoneCall className="w-5 h-5 mr-3" />

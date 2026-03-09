@@ -484,65 +484,37 @@ HPE IT Solutions Team`,
                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
               />
 
-              {!selectedCity && Object.entries(citiesData).map(([city, data]) => {
-                const dotColor = isDark ? 'black' : 'white';
-                const icon = L.divIcon({
+              {Object.entries(citiesData).map(([city, data]) => {
+                const branch = data.branches[0];
+                const markerPos = branch ? branch.position : data.center;
+                const redPinIcon = L.divIcon({
                   className: 'custom-div-icon',
-                  html: `<div style="background-color: #00b0d4; width: 10px; height: 10px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 8px rgba(0,176,212,0.6);"></div>`,
-                  iconSize: [10, 10],
-                  iconAnchor: [5, 5]
+                  html: `<div style="
+                    width: 24px; height: 32px; position: relative; cursor: pointer;
+                  ">
+                    <div style="
+                      width: 24px; height: 24px; background-color: #ef4444;
+                      border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+                      border: 3px solid #fff;
+                      box-shadow: 0 0 12px rgba(239,68,68,0.8), 0 2px 8px rgba(0,0,0,0.4);
+                    "></div>
+                    <div style="
+                      width: 6px; height: 6px; background: white; border-radius: 50%;
+                      position: absolute; top: 9px; left: 9px; transform: rotate(45deg);
+                    "></div>
+                  </div>`,
+                  iconSize: [24, 32],
+                  iconAnchor: [12, 32]
                 });
                 return (
                   <Marker
                     key={city}
-                    position={data.center}
-                    icon={icon}
+                    position={markerPos}
+                    icon={redPinIcon}
                     eventHandlers={{ click: () => setSelectedCity(city) }}
                   />
                 );
               })}
-
-              {selectedCity && citiesData[selectedCity].branches.map((branch, i) => (
-                <Marker key={i} position={branch.position}>
-                  <Popup className="hpe-dark-popup">
-                    <div className="p-3 min-w-[220px] bg-white rounded-lg">
-                      <h4 className="font-black text-xs uppercase tracking-widest text-hpe-navy mb-3 border-b pb-2">
-                        {selectedCity} Division
-                      </h4>
-                      <p className="text-gray-600 text-[11px] leading-tight mb-4">{branch.address}</p>
-
-                      <div className="grid gap-2">
-                        {branch.phone && (
-                          <div className="flex items-center gap-2 text-[11px] font-bold text-gray-800">
-                            <Phone size={12} className="text-hpe-orange" /> {branch.phone}
-                          </div>
-                        )}
-
-                        <div className="flex flex-col gap-2 mt-2">
-                          {branch.website && (
-                            <a href={branch.website} target="_blank" rel="noreferrer" className="bg-hpe-navy text-white text-center py-2 rounded-lg text-[9px] font-black uppercase hover:bg-hpe-cyan hover:text-hpe-navy transition-all">
-                              Analyze Facility
-                            </a>
-                          )}
-                          <a href={`https://www.google.com/maps?q=${branch.position[0]},${branch.position[1]}`} target="_blank" rel="noreferrer" className="bg-gray-100 text-gray-700 text-center py-2 rounded-lg text-[9px] font-black uppercase">
-                            Navigation Path
-                          </a>
-                        </div>
-                      </div>
-
-                      {branch.closed && (
-                        <div className="mt-4 p-1.5 bg-red-50 text-red-600 text-[8px] font-black uppercase text-center rounded border border-red-100">
-                          Facility Offline
-                        </div>
-                      )}
-
-                      <button onClick={() => setSelectedCity(null)} className="w-full mt-4 text-[9px] uppercase tracking-tighter text-blue-600 font-bold hover:underline">
-                        ← Network Reset
-                      </button>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
             </MapContainer>
           </div>
         </div>

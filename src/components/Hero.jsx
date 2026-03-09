@@ -127,7 +127,7 @@ function Hero() {
                                 <motion.button
                                     whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(255,141,0,0.6)" }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => navigate('/contact')}
+                                    onClick={() => navigate('/contact#contact-grid')}
                                     className="w-full sm:w-auto bg-brand-orange text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-black text-xs md:text-sm uppercase tracking-widest shadow-[0_0_15px_rgba(255,141,0,0.3)] transition-all cursor-pointer"
                                 >
                                     Contact Us
