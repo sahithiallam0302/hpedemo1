@@ -105,9 +105,11 @@ const Certifications = () => {
                 </div>
 
                 {/* Certifications Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6 md:gap-8">
+                <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-5xl mx-auto">
                     {certs.map((cert, index) => (
-                        <CertCard key={index} cert={cert} index={index} />
+                        <div key={index} className="w-[calc(50%-1rem)] md:w-[calc(33.33%-2rem)] lg:w-[calc(20%-2rem)] min-w-[140px] max-w-[200px]">
+                            <CertCard cert={cert} index={index} />
+                        </div>
                     ))}
                 </div>
             </div>
