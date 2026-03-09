@@ -51,11 +51,11 @@ const Preloader = ({ onFinish }) => {
 
                     {/* Skip Intro Button */}
                     <motion.button
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 20, x: '-50%' }}
+                        animate={{ opacity: 1, y: 0, x: '-50%' }}
                         transition={{ delay: 1, duration: 0.8 }}
                         onClick={dismiss}
-                        className="absolute bottom-8 right-8 z-[1000] px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95"
+                        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[1000] px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-white text-[10px] font-black uppercase tracking-[0.4em] transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
                     >
                         Skip Intro
                     </motion.button>
